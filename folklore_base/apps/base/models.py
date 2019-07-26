@@ -87,6 +87,7 @@ class Informant(models.Model):
     class Meta:
         verbose_name = 'Информант'
         verbose_name_plural = 'Информанты'
+
     def __str__(self):
         return str(self.fio) + ' ' + str(self.place_of_residence)
 
@@ -108,3 +109,21 @@ class Researcher(models.Model):
 
 '''End Researchers'''
 
+'''Model Organisation'''
+
+class Organisation(models.Model):
+    name_organisation = models.CharField(max_length=30,
+                                         verbose_name='Аббревиатура')
+    full_name_organisation = models.CharField(max_length=60,
+                                              verbose_name='Полное наименование')
+    email_organisation = models.EmailField(blank=True,
+                                           verbose_name='Email')
+    about_organisation = models.TextField(blank=True,
+                                          verbose_name='Дополнительная информация')
+
+
+
+    class Meta:
+        verbose_name = 'Организация'
+        verbose_name_plural = 'Организации'
+'''End Organisations'''

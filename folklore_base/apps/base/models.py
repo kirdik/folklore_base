@@ -63,13 +63,15 @@ class Naspunk(models.Model):
 
 '''End of Location'''
 
+'''Model Informants'''
 class Informant(models.Model):
     fio = models.CharField(max_length=50,
                            help_text='Фамилия Имя Отчество',
                            verbose_name='ФИО')
     maiden_name = models.CharField(max_length=30,
                                    verbose_name='Девичья фамилия',
-                                   blank=True)
+                                   blank=True,
+                                   default='')
     date_of_birth = models.DateField(verbose_name='Дата рождения',
                                      blank=True)
     place_of_residence = models.ForeignKey(Naspunk,
@@ -87,4 +89,22 @@ class Informant(models.Model):
         verbose_name_plural = 'Информанты'
     def __str__(self):
         return str(self.fio) + ' ' + str(self.place_of_residence)
+
+'''End of Informants'''
+
+'''Model Researchers'''
+class Researcher(models.Model):
+    fio_researcher = models.CharField(max_length=50,
+                                      help_text='Фамилия Имя Отчество',
+                                      verbose_name='ФИО')
+    email_researcher = models.EmailField(blank=True,
+                                         verbose_name='Email')
+    about_researcher = models.TextField(blank=True,
+                                        verbose_name='Дополнительная информация')
+
+    class Meta:
+        verbose_name = 'Исследователь'
+        verbose_name_plural = 'Исследователи'
+
+'''End Researchers'''
 

@@ -127,3 +127,20 @@ class Organisation(models.Model):
         verbose_name = 'Организация'
         verbose_name_plural = 'Организации'
 '''End Organisations'''
+
+''' Media type Model'''
+class MediaType(models.Model):
+    media_type_a = models.CharField(max_length=30,
+                                    verbose_name='Тип аналогового носителя',
+                                    help_text='аудиокассета, бобина, видеокассета VHS')
+    manufacturer = models.CharField(max_length=30,
+                                    verbose_name='Производитель',
+                                    blank=True)
+    additional_note = models.TextField(verbose_name='Дополнительные сведения',
+                                       help_text='время звучания, оценка ветхости и прочее',
+                                       blank=True)
+    class Meta:
+        verbose_name = 'Тип носителя'
+        verbose_name_plural = 'Типы носителей'
+
+'''End Media type'''

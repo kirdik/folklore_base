@@ -126,7 +126,29 @@ class Organisation(models.Model):
     class Meta:
         verbose_name = 'Организация'
         verbose_name_plural = 'Организации'
+
 '''End Organisations'''
+
+'''Expeditions Model'''
+class Expeditions(models.Model):
+    begin_data_expedition = models.DateField(verbose_name='Дата начала экспедиции')
+
+    end_data_expedition = models.DateField(verbose_name='Дата окончания экспедиции',
+                                           blank=True)
+    organisation_expedition = models.ForeignKey(Organisation,
+                                                on_delete=models.DO_NOTHING,
+                                                verbose_name='Организация')
+    researcher_expedtion = models.ForeignKey(Researcher,
+                                             on_delete=models.DO_NOTHING,
+                                             verbose_name='Руководитель экспедиции')
+
+    class Meta:
+        verbose_name = 'Экспедиция'
+        verbose_name_plural = 'Экспедиции'
+
+
+
+'''End Expeditions'''
 
 ''' Media type Model'''
 class MediaType(models.Model):
@@ -137,10 +159,11 @@ class MediaType(models.Model):
                                     verbose_name='Производитель',
                                     blank=True)
     additional_note = models.TextField(verbose_name='Дополнительные сведения',
-                                       help_text='время звучания, оценка ветхости и прочее',
+                                       help_text='время звучания, метраж, для какого типа воспроизводящего устройства и прочее',
                                        blank=True)
     class Meta:
         verbose_name = 'Тип носителя'
         verbose_name_plural = 'Типы носителей'
 
 '''End Media type'''
+

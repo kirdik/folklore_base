@@ -1,8 +1,9 @@
 from django.db import models
 
-
 # Create your models here.
 '''Location - модель адреса экспедиционной записи'''
+
+
 class Countries(models.Model):
     countrie_name = models.CharField(max_length=30,
                                      help_text='Страна',
@@ -15,10 +16,12 @@ class Countries(models.Model):
     def __str__(self):
         return self.countrie_name
 
+
 class Oblast(models.Model):
     oblast = models.ForeignKey(Countries,
                                on_delete=models.DO_NOTHING,
-                               verbose_name='Страна')
+                               verbose_name='Страна',
+                               default='Российская Федерация')
     oblast_name = models.CharField(max_length=30,
                                    help_text='Область',
                                    verbose_name='Область')
@@ -29,6 +32,7 @@ class Oblast(models.Model):
 
     def __str__(self):
         return self.oblast_name
+
 
 class Rajon(models.Model):
     rajon = models.ForeignKey(Oblast,
@@ -46,6 +50,7 @@ class Rajon(models.Model):
     def __str__(self):
         return self.rajon_name
 
+
 class Naspunk(models.Model):
     naspunkt = models.ForeignKey(Rajon, on_delete=models.DO_NOTHING,
                                  verbose_name='Район')
@@ -61,9 +66,12 @@ class Naspunk(models.Model):
     def __str__(self):
         return self.naspunkt_name
 
+
 '''End of Location'''
 
 '''Model Informants'''
+
+
 class Informant(models.Model):
     fio = models.CharField(max_length=50,
                            help_text='Фамилия Имя Отчество',
@@ -91,9 +99,12 @@ class Informant(models.Model):
     def __str__(self):
         return str(self.fio) + ' ' + str(self.place_of_residence)
 
+
 '''End of Informants'''
 
 '''Model Researchers'''
+
+
 class Researcher(models.Model):
     fio_researcher = models.CharField(max_length=50,
                                       help_text='Фамилия Имя Отчество',
@@ -107,9 +118,11 @@ class Researcher(models.Model):
         verbose_name = 'Исследователь'
         verbose_name_plural = 'Исследователи'
 
+
 '''End Researchers'''
 
 '''Model Organisation'''
+
 
 class Organisation(models.Model):
     name_organisation = models.CharField(max_length=30,
@@ -121,15 +134,16 @@ class Organisation(models.Model):
     about_organisation = models.TextField(blank=True,
                                           verbose_name='Дополнительная информация')
 
-
-
     class Meta:
         verbose_name = 'Организация'
         verbose_name_plural = 'Организации'
 
+
 '''End Organisations'''
 
 '''Expeditions Model'''
+
+
 class Expeditions(models.Model):
     begin_data_expedition = models.DateField(verbose_name='Дата начала экспедиции')
 
@@ -147,10 +161,11 @@ class Expeditions(models.Model):
         verbose_name_plural = 'Экспедиции'
 
 
-
 '''End Expeditions'''
 
 ''' Media type Model'''
+
+
 class MediaType(models.Model):
     media_type_a = models.CharField(max_length=30,
                                     verbose_name='Тип аналогового носителя',
@@ -159,11 +174,59 @@ class MediaType(models.Model):
                                     verbose_name='Производитель',
                                     blank=True)
     additional_note = models.TextField(verbose_name='Дополнительные сведения',
-                                       help_text='время звучания, метраж, для какого типа воспроизводящего устройства и прочее',
+                                       help_text='время звучания, метраж, '
+                                                 'для какого типа воспроизводящего'
+                                                 ' устройства и прочее',
                                        blank=True)
+
     class Meta:
         verbose_name = 'Тип носителя'
         verbose_name_plural = 'Типы носителей'
 
+
 '''End Media type'''
 
+'''Inventory Number model'''
+
+
+class InventoryNumber(models.Model):
+    inventory_number = models.CharField(max_length=40,
+                                        unique=True,
+                                        verbose_name='Инвентарный номер')
+
+    class Meta:
+        verbose_name = 'Инвентарный номер'
+
+
+'''End Inventory Number'''
+
+'''Storage location model'''
+
+
+class StorageLocation(models.Model):
+    number_of_place = models.CharField(max_length=30,
+                                       verbose_name='Номер места хранения',
+                                       unique=True)
+
+    class Meta:
+        verbose_name_plural = 'Номер места хранения'
+        verbose_name = 'Номер места хранения'
+
+
+'''End Storage Location'''
+
+'''FizNositel'''
+
+
+class FizNositel(models.Model):
+    inventory_number_fzn = models.ForeignKey(InventoryNumber,
+                                             on_delete=models.DO_NOTHING,
+                                             verbose_name='Инвентарный номер',
+                                             )
+    storaje_location_fzn = models.ForeignKey(StorageLocation,
+                                             on_delete=models.DO_NOTHING,
+                                             verbose_name='Место хранения')
+
+    class Meta:
+        verbose_name = 'Физический носитель'
+        verbose_name_plural = 'Физические носители'

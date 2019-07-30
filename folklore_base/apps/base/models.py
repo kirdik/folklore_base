@@ -117,6 +117,8 @@ class Researcher(models.Model):
     class Meta:
         verbose_name = 'Исследователь'
         verbose_name_plural = 'Исследователи'
+    def __str__(self):
+        return self.fio_researcher
 
 
 '''End Researchers'''
@@ -127,7 +129,7 @@ class Researcher(models.Model):
 class Organisation(models.Model):
     name_organisation = models.CharField(max_length=30,
                                          verbose_name='Аббревиатура')
-    full_name_organisation = models.CharField(max_length=60,
+    full_name_organisation = models.CharField(max_length=120,
                                               verbose_name='Полное наименование')
     email_organisation = models.EmailField(blank=True,
                                            verbose_name='Email')
@@ -137,6 +139,8 @@ class Organisation(models.Model):
     class Meta:
         verbose_name = 'Организация'
         verbose_name_plural = 'Организации'
+    def __str__(self):
+        return self.name_organisation
 
 
 '''End Organisations'''
@@ -148,6 +152,8 @@ class Expeditions(models.Model):
     begin_data_expedition = models.DateField(verbose_name='Дата начала экспедиции')
 
     end_data_expedition = models.DateField(verbose_name='Дата окончания экспедиции',
+                                           default='00.00.0000',
+                                           null=True,
                                            blank=True)
     organisation_expedition = models.ForeignKey(Organisation,
                                                 on_delete=models.DO_NOTHING,
@@ -159,6 +165,9 @@ class Expeditions(models.Model):
     class Meta:
         verbose_name = 'Экспедиция'
         verbose_name_plural = 'Экспедиции'
+
+    def __str__(self):
+        return str(self.organisation_expedition) + ' ' + str(self.begin_data_expedition)
 
 
 '''End Expeditions'''
@@ -183,6 +192,9 @@ class MediaType(models.Model):
         verbose_name = 'Тип носителя'
         verbose_name_plural = 'Типы носителей'
 
+    def __str__(self):
+        return str(self.media_type_a) + ' ' + str(self.manufacturer)
+
 
 '''End Media type'''
 
@@ -196,6 +208,10 @@ class InventoryNumber(models.Model):
 
     class Meta:
         verbose_name = 'Инвентарный номер'
+        verbose_name_plural = 'Инвентарные номера'
+
+    def __str__(self):
+        return str(self.inventory_number)
 
 
 '''End Inventory Number'''
@@ -211,22 +227,53 @@ class StorageLocation(models.Model):
     class Meta:
         verbose_name_plural = 'Номер места хранения'
         verbose_name = 'Номер места хранения'
+    def __str__(self):
+        return str(self.number_of_place)
 
 
 '''End Storage Location'''
+
 
 '''FizNositel'''
 
 
 class FizNositel(models.Model):
-    inventory_number_fzn = models.ForeignKey(InventoryNumber,
+    inventory_number_fzn = models.OneToOneField(InventoryNumber,
                                              on_delete=models.DO_NOTHING,
                                              verbose_name='Инвентарный номер',
                                              )
     storaje_location_fzn = models.ForeignKey(StorageLocation,
                                              on_delete=models.DO_NOTHING,
                                              verbose_name='Место хранения')
+    media_type_fzn = models.ForeignKey(MediaType,
+                                       on_delete=models.DO_NOTHING,
+                                       verbose_name='Тип носителя',
+                                       default=1)
+
 
     class Meta:
         verbose_name = 'Физический носитель'
         verbose_name_plural = 'Физические носители'
+
+    def __str__(self):
+        return str(self.inventory_number_fzn) + ' ' + str(self.storaje_location_fzn) + ' ' + str(self.media_type_fzn)
+
+'''End FizNositel'''
+
+'''Gallery of fiz nositel'''
+class GalleryFizNositel(models.Model):
+    img_fiz_nositel = models.ImageField(upload_to='gallery_fiz_nositel',
+                                        verbose_name='Фотография обложек и вложенных описей')
+    img_fiz_nos_key = models.ForeignKey(FizNositel,
+                                        on_delete=models.DO_NOTHING,
+                                        blank=True,
+                                        null=True,
+                                        verbose_name='изображение')
+    class Meta:
+        verbose_name = 'Фото носителя'
+        verbose_name_plural = 'Фотографии носителей'
+
+    def __str__(self):
+        return str(self.img_fiz_nositel)
+
+'''End Gallery Fiznositel'''

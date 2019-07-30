@@ -1,17 +1,36 @@
 from django.contrib import admin
 from folklore_base.apps.base.models import *
 
-MyModels = [ Countries, Oblast, Rajon, Naspunk,
+MyModels = [ Naspunk,
              Informant,Researcher,Organisation,
              MediaType,Expeditions, InventoryNumber,
-             StorageLocation, FizNositel]
+             StorageLocation,GalleryFizNositel]
 admin.site.register(MyModels)
 
-#class InventoryNumberInline(admin.TabularInline):
-#    model = InventoryNumber
 
-#@admin.register(InventoryNumber)
-#class InventoryNumberAdmin(admin.ModelAdmin):
-#    inlines = [InventoryNumberInline,]
+class OblastInline(admin.TabularInline):
+    model = Oblast
+@admin.register(Countries)
+class CountriesAdmin(admin.ModelAdmin):
+    inlines = [OblastInline]
+
+class RayonInline(admin.TabularInline):
+    model = Rajon
+@admin.register(Oblast)
+class OblastAdmin(admin.ModelAdmin):
+    inlines = [RayonInline]
+
+class NasPunktInline(admin.TabularInline):
+    model = Naspunk
+@admin.register(Rajon)
+class RajonAdmin(admin.ModelAdmin):
+    inlines = [NasPunktInline]
+
+class GalleryFiznositelInline(admin.TabularInline):
+    model = GalleryFizNositel
+
+@admin.register(FizNositel)
+class FiznositelAdmin(admin.ModelAdmin):
+    inlines = [GalleryFiznositelInline]
 
 

@@ -117,6 +117,7 @@ class Researcher(models.Model):
     class Meta:
         verbose_name = 'Исследователь'
         verbose_name_plural = 'Исследователи'
+
     def __str__(self):
         return self.fio_researcher
 
@@ -139,6 +140,7 @@ class Organisation(models.Model):
     class Meta:
         verbose_name = 'Организация'
         verbose_name_plural = 'Организации'
+
     def __str__(self):
         return self.name_organisation
 
@@ -227,21 +229,21 @@ class StorageLocation(models.Model):
     class Meta:
         verbose_name_plural = 'Номер места хранения'
         verbose_name = 'Номер места хранения'
+
     def __str__(self):
         return str(self.number_of_place)
 
 
 '''End Storage Location'''
 
-
 '''FizNositel'''
 
 
 class FizNositel(models.Model):
     inventory_number_fzn = models.OneToOneField(InventoryNumber,
-                                             on_delete=models.DO_NOTHING,
-                                             verbose_name='Инвентарный номер',
-                                             )
+                                                on_delete=models.DO_NOTHING,
+                                                verbose_name='Инвентарный номер',
+                                                )
     storaje_location_fzn = models.ForeignKey(StorageLocation,
                                              on_delete=models.DO_NOTHING,
                                              verbose_name='Место хранения')
@@ -249,7 +251,14 @@ class FizNositel(models.Model):
                                        on_delete=models.DO_NOTHING,
                                        verbose_name='Тип носителя',
                                        default=1)
-
+    fzn_txt = models.TextField(blank=True,
+                               verbose_name='Описание',
+                               help_text='Ветхость, скорость записи (для бобин), и прочие примечания')
+    fzn_doc = models.FileField(upload_to='fzn_doc/%Y/%m/%d/',
+                               blank=True,
+                               null=True,
+                               verbose_name='файл с описанием содержимого',
+                               )
 
     class Meta:
         verbose_name = 'Физический носитель'
@@ -258,17 +267,21 @@ class FizNositel(models.Model):
     def __str__(self):
         return str(self.inventory_number_fzn) + ' ' + str(self.storaje_location_fzn) + ' ' + str(self.media_type_fzn)
 
+
 '''End FizNositel'''
 
 '''Gallery of fiz nositel'''
+
+
 class GalleryFizNositel(models.Model):
-    img_fiz_nositel = models.ImageField(upload_to='gallery_fiz_nositel',
+    img_fiz_nositel = models.ImageField(upload_to='gallery_fiz_nositel/%Y/%m/%d/',
                                         verbose_name='Фотография обложек и вложенных описей')
     img_fiz_nos_key = models.ForeignKey(FizNositel,
                                         on_delete=models.DO_NOTHING,
                                         blank=True,
                                         null=True,
                                         verbose_name='изображение')
+
     class Meta:
         verbose_name = 'Фото носителя'
         verbose_name_plural = 'Фотографии носителей'
@@ -276,4 +289,13 @@ class GalleryFizNositel(models.Model):
     def __str__(self):
         return str(self.img_fiz_nositel)
 
+
 '''End Gallery Fiznositel'''
+
+
+''' Digital media Model'''
+class DigitalMedia(models.Model):
+    pass
+
+
+'''End Digital Media'''

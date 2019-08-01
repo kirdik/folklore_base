@@ -1,10 +1,7 @@
 from django.contrib import admin
 from folklore_base.apps.base.models import *
 
-MyModels = [ Naspunk,
-             Informant,Researcher,Organisation,
-             MediaType,Expeditions, InventoryNumber,
-             StorageLocation,GalleryFizNositel]
+MyModels = [Informant,Researcher,Organisation,Expeditions]
 admin.site.register(MyModels)
 
 

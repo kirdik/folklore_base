@@ -90,7 +90,11 @@ class Informant(models.Model):
                                        null=True, related_name='+',
                                        on_delete=models.DO_NOTHING)
     date_move = models.IntegerField(verbose_name='Год переезда',
-                                    blank=True)
+                                    blank=True,
+                                    null=True)
+    img_informant = models.ImageField(upload_to='informants/',
+                                      blank=True,
+                                      null=True)
 
     class Meta:
         verbose_name = 'Информант'
@@ -174,8 +178,8 @@ class Expeditions(models.Model):
 
 '''End Expeditions'''
 
-''' Media type Model'''
 
+''' Media type Model'''
 
 class MediaType(models.Model):
     media_type_a = models.CharField(max_length=30,
@@ -281,21 +285,45 @@ class GalleryFizNositel(models.Model):
                                         blank=True,
                                         null=True,
                                         verbose_name='изображение')
+    def img_fzn_a(self):
+        if self.img_fiz_nositel:
+            from django.utils.safestring import mark_safe
+            return mark_safe(u'<img src="{0}" width="100">'.format(self.img_fiz_nositel.url))
+        else:
+            return '(none)'
+    img_fzn_a.short_description = 'Thumb'
+    img_fzn_a.alow_tags = True
 
     class Meta:
         verbose_name = 'Фото носителя'
         verbose_name_plural = 'Фотографии носителей'
 
-    def __str__(self):
-        return str(self.img_fiz_nositel)
+    #def __str__(self):
+    #    return str(self.img_fiz_nositel)
 
 
 '''End Gallery Fiznositel'''
 
+'''HDD drives Model'''
+
+class HddMediaDrive(models.Model):
+    inventory_number_hdd = models.OneToOneField(InventoryNumber,
+                                                on_delete=models.DO_NOTHING,
+                                                verbose_name='Инвентарный номер')
+    hdd_drive = models.CharField(max_length=30,
+                                 verbose_name='Производитель ЖД')
+    hdd_drive_capacity = models.CharField(max_length=5,
+                                          verbose_name='Объем диска в гигобайтах')
+'''End of HDD drives'''
 
 ''' Digital media Model'''
 class DigitalMedia(models.Model):
-    pass
+    place_hdd_drive = models.ForeignKey(on_delete=models.DO_NOTHING,
+                                        verbose_name='Хранение на HDD')
+    path_of_place = models.CharField(max_length=300,
+                                     verbose_name="Путь до папки на жесмтком диске")
+
+
 
 
 '''End Digital Media'''

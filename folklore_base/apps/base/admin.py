@@ -1,8 +1,13 @@
 from django.contrib import admin
 from folklore_base.apps.base.models import *
 
-MyModels = [Informant,Researcher,Organisation,Expeditions]
+MyModels = [Researcher,Organisation,Expeditions, StorageLocation, MediaType]
 admin.site.register(MyModels)
+
+class InformantAdmin(admin.ModelAdmin):
+    list_display = ('fio', 'date_of_birth', 'place_of_residence' )
+
+admin.site.register(Informant, InformantAdmin)
 
 
 class OblastInline(admin.TabularInline):
@@ -26,8 +31,11 @@ class RajonAdmin(admin.ModelAdmin):
 class GalleryFiznositelInline(admin.TabularInline):
     model = GalleryFizNositel
 
+
 @admin.register(FizNositel)
 class FiznositelAdmin(admin.ModelAdmin):
     inlines = [GalleryFiznositelInline]
+    list_display = ('inventory_number_fzn', 'storaje_location_fzn', 'media_type_fzn')
+    list_filter = ('storaje_location_fzn','inventory_number_fzn')
 
 

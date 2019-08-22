@@ -1,7 +1,9 @@
 from django.contrib import admin
 from folklore_base.apps.base.models import *
+admin.site.site_header = 'Банк данных фольклорных записей'
 
-MyModels = [Researcher,Organisation,Expeditions, StorageLocation, MediaType]
+
+MyModels = [Researcher,Organisation,Expeditions, StorageLocation, MediaType, InventoryNumber]
 admin.site.register(MyModels)
 
 class InformantAdmin(admin.ModelAdmin):
@@ -38,4 +40,15 @@ class FiznositelAdmin(admin.ModelAdmin):
     list_display = ('inventory_number_fzn', 'storaje_location_fzn', 'media_type_fzn')
     list_filter = ('storaje_location_fzn','inventory_number_fzn')
 
+class TimestampInline(admin.TabularInline):
+    model = TimingDigitalMedia
+
+@admin.register(DigitalMedia)
+class DigitalMediaAdmin(admin.ModelAdmin):
+    inlines = [TimestampInline]
+
+class HddMediaDriveAdmin(admin.ModelAdmin):
+    list_display = ('hdd_drive', 'hdd_drive_capacity', 'inventory_number_hdd')
+
+admin.site.register(HddMediaDrive, HddMediaDriveAdmin)
 

@@ -178,8 +178,8 @@ class Expeditions(models.Model):
 
 '''End Expeditions'''
 
-
 ''' Media type Model'''
+
 
 class MediaType(models.Model):
     media_type_a = models.CharField(max_length=30,
@@ -195,8 +195,8 @@ class MediaType(models.Model):
                                        blank=True)
 
     class Meta:
-        verbose_name = 'Тип носителя'
-        verbose_name_plural = 'Типы носителей'
+        verbose_name = 'Тип аналового носителя'
+        verbose_name_plural = 'Типы аналоговых носителей'
 
     def __str__(self):
         return str(self.media_type_a) + ' ' + str(self.manufacturer)
@@ -285,12 +285,14 @@ class GalleryFizNositel(models.Model):
                                         blank=True,
                                         null=True,
                                         verbose_name='изображение')
+
     def img_fzn_a(self):
         if self.img_fiz_nositel:
             from django.utils.safestring import mark_safe
             return mark_safe(u'<img src="{0}" width="100">'.format(self.img_fiz_nositel.url))
         else:
             return '(none)'
+
     img_fzn_a.short_description = 'Thumb'
     img_fzn_a.alow_tags = True
 
@@ -298,13 +300,14 @@ class GalleryFizNositel(models.Model):
         verbose_name = 'Фото носителя'
         verbose_name_plural = 'Фотографии носителей'
 
-    #def __str__(self):
+    # def __str__(self):
     #    return str(self.img_fiz_nositel)
 
 
 '''End Gallery Fiznositel'''
 
 '''HDD drives Model'''
+
 
 class HddMediaDrive(models.Model):
     inventory_number_hdd = models.OneToOneField(InventoryNumber,
@@ -314,16 +317,52 @@ class HddMediaDrive(models.Model):
                                  verbose_name='Производитель ЖД')
     hdd_drive_capacity = models.CharField(max_length=5,
                                           verbose_name='Объем диска в гигобайтах')
+    class Meta:
+        verbose_name = 'Жесткий диск (HDD)'
+        verbose_name_plural = 'Жесткие диски (HDD)'
+    def __str__(self):
+        return str(self.hdd_drive) + ' ' + str(self.inventory_number_hdd)
+
+
 '''End of HDD drives'''
 
 ''' Digital media Model'''
+
+
 class DigitalMedia(models.Model):
-    place_hdd_drive = models.ForeignKey(on_delete=models.DO_NOTHING,
-                                        verbose_name='Хранение на HDD')
+    place_hdd_drive = models.ForeignKey(HddMediaDrive,
+                                        on_delete=models.DO_NOTHING,
+                                        default=0,
+                                        verbose_name='На каком HDD хранится')
+    id_of_digitl_media = models.AutoField(primary_key=True,
+                                          max_length=6,
+                                          unique=True,
+                                          default='000000',
+                                          verbose_name='ID цифровой записи')
     path_of_place = models.CharField(max_length=300,
-                                     verbose_name="Путь до папки на жесмтком диске")
+                                     verbose_name="Путь до папки на жестком диске",
+                                     default='/')
 
-
+    class Meta:
+        verbose_name='Цифровой медиа файл'
+        verbose_name_plural = 'Цифровые медиа файлы'
 
 
 '''End Digital Media'''
+
+'''Timing of digital media'''
+
+
+class TimingDigitalMedia(models.Model):
+    time_stamp = models.TimeField(default='00:00:00',
+                                  verbose_name='час:минута:секунда')
+    number_of_temestamp = models.IntegerField(default='0',
+                                              unique=True,
+                                              verbose_name='Порядковый номер')
+    text_for_time_stamp = models.TextField(verbose_name='Описание временной логической еденицы записи',
+                                           blank=True)
+    timestamp_for_dm = models.ForeignKey(DigitalMedia,
+                                         on_delete=models.CASCADE)
+
+
+'''End Timing'''

@@ -330,6 +330,9 @@ class HddMediaDrive(models.Model):
 
 
 class DigitalMedia(models.Model):
+    media_file = models.FileField(upload_to='digitalmedia/%Y/%m/',
+                                  verbose_name='Загрузить звуковой файл',
+                                  default='no')
     place_hdd_drive = models.ForeignKey(HddMediaDrive,
                                         on_delete=models.DO_NOTHING,
                                         default=0,
@@ -363,6 +366,5 @@ class TimingDigitalMedia(models.Model):
                                            blank=True)
     timestamp_for_dm = models.ForeignKey(DigitalMedia,
                                          on_delete=models.CASCADE)
-
 
 '''End Timing'''

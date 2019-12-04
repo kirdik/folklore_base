@@ -1,0 +1,5 @@
+log-cow.log
+__pycache__
+test.py
+.idea
+.DS_Store

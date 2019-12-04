@@ -33,7 +33,6 @@ class RajonAdmin(admin.ModelAdmin):
 class GalleryFiznositelInline(admin.TabularInline):
     model = GalleryFizNositel
 
-
 @admin.register(FizNositel)
 class FiznositelAdmin(admin.ModelAdmin):
     inlines = [GalleryFiznositelInline]

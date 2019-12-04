@@ -1,7 +1,8 @@
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+import os
+import django
+os.environ["DJANGO_SETTINGS_MODULE"] = 'folklore_base.settings'
+django.setup()
 from folklore_base.apps.base.models import MediaType
-
 import csv
 #a1 = '1234567'
 #p = FizNositel.objects.create( inventory_number_fzn = InventoryNumber.objects.create(inventory_number = '123456' ),
@@ -15,10 +16,10 @@ number_one = 1 #Номер столбца в таблице CSV файла
 number_two = 2 #Второй номер столбца
 def readcsv(csvfile, separator, number_one, number_two): # Определяем функцию которая будет читать из файла
     with open(csvfile) as file: # Открываем файл на чтение
-        arrfile = csv.reader(file, delimiter = separator, quoting=csv.QUOTE_ALL)  # Читаем файл при помощи либы csv
+        arrfile = csv.reader(file, delimiter=separator, quoting=csv.QUOTE_ALL)  # Читаем файл при помощи либы csv
         arrarr = []  # Инициируем массив
         for i in arrfile:  # В цикле заполняем массив данными из столбца
-            arrarr.append([number_one], [number_two])
+            arrarr.append(i[number_one], i[number_two])
     return arrarr
 list_a = readcsv(csvfile, separator, 1, 2 ) # Запускаем функцию которую написали выше
 #uniclist = list(set(list_a)) #Все уникальные элементы списка

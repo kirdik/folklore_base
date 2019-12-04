@@ -15,10 +15,10 @@ number_one = 1 #Номер столбца в таблице CSV файла
 number_two = 2 #Второй номер столбца
 def readcsv(csvfile, separator, number_one, number_two): # Определяем функцию которая будет читать из файла
     with open(csvfile) as file: # Открываем файл на чтение
-        arrfile = csv.reader(file, delimiter = separator, quoting = csv.QUOTE_ALL) # Читаем файл при помощи либы csv
-        arrarr = [] # Инициируем массив
+        arrfile = csv.reader(file, delimiter = separator, quoting=csv.QUOTE_ALL)  # Читаем файл при помощи либы csv
+        arrarr = []  # Инициируем массив
         for i in arrfile:  # В цикле заполняем массив данными из столбца
-            arrarr.append([number_one],[number_two])
+            arrarr.append([number_one], [number_two])
     return arrarr
 list_a = readcsv(csvfile, separator, 1, 2 ) # Запускаем функцию которую написали выше
 #uniclist = list(set(list_a)) #Все уникальные элементы списка
@@ -34,7 +34,7 @@ for i in p1:
 """ Сравниваем массивы и вычисляем уникальные элементы """
 
 result = list(set(arrarr2) ^ set(uniclist))
-#print(result)
+print(result)
 """ Загружаем уникальные массивы в базу"""
 
 

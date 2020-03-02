@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9f33501-a52f-49c5-b186-e89bb3d461e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log-cow.log" beforeDir="false" afterPath="$PROJECT_DIR$/log-cow.log" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -151,6 +154,7 @@
       <workItem from="1575798996051" duration="341000" />
       <workItem from="1583002917401" duration="1020000" />
       <workItem from="1583139073315" duration="912000" />
+      <workItem from="1583154162072" duration="643000" />
     </task>
     <task id="LOCAL-00001" summary="001&#10;Локация и информанты">
       <created>1564167634753</created>

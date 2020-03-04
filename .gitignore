@@ -1,6 +1,6 @@
-log-cow.log
-__pycache__
+*log-cow.log
+__pycache__/*
 test.py
 .idea
-.DS_Store
+*.DS_Store*
 db.sqlite3

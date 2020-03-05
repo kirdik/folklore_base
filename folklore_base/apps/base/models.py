@@ -339,12 +339,12 @@ class DigitalMedia(models.Model):
                                         verbose_name='На каком HDD хранится')
     id_of_digitl_media = models.AutoField(primary_key=True,
                                           #max_length=6,
-                                          unique=True,
+                                          unique=None,
                                           default='000000',
                                           verbose_name='ID цифровой записи')
-    path_of_place = models.CharField(max_length=300,
+    '''path_of_place = models.CharField(max_length=300,
                                      verbose_name="Путь до папки на жестком диске",
-                                     default='/')
+                                     default='/')'''
 
     class Meta:
         verbose_name='Цифровой медиа файл'
@@ -358,9 +358,10 @@ class DigitalMedia(models.Model):
 
 class TimingDigitalMedia(models.Model):
     time_stamp = models.TimeField(default='00:00:00',
-                                  verbose_name='час:минута:секунда')
+                                  verbose_name='час:минута:секунда',
+                                  unique=None)
     number_of_temestamp = models.IntegerField(default='0',
-                                              unique=True,
+                                              unique=None,
                                               verbose_name='Порядковый номер')
     text_for_time_stamp = models.TextField(verbose_name='Описание временной логической еденицы записи',
                                            blank=True)

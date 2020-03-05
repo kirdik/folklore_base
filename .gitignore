@@ -1,6 +1,8 @@
 *log-cow.log
-__pycache__/*
+*pycache*
 test.py
 .idea
 *.DS_Store*
-*db.sqlite3*
+*sqlite3
+*.mp3
+dump.txt

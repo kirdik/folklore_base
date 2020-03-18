@@ -1,5 +1,7 @@
 from django.contrib import admin
 from folklore_base.apps.base.models import *
+
+admin.site.site_title = 'Банк полубанк'
 admin.site.site_header = 'Банк данных фольклорных записей'
 
 

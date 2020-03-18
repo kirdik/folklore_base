@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for audio in audio %}
+    <br><audio controls><source src='{{ audio.file_ff_upload.url }}' type="audio/mpeg"></audio><br>
+    <b>{{ audio.name_of_file_ff }}</b><br>
+{% endfor %}
+{% endblock %}

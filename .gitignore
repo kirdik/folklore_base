@@ -6,3 +6,4 @@ test.py
 *sqlite3
 *.mp3
 dump.txt
+media/*

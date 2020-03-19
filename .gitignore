@@ -1,7 +1,7 @@
 *log-cow.log
 *pycache*
 test.py
-.idea
+.idea/*
 *.DS_Store*
 *sqlite3
 *.mp3

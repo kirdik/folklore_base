@@ -335,7 +335,6 @@ class DigitalMedia(models.Model):
                                         default=0,
                                         verbose_name='На каком HDD хранится')
     id_of_digitl_media = models.AutoField(primary_key=True,
-                                          max_length=6,
                                           unique=True,
                                           default='000000',
                                           verbose_name='ID цифровой записи')

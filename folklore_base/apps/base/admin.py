@@ -40,15 +40,15 @@ class FiznositelAdmin(admin.ModelAdmin):
     list_display = ('inventory_number_fzn', 'storaje_location_fzn', 'media_type_fzn')
     list_filter = ('storaje_location_fzn','inventory_number_fzn')
 
-class TimestampInline(admin.TabularInline):
-    model = TimingDigitalMedia
+#class TimestampInline(admin.TabularInline):
+#    model = TimingDigitalMedia
 
-@admin.register(DigitalMedia)
-class DigitalMediaAdmin(admin.ModelAdmin):
-    inlines = [TimestampInline]
+#@admin.register(DigitalMedia)
+#class DigitalMediaAdmin(admin.ModelAdmin):
+#    inlines = [TimestampInline]
+admin.site.register(DigitalMedia)
 
 class HddMediaDriveAdmin(admin.ModelAdmin):
     list_display = ('hdd_drive', 'hdd_drive_capacity', 'inventory_number_hdd')
 
 admin.site.register(HddMediaDrive, HddMediaDriveAdmin)
-

@@ -338,13 +338,14 @@ class DigitalMedia(models.Model):
                                           unique=True,
                                           default='000000',
                                           verbose_name='ID цифровой записи')
-    path_of_place = models.CharField(max_length=300,
-                                     verbose_name="Путь до папки на жестком диске",
-                                     default='/')
+    fileupl = models.FileField(upload_to='audio/',
+                               verbose_name='Аудиофайл')
 
     class Meta:
         verbose_name='Цифровой медиа файл'
         verbose_name_plural = 'Цифровые медиа файлы'
+    def __str__(self):
+        return str(self.fileupl)
 
 
 '''End Digital Media'''
@@ -352,7 +353,7 @@ class DigitalMedia(models.Model):
 '''Timing of digital media'''
 
 
-class TimingDigitalMedia(models.Model):
+''' class TimingDigitalMedia(models.Model):
     time_stamp = models.TimeField(default='00:00:00',
                                   verbose_name='час:минута:секунда')
     number_of_temestamp = models.IntegerField(default='0',
@@ -361,7 +362,7 @@ class TimingDigitalMedia(models.Model):
     text_for_time_stamp = models.TextField(verbose_name='Описание временной логической еденицы записи',
                                            blank=True)
     timestamp_for_dm = models.ForeignKey(DigitalMedia,
-                                         on_delete=models.CASCADE)
+                                         on_delete=models.CASCADE) '''
 
 
 '''End Timing'''

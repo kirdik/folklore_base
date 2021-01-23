@@ -334,18 +334,21 @@ class DigitalMedia(models.Model):
                                         on_delete=models.DO_NOTHING,
                                         default=0,
                                         verbose_name='На каком HDD хранится')
-    id_of_digitl_media = models.AutoField(primary_key=True,
-                                          unique=True,
-                                          default='000000',
-                                          verbose_name='ID цифровой записи')
+    id_of_digitl_media = models.CharField(unique=True,
+                                          default='CRF20201213_34_A',
+                                          verbose_name='ID цифровой записи',
+                                          max_length=45)
     fileupl = models.FileField(upload_to='audio/',
                                verbose_name='Аудиофайл')
+    file_description = models.TextField(max_length=600,
+                                        verbose_name='Описание и тайминг',
+                                        default='00:00:00 Русского \n00:00:30 Конец')
 
     class Meta:
         verbose_name='Цифровой медиа файл'
         verbose_name_plural = 'Цифровые медиа файлы'
     def __str__(self):
-        return str(self.fileupl)
+        return str(self.id_of_digitl_media)
 
 
 '''End Digital Media'''

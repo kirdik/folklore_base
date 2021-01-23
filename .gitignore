@@ -3,3 +3,4 @@ log-cow.log
 __pycache__
 Pipfile
 media/*
+*.DS_Store

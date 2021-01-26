@@ -69,43 +69,6 @@ class Naspunk(models.Model):
 
 '''End of Location'''
 
-'''Model Informants'''
-
-
-class Informant(models.Model):
-    fio = models.CharField(max_length=50,
-                           help_text='Фамилия Имя Отчество',
-                           verbose_name='ФИО')
-    maiden_name = models.CharField(max_length=30,
-                                   verbose_name='Девичья фамилия',
-                                   blank=True,
-                                   default='')
-    date_of_birth = models.DateField(verbose_name='Дата рождения',
-                                     blank=True)
-    place_of_residence = models.ForeignKey(Naspunk,
-                                           on_delete=models.DO_NOTHING,
-                                           verbose_name='Место проживания')
-    place_of_birth = models.ForeignKey(Naspunk,
-                                       verbose_name='Место рождения',
-                                       null=True, related_name='+',
-                                       on_delete=models.DO_NOTHING)
-    date_move = models.IntegerField(verbose_name='Год переезда',
-                                    blank=True,
-                                    null=True)
-    img_informant = models.ImageField(upload_to='informants/',
-                                      blank=True,
-                                      null=True)
-
-    class Meta:
-        verbose_name = 'Информант'
-        verbose_name_plural = 'Информанты'
-
-    def __str__(self):
-        return str(self.fio) + ' ' + str(self.place_of_residence)
-
-
-'''End of Informants'''
-
 '''Model Researchers'''
 
 
@@ -151,6 +114,58 @@ class Organisation(models.Model):
 
 '''End Organisations'''
 
+
+''' Seans zapisi Model'''
+class SeansOfRecord(models.Model):
+    data_seans_of_record = models.DateField(verbose_name='Дата сеанса записи')
+    place_of_record = models.ForeignKey(Naspunk,
+                                        on_delete=models.DO_NOTHING,
+                                        verbose_name='Место записи')
+
+    class Meta:
+        verbose_name = 'Сеанс записи'
+        verbose_name_plural = 'Сеансы записи'
+
+    def __str__(self):
+        return str(self.data_seans_of_record) + ' ' + str(self.place_of_record)
+
+'''End of Seanse of record'''
+'''Model Informants'''
+class Informant(models.Model):
+    fio = models.CharField(max_length=50,
+                           help_text='Фамилия Имя Отчество',
+                           verbose_name='ФИО')
+    maiden_name = models.CharField(max_length=30,
+                                   verbose_name='Девичья фамилия',
+                                   blank=True,
+                                   default='')
+    date_of_birth = models.DateField(verbose_name='Дата рождения',
+                                     blank=True)
+    place_of_residence = models.ForeignKey(Naspunk,
+                                           on_delete=models.DO_NOTHING,
+                                           verbose_name='Место проживания')
+    place_of_birth = models.ForeignKey(Naspunk,
+                                       verbose_name='Место рождения',
+                                       null=True, related_name='+',
+                                       on_delete=models.DO_NOTHING)
+    date_move = models.IntegerField(verbose_name='Год переезда',
+                                    blank=True,
+                                    null=True)
+    img_informant = models.ImageField(upload_to='informants/',
+                                      blank=True,
+                                      null=True)
+    data_seans_of_record_inf = models.ForeignKey(SeansOfRecord,
+    on_delete=models.DO_NOTHING)
+    class Meta:
+        verbose_name = 'Информант'
+        verbose_name_plural = 'Информанты'
+
+    def __str__(self):
+        return str(self.fio) + ' ' + str(self.place_of_residence)
+
+
+'''End of Informants'''
+
 '''Expeditions Model'''
 
 
@@ -177,6 +192,7 @@ class Expeditions(models.Model):
 
 
 '''End Expeditions'''
+
 
 ''' Media type Model'''
 
@@ -326,10 +342,13 @@ class HddMediaDrive(models.Model):
 
 '''End of HDD drives'''
 
+
 ''' Digital media Model'''
 
 
 class DigitalMedia(models.Model):
+    seans = models.ForeignKey(SeansOfRecord,
+                              on_delete=models.DO_NOTHING)
     place_hdd_drive = models.ForeignKey(HddMediaDrive,
                                         on_delete=models.DO_NOTHING,
                                         default=0,

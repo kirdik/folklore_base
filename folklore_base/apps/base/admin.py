@@ -3,7 +3,8 @@ from folklore_base.apps.base.models import *
 admin.site.site_header = 'Банк данных фольклорных записей'
 
 
-MyModels = [Researcher,Organisation,Expeditions, StorageLocation, MediaType, InventoryNumber]
+MyModels = [Researcher,Organisation,Expeditions, DigitalMedia]
+
 admin.site.register(MyModels)
 
 class InformantAdmin(admin.ModelAdmin):
@@ -30,23 +31,27 @@ class NasPunktInline(admin.TabularInline):
 class RajonAdmin(admin.ModelAdmin):
     inlines = [NasPunktInline]
 
-class GalleryFiznositelInline(admin.TabularInline):
-    model = GalleryFizNositel
+#class GalleryFiznositelInline(admin.TabularInline):
+#    model = GalleryFizNositel
 
 
-@admin.register(FizNositel)
-class FiznositelAdmin(admin.ModelAdmin):
-    inlines = [GalleryFiznositelInline]
-    list_display = ('inventory_number_fzn', 'storaje_location_fzn', 'media_type_fzn')
-    list_filter = ('storaje_location_fzn','inventory_number_fzn')
+#@admin.register(FizNositel)
+#class FiznositelAdmin(admin.ModelAdmin):
+#    inlines = [GalleryFiznositelInline]
+#    list_display = ('inventory_number_fzn', 'storaje_location_fzn', 'media_type_fzn')
+#    list_filter = ('storaje_location_fzn','inventory_number_fzn')
+class InformantInline(admin.TabularInline):
+    model = Informant
+    extra = 1
 
-#class TimestampInline(admin.TabularInline):
-#    model = TimingDigitalMedia
+class DigitalMediaInline(admin.TabularInline):
+    model = DigitalMedia
+    extra = 1
 
-#@admin.register(DigitalMedia)
-#class DigitalMediaAdmin(admin.ModelAdmin):
-#    inlines = [TimestampInline]
-admin.site.register(DigitalMedia)
+@admin.register(SeansOfRecord)
+class SeansOfRecordAdmin(admin.ModelAdmin):
+    inlines = [InformantInline, DigitalMediaInline]
+
 
 class HddMediaDriveAdmin(admin.ModelAdmin):
     list_display = ('hdd_drive', 'hdd_drive_capacity', 'inventory_number_hdd')

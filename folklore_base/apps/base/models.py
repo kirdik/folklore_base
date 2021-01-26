@@ -51,7 +51,7 @@ class Rajon(models.Model):
         return self.rajon_name
 
 
-class Naspunk(models.Model):
+class Naspunkt(models.Model):
     naspunkt = models.ForeignKey(Rajon, on_delete=models.DO_NOTHING,
                                  verbose_name='Район')
 
@@ -114,13 +114,51 @@ class Organisation(models.Model):
 
 '''End Organisations'''
 
+'''Model Informant'''
+class Informant(models.Model):
+    fio = models.CharField(max_length=50,
+                           help_text='Фамилия Имя Отчество указывать полностью',
+                           verbose_name='ФИО')
+    date_of_birth = models.IntegerField(verbose_name='Год рождения',
+                                     blank=True,
+                                     null=True,
+                                     help_text='Указывать только год рождения. Точную дату при необходимости добавить в "Дополнительно"')
+    place_of_residence = models.ForeignKey(Naspunkt,
+                                           on_delete=models.DO_NOTHING,
+                                           verbose_name='Место проживания')
+    img_informant = models.ImageField(upload_to='informants/',
+                                      blank=True,
+                                      null=True,
+                                      verbose_name='Фотография исполнителя')
+    info_informant = models.TextField(verbose_name='Дополнительная информация',
+                                      help_text='Здесь можно добавить такие сведения как: '
+                                      'девичья фамилия, '
+                                      'место рождения, '
+                                      'год переезда, '
+                                      'точная дата рождения, '
+                                      'дата смерти, '
+                                      'контактная информация',
+                                      blank=True)
+    #data_seans_of_record_inf = models.ForeignKey(SeansOfRecord,
+    #                                             on_delete=models.DO_NOTHING,
+    #                                             blank=True,
+    #                                             null=True)
+    class Meta:
+        verbose_name = 'Информант'
+        verbose_name_plural = 'Информанты'
 
+    def __str__(self):
+        return str(self.fio) + ' ' + str(self.place_of_residence)
+
+
+'''End of Informant'''
 ''' Seans zapisi Model'''
 class SeansOfRecord(models.Model):
     data_seans_of_record = models.DateField(verbose_name='Дата сеанса записи')
-    place_of_record = models.ForeignKey(Naspunk,
+    place_of_record = models.ForeignKey(Naspunkt,
                                         on_delete=models.DO_NOTHING,
                                         verbose_name='Место записи')
+    informant_of_seanse = models.ManyToManyField(Informant)
 
     class Meta:
         verbose_name = 'Сеанс записи'
@@ -130,41 +168,7 @@ class SeansOfRecord(models.Model):
         return str(self.data_seans_of_record) + ' ' + str(self.place_of_record)
 
 '''End of Seanse of record'''
-'''Model Informants'''
-class Informant(models.Model):
-    fio = models.CharField(max_length=50,
-                           help_text='Фамилия Имя Отчество',
-                           verbose_name='ФИО')
-    maiden_name = models.CharField(max_length=30,
-                                   verbose_name='Девичья фамилия',
-                                   blank=True,
-                                   default='')
-    date_of_birth = models.DateField(verbose_name='Дата рождения',
-                                     blank=True)
-    place_of_residence = models.ForeignKey(Naspunk,
-                                           on_delete=models.DO_NOTHING,
-                                           verbose_name='Место проживания')
-    place_of_birth = models.ForeignKey(Naspunk,
-                                       verbose_name='Место рождения',
-                                       null=True, related_name='+',
-                                       on_delete=models.DO_NOTHING)
-    date_move = models.IntegerField(verbose_name='Год переезда',
-                                    blank=True,
-                                    null=True)
-    img_informant = models.ImageField(upload_to='informants/',
-                                      blank=True,
-                                      null=True)
-    data_seans_of_record_inf = models.ForeignKey(SeansOfRecord,
-    on_delete=models.DO_NOTHING)
-    class Meta:
-        verbose_name = 'Информант'
-        verbose_name_plural = 'Информанты'
 
-    def __str__(self):
-        return str(self.fio) + ' ' + str(self.place_of_residence)
-
-
-'''End of Informants'''
 
 '''Expeditions Model'''
 
@@ -194,32 +198,6 @@ class Expeditions(models.Model):
 '''End Expeditions'''
 
 
-''' Media type Model'''
-
-
-class MediaType(models.Model):
-    media_type_a = models.CharField(max_length=30,
-                                    verbose_name='Тип аналогового носителя',
-                                    help_text='аудиокассета, бобина, видеокассета VHS')
-    manufacturer = models.CharField(max_length=30,
-                                    verbose_name='Производитель',
-                                    blank=True)
-    additional_note = models.TextField(verbose_name='Дополнительные сведения',
-                                       help_text='время звучания, метраж, '
-                                                 'для какого типа воспроизводящего'
-                                                 ' устройства и прочее',
-                                       blank=True)
-
-    class Meta:
-        verbose_name = 'Тип аналового носителя'
-        verbose_name_plural = 'Типы аналоговых носителей'
-
-    def __str__(self):
-        return str(self.media_type_a) + ' ' + str(self.manufacturer)
-
-
-'''End Media type'''
-
 '''Inventory Number model'''
 
 
@@ -238,89 +216,6 @@ class InventoryNumber(models.Model):
 
 '''End Inventory Number'''
 
-'''Storage location model'''
-
-
-class StorageLocation(models.Model):
-    number_of_place = models.CharField(max_length=30,
-                                       verbose_name='Номер места хранения',
-                                       unique=True)
-
-    class Meta:
-        verbose_name_plural = 'Номер места хранения'
-        verbose_name = 'Номер места хранения'
-
-    def __str__(self):
-        return str(self.number_of_place)
-
-
-'''End Storage Location'''
-
-'''FizNositel'''
-
-
-class FizNositel(models.Model):
-    inventory_number_fzn = models.OneToOneField(InventoryNumber,
-                                                on_delete=models.DO_NOTHING,
-                                                verbose_name='Инвентарный номер',
-                                                )
-    storaje_location_fzn = models.ForeignKey(StorageLocation,
-                                             on_delete=models.DO_NOTHING,
-                                             verbose_name='Место хранения')
-    media_type_fzn = models.ForeignKey(MediaType,
-                                       on_delete=models.DO_NOTHING,
-                                       verbose_name='Тип носителя',
-                                       default=1)
-    fzn_txt = models.TextField(blank=True,
-                               verbose_name='Описание',
-                               help_text='Ветхость, скорость записи (для бобин), и прочие примечания')
-    fzn_doc = models.FileField(upload_to='fzn_doc/%Y/%m/%d/',
-                               blank=True,
-                               null=True,
-                               verbose_name='файл с описанием содержимого',
-                               )
-
-    class Meta:
-        verbose_name = 'Физический носитель'
-        verbose_name_plural = 'Физические носители'
-
-    def __str__(self):
-        return str(self.inventory_number_fzn) + ' ' + str(self.storaje_location_fzn) + ' ' + str(self.media_type_fzn)
-
-
-'''End FizNositel'''
-
-'''Gallery of fiz nositel'''
-
-
-class GalleryFizNositel(models.Model):
-    img_fiz_nositel = models.ImageField(upload_to='gallery_fiz_nositel/%Y/%m/%d/',
-                                        verbose_name='Фотография обложек и вложенных описей')
-    img_fiz_nos_key = models.ForeignKey(FizNositel,
-                                        on_delete=models.DO_NOTHING,
-                                        blank=True,
-                                        null=True,
-                                        verbose_name='изображение')
-
-    def img_fzn_a(self):
-        if self.img_fiz_nositel:
-            from django.utils.safestring import mark_safe
-            return mark_safe(u'<img src="{0}" width="100">'.format(self.img_fiz_nositel.url))
-        else:
-            return '(none)'
-
-    img_fzn_a.short_description = 'Thumb'
-    img_fzn_a.alow_tags = True
-
-    class Meta:
-        verbose_name = 'Фото носителя'
-        verbose_name_plural = 'Фотографии носителей'
-
-    # def __str__(self):
-    #    return str(self.img_fiz_nositel)
-
-
-'''End Gallery Fiznositel'''
 
 '''HDD drives Model'''
 
@@ -371,20 +266,3 @@ class DigitalMedia(models.Model):
 
 
 '''End Digital Media'''
-
-'''Timing of digital media'''
-
-
-''' class TimingDigitalMedia(models.Model):
-    time_stamp = models.TimeField(default='00:00:00',
-                                  verbose_name='час:минута:секунда')
-    number_of_temestamp = models.IntegerField(default='0',
-                                              unique=True,
-                                              verbose_name='Порядковый номер')
-    text_for_time_stamp = models.TextField(verbose_name='Описание временной логической еденицы записи',
-                                           blank=True)
-    timestamp_for_dm = models.ForeignKey(DigitalMedia,
-                                         on_delete=models.CASCADE) '''
-
-
-'''End Timing'''

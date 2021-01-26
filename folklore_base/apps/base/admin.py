@@ -3,7 +3,7 @@ from folklore_base.apps.base.models import *
 admin.site.site_header = 'Банк данных фольклорных записей'
 
 
-MyModels = [Researcher,Organisation,Expeditions, DigitalMedia]
+MyModels = [Researcher,Organisation,Expeditions, InventoryNumber]
 
 admin.site.register(MyModels)
 
@@ -11,7 +11,6 @@ class InformantAdmin(admin.ModelAdmin):
     list_display = ('fio', 'date_of_birth', 'place_of_residence' )
 
 admin.site.register(Informant, InformantAdmin)
-
 
 class OblastInline(admin.TabularInline):
     model = Oblast
@@ -26,31 +25,29 @@ class OblastAdmin(admin.ModelAdmin):
     inlines = [RayonInline]
 
 class NasPunktInline(admin.TabularInline):
-    model = Naspunk
+    model = Naspunkt
 @admin.register(Rajon)
 class RajonAdmin(admin.ModelAdmin):
     inlines = [NasPunktInline]
 
-#class GalleryFiznositelInline(admin.TabularInline):
-#    model = GalleryFizNositel
 
-
-#@admin.register(FizNositel)
-#class FiznositelAdmin(admin.ModelAdmin):
-#    inlines = [GalleryFiznositelInline]
-#    list_display = ('inventory_number_fzn', 'storaje_location_fzn', 'media_type_fzn')
-#    list_filter = ('storaje_location_fzn','inventory_number_fzn')
 class InformantInline(admin.TabularInline):
     model = Informant
-    extra = 1
+    extra = 0
 
 class DigitalMediaInline(admin.TabularInline):
     model = DigitalMedia
-    extra = 1
+    extra = 0
+class DigitalMediaAdmin(admin.ModelAdmin):
+    list_display = ['id_of_digitl_media', 'seans']
+admin.site.register(DigitalMedia, DigitalMediaAdmin)
+
 
 @admin.register(SeansOfRecord)
 class SeansOfRecordAdmin(admin.ModelAdmin):
-    inlines = [InformantInline, DigitalMediaInline]
+    inlines = [DigitalMediaInline]
+    filter_horizontal = ('informant_of_seanse',)
+
 
 
 class HddMediaDriveAdmin(admin.ModelAdmin):

@@ -12,10 +12,12 @@
 Далее необходимо перейти в ветку "addfile" проекта. Если не знаете как, то просто пройдите по этой [ссылке](https://github.com/kirdik/folklore_base/tree/addfile) <br>
 После этого в правом вверхнем углу нажмите зеленую кнопу "Code" и в выпадающем меню нажмите "Download ZIP". <br>
 Далее вам необходимо распаковать скачанный файл, затем открыть консоль или терминал, это зависит от вашей операционной системы, перейти в скачанную папку (folklore_base) и выполнить несколько команд:<br>
+
 ```
-pip install -r requrements.txt <br>
-python manage.py makemigrations <br>
-python manage.py migrate <br>
-python manage.py createsuperuser <br>
-python manage.py runserver <br>
+pip install -r requrements.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver 
+
 ```

@@ -1,9 +1,9 @@
 from django.contrib import admin
 from folklore_base.apps.base.models import *
-admin.site.site_header = 'Банк данных фольклорных записей'
+admin.site.site_header = 'Банк данных экспедиционных материалов'
 
 
-MyModels = [Researcher,Organisation,Expeditions, InventoryNumber]
+MyModels = [Researcher,Organisation, InventoryNumber]
 
 admin.site.register(MyModels)
 
@@ -48,7 +48,9 @@ class SeansOfRecordAdmin(admin.ModelAdmin):
     inlines = [DigitalMediaInline]
     filter_horizontal = ('informant_of_seanse',)
 
-
+@admin.register(Expeditions)
+class ExpeditionAdmin(admin.ModelAdmin):
+    filter_horizontal = ('seanses_of_expedition',)
 
 class HddMediaDriveAdmin(admin.ModelAdmin):
     list_display = ('hdd_drive', 'hdd_drive_capacity', 'inventory_number_hdd')

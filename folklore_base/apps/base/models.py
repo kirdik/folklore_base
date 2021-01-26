@@ -158,7 +158,8 @@ class SeansOfRecord(models.Model):
     place_of_record = models.ForeignKey(Naspunkt,
                                         on_delete=models.DO_NOTHING,
                                         verbose_name='Место записи')
-    informant_of_seanse = models.ManyToManyField(Informant)
+    informant_of_seanse = models.ManyToManyField(Informant,
+                                                 verbose_name='Информанты сеанса')
 
     class Meta:
         verbose_name = 'Сеанс записи'
@@ -186,6 +187,9 @@ class Expeditions(models.Model):
     researcher_expedtion = models.ForeignKey(Researcher,
                                              on_delete=models.DO_NOTHING,
                                              verbose_name='Руководитель экспедиции')
+    seanses_of_expedition = models.ManyToManyField(SeansOfRecord,
+                                                   blank=True,
+                                                   verbose_name='Сеансы записи')
 
     class Meta:
         verbose_name = 'Экспедиция'

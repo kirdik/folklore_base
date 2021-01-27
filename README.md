@@ -10,7 +10,7 @@
 
 ### Установка:
 <br>
-Для работы требуется установленный на компьютере интерпретатор [Python](https://www.python.org)<br>
+Для работы требуется установленный на компьютере интерпретатор [Python]<br>
 Далее необходимо перейти в ветку **addfile** проекта.<br>
 Если не знаете как, то просто пройдите по этой [ссылке](https://github.com/kirdik/folklore_base/tree/addfile)<br>
 После этого в правом вверхнем углу нажмите зеленую кнопу "Code" и в выпадающем меню нажмите "Download ZIP". <br>
@@ -24,3 +24,4 @@ python manage.py createsuperuser
 python manage.py runserver
 
 ```
+[Python]:https://www.python.org

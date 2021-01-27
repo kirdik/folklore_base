@@ -1,0 +1,15 @@
+<!-- templates/digitalmedia.html -->
+{% extends 'base.html' %}
+{% block title %}
+Список аудио файлов
+{% endblock%}
+
+
+
+{% block content %}
+{% for dm in object_list %}
+<div class="post-entry">
+  <a href='{% url "post_detail" dm.pk %}' >{{ dm.id_of_digitl_media }}</a>
+</div>
+{% endfor %}
+{% endblock content %}

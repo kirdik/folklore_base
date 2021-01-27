@@ -1,0 +1,13 @@
+<!-- templates/digitalmediadetail.html -->
+{% extends 'base.html' %}
+{% block title %}
+Аудио файл {{ object.id_of_digitl_media }}
+{% endblock %}
+{% block content %}
+  <div class="post-entry">
+    <h3>{{ object.id_of_digitl_media }}</h3>
+    {{ object.file_description }}<br><br>
+    <audio src="{{ object.fileupl.url }}" controls></audio>
+  </div>
+
+{% endblock content %}

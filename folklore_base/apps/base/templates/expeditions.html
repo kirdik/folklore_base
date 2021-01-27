@@ -1,0 +1,29 @@
+<!-- templates/expeditions.html -->
+{% extends 'base.html' %}
+{% block title %}
+Список экспедиций
+{% endblock%}
+
+{% block content %}
+{% for exp in object_list %}
+
+<div class="card">
+  <div class="card-header">
+  {{ exp.organisation_expedition }} {{ exp.begin_data_expedition }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">руководитель: {{ exp.researcher_expedtion }}</h5>
+    <p class="card-text">
+      {% for seance in exp.seanses_of_expedition.all %}
+      <li>{{ seance }} <br>
+      {% endfor %}</p>
+    <a href='{% url "seances" exp.pk %}' class="btn btn-primary">Подробнее</a>
+  </div>
+</div>
+
+
+
+
+{% endfor %}
+<br>
+{% endblock content %}

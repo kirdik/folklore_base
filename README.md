@@ -24,3 +24,25 @@ python manage.py createsuperuser
 python manage.py runserver
 
 ```
+
+После успешного выполнения всех операций в консоли должно отображаться что-то вроде этого: <br>
+
+```bash
+
+Django version 3.1.5, using settings 'folklore_base.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+```
+Скопируйте адрес:
+
+```
+http://127.0.0.1:8000/
+
+```
+Вставьте в адресную строку браузера. Что бы попасть в админ панель наберите в адресной строке:
+
+```
+http://127.0.0.1:8000/admin
+
+```

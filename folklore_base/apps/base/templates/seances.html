@@ -4,11 +4,25 @@
 Экспедиция {{ object.name_organisation }} {{ object.begin_data_expedition }}
 {% endblock %}
 {% block content %}
-  <div class="post-entry">
-    <h3>{{ object.end_data_expedition.all }}</h3>
-    {% for seance in object.seanses_of_expedition.all %}
-    {{ seance.place_of_record }} {{ seance.data_seans_of_record }}<br>
-    {% endfor %} <br><br>
+<h4>Сеансы записи экспедиции {{ object.name_organisation }} {{ object.begin_data_expedition }}</h4><hr>
+<div class="container">
+  <div class="row" >
+{% for seance in object.seanses_of_expedition.all %}
+<div class="col-sm col-md-3">
+<div class="card" style="width: 18rem; margin: 4;">
+
+    <div class="card-header">{{ seance.place_of_record }}<br>{{ seance.data_seans_of_record }}</div>
+<div class="card-body">
+    <b>Информанты:</b>
+    {% for inf in seance.informant_of_seanse.all %}
+    <p class="card-text">{{ inf }}</p>
+    {% endfor %}
+    <a href="#" class="btn btn-primary">Материалы</a>
   </div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
 
 {% endblock content %}

@@ -5,14 +5,17 @@
 {% endblock%}
 
 {% block content %}
+<h3>Список экспедиций</h3> <hr>
+<div class="container">
+  <div class="row">
 {% for exp in object_list %}
-
-<div class="card">
+<div class="col-sm">
+<div class="card" style="width: 18rem; margin: 4;">
   <div class="card-header">
   {{ exp.organisation_expedition }} {{ exp.begin_data_expedition }}
   </div>
   <div class="card-body">
-    <h5 class="card-title">руководитель: {{ exp.researcher_expedtion }}</h5>
+    <i>руководитель: {{ exp.researcher_expedtion }}</i>
     <p class="card-text">
       {% for seance in exp.seanses_of_expedition.all %}
       <li>{{ seance }} <br>
@@ -20,10 +23,10 @@
     <a href='{% url "seances" exp.pk %}' class="btn btn-primary">Подробнее</a>
   </div>
 </div>
-
-
+</div>
 
 
 {% endfor %}
-<br>
+</div>
+</div>
 {% endblock content %}

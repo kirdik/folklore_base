@@ -16,7 +16,7 @@
 После этого в правом вверхнем углу нажмите зеленую кнопу "Code" и в выпадающем меню нажмите "Download ZIP". <br>
 Далее вам необходимо распаковать скачанный файл, затем открыть консоль или терминал, это зависит от вашей операционной системы, перейти в скачанную папку (folklore_base) и выполнить несколько команд:<br>
 
-```
+```bash
 pip install -r requrements.txt
 python manage.py makemigrations
 python manage.py migrate
@@ -24,4 +24,3 @@ python manage.py createsuperuser
 python manage.py runserver
 
 ```
-

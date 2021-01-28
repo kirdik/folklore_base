@@ -160,7 +160,6 @@ class SeansOfRecord(models.Model):
                                         verbose_name='Место записи')
     informant_of_seanse = models.ManyToManyField(Informant,
                                                  verbose_name='Информанты сеанса')
-
     class Meta:
         verbose_name = 'Сеанс записи'
         verbose_name_plural = 'Сеансы записи'

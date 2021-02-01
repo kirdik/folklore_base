@@ -7,22 +7,22 @@
 <h4>Сеансы записи экспедиции {{ object.name_organisation }} {{ object.begin_data_expedition }}</h4><hr>
 <div class="container">
   <div class="row" >
-{% for seance in object.seanses_of_expedition.all %}
-<div class="col-sm col-md-3">
-<div class="card" style="width: 18rem; margin: 4;">
+    {% for seance in object.seanses_of_expedition.all %}
+    <div class="col-sm col-md-3">
+      <div class="card" style="width: 18rem; margin: 4;">
 
-    <div class="card-header">{{ seance.place_of_record }}<br>{{ seance.data_seans_of_record }}</div>
-<div class="card-body">
-    <b>Информанты:</b>
-    {% for inf in seance.informant_of_seanse.all %}
-    <p class="card-text">{{ inf }}</p>
+        <div class="card-header">{{ seance.place_of_record }}<br>{{ seance.data_seans_of_record }}</div>
+        <div class="card-body">
+          <b>Информанты:</b>
+          {% for inf in seance.informant_of_seanse.all %}
+          <p class="card-text">{{ inf }}</p>
+          {% endfor %}
+          <a href="{% url 'matherials' seance.id_of_seance_of_record %}" class="btn btn-secondary">Материалы</a>
+        </div>
+      </div>
+    </div>
     {% endfor %}
-    <a href="{% url 'matherials' seance.id_of_seance_of_record %}" class="btn btn-secondary">Материалы</a>
   </div>
-</div>
-</div>
-{% endfor %}
-</div>
 </div>
 
 {% endblock content %}

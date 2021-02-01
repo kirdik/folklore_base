@@ -8,25 +8,25 @@
 <h3>Список экспедиций</h3> <hr>
 <div class="container">
   <div class="row">
-{% for exp in object_list %}
-<div class="col-sm">
-<div class="card mb-1" style="width: 18rem;">
-  <div class="card-header">
-  {{ exp.organisation_expedition }} {{ exp.begin_data_expedition }}
-  </div>
-  <div class="card-body">
-    руководитель: <i>{{ exp.researcher_expedtion }}</i>
-    <p class="card-text">
-      {% for seance in exp.seanses_of_expedition.all %}
-      <li>{{ seance.place_of_record }} <br>
-      {% endfor %}</p>
-    <a href='{% url "seances" exp.pk %}' class="btn btn-secondary">Подробнее</a>
-  </div>
-</div>
-</div>
+    {% for exp in object_list %}
+    <div class="col-sm">
+      <div class="card mb-1" style="width: 18rem;">
+        <div class="card-header">
+          {{ exp.organisation_expedition }} {{ exp.begin_data_expedition }}
+        </div>
+        <div class="card-body">
+          руководитель: <i>{{ exp.researcher_expedtion }}</i>
+          <p class="card-text">
+            {% for seance in exp.seanses_of_expedition.all %}
+            <li>{{ seance.place_of_record }} <br>
+              {% endfor %}</p>
+              <a href='{% url "seances" exp.pk %}' class="btn btn-secondary">Подробнее</a>
+            </div>
+          </div>
+        </div>
 
 
-{% endfor %}
-</div>
-</div>
+        {% endfor %}
+      </div>
+    </div>
 {% endblock content %}

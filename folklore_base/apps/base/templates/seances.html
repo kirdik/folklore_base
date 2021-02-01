@@ -17,7 +17,7 @@
     {% for inf in seance.informant_of_seanse.all %}
     <p class="card-text">{{ inf }}</p>
     {% endfor %}
-    <a href="#" class="btn btn-primary">Материалы</a>
+    <a href="{% url 'matherials' seance.id_of_seance_of_record %}" class="btn btn-secondary">Материалы</a>
   </div>
 </div>
 </div>

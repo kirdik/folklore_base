@@ -35,7 +35,7 @@ class Oblast(models.Model):
 
 
 class Rajon(models.Model):
-    rajon = models.ForeignKey(Oblast,
+    oblast_rajon = models.ForeignKey(Oblast,
                               on_delete=models.DO_NOTHING,
                               verbose_name='Область')
 
@@ -52,7 +52,7 @@ class Rajon(models.Model):
 
 
 class Naspunkt(models.Model):
-    naspunkt = models.ForeignKey(Rajon, on_delete=models.DO_NOTHING,
+    rajon_naspunkt = models.ForeignKey(Rajon, on_delete=models.DO_NOTHING,
                                  verbose_name='Район')
 
     naspunkt_name = models.CharField(max_length=30,
@@ -154,6 +154,7 @@ class Informant(models.Model):
 '''End of Informant'''
 ''' Seans zapisi Model'''
 class SeansOfRecord(models.Model):
+    id_of_seance_of_record = models.AutoField(primary_key=True)
     data_seans_of_record = models.DateField(verbose_name='Дата сеанса записи')
     place_of_record = models.ForeignKey(Naspunkt,
                                         on_delete=models.DO_NOTHING,
@@ -177,7 +178,6 @@ class Expeditions(models.Model):
     begin_data_expedition = models.DateField(verbose_name='Дата начала экспедиции')
 
     end_data_expedition = models.DateField(verbose_name='Дата окончания экспедиции',
-                                           default='00.00.0000',
                                            null=True,
                                            blank=True)
     organisation_expedition = models.ForeignKey(Organisation,
@@ -245,6 +245,7 @@ class HddMediaDrive(models.Model):
 
 
 class DigitalMedia(models.Model):
+    id_auto = models.AutoField(primary_key=True)
     seans = models.ForeignKey(SeansOfRecord,
                               on_delete=models.DO_NOTHING)
     place_hdd_drive = models.ForeignKey(HddMediaDrive,

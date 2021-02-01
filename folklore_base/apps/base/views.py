@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import DigitalMedia, Expeditions, SeansOfRecord
+from .models import *
+
 
 class ExpeditionsList(ListView):
     model = Expeditions
@@ -15,3 +16,7 @@ class DigitalMediaListView(ListView):
 class DigitalMediaDetailView(DetailView):
     model = DigitalMedia
     template_name = 'digitalmediadetail.html'
+
+def matherials(request, id):
+    mat = DigitalMedia.objects.select_related().filter(seans=id)
+    return render(request, 'matherials.html', {'mat': mat})

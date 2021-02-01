@@ -10,17 +10,17 @@
   <div class="row">
 {% for exp in object_list %}
 <div class="col-sm">
-<div class="card" style="width: 18rem; margin: 4;">
+<div class="card mb-1" style="width: 18rem;">
   <div class="card-header">
   {{ exp.organisation_expedition }} {{ exp.begin_data_expedition }}
   </div>
   <div class="card-body">
-    <i>руководитель: {{ exp.researcher_expedtion }}</i>
+    руководитель: <i>{{ exp.researcher_expedtion }}</i>
     <p class="card-text">
       {% for seance in exp.seanses_of_expedition.all %}
-      <li>{{ seance }} <br>
+      <li>{{ seance.place_of_record }} <br>
       {% endfor %}</p>
-    <a href='{% url "seances" exp.pk %}' class="btn btn-primary">Подробнее</a>
+    <a href='{% url "seances" exp.pk %}' class="btn btn-secondary">Подробнее</a>
   </div>
 </div>
 </div>

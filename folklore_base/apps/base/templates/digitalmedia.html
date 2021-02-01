@@ -8,8 +8,14 @@
 
 {% block content %}
 {% for dm in object_list %}
-<div class="post-entry">
-  <a href='{% url "post_detail" dm.pk %}' >{{ dm.id_of_digitl_media }}</a>
+<div class="card" style="margin: 4;">
+  <h5 class="card-header">{{ dm.id_of_digitl_media }}</h5>
+  <div class="card-body">
+    <h5 class="card-title">{{ dm.seans }}</h5>
+    <p class="card-text"><audio src="{{ dm.fileupl.url }}" controls></audio></p>
+    <p class="card-text">{{ dm.file_description|linebreaks }}</p>
+  </div>
 </div>
+
 {% endfor %}
 {% endblock content %}

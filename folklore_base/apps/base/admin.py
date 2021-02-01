@@ -26,9 +26,14 @@ class OblastAdmin(admin.ModelAdmin):
 
 class NasPunktInline(admin.TabularInline):
     model = Naspunkt
+@admin.register(Naspunkt)
+class NaspunktAdmin(admin.ModelAdmin):
+    list_display = ['naspunkt_name', 'rajon_naspunkt']
+
 @admin.register(Rajon)
 class RajonAdmin(admin.ModelAdmin):
     inlines = [NasPunktInline]
+    list_display = ['rajon_name', 'oblast_rajon'  ]
 
 
 class InformantInline(admin.TabularInline):

@@ -51,6 +51,11 @@ class DigitalMediaInline(admin.TabularInline):
     extra = 0
 class DigitalMediaAdmin(admin.ModelAdmin):
     list_display = ['id_of_digitl_media', 'seans']
+    fields = ['seans', 'id_of_digitl_media', 'fileupl', 'preview', 'place_hdd_drive', 'file_description']
+    readonly_fields = ["preview"]
+    def preview(self, obj):
+        return mark_safe(f'<audio src="{obj.fileupl.url}" controls></audio>')
+
 admin.site.register(DigitalMedia, DigitalMediaAdmin)
 
 

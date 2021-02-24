@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 from folklore_base.apps.base.models import *
 admin.site.site_header = 'Банк данных экспедиционных материалов'
 
@@ -8,7 +9,12 @@ MyModels = [Researcher,Organisation, InventoryNumber]
 admin.site.register(MyModels)
 
 class InformantAdmin(admin.ModelAdmin):
+    fields = ['fio', 'date_of_birth', 'place_of_residence', 'img_informant', 'preview', 'info_informant']
+    readonly_fields = ["preview"]
+    def preview(self, obj):
+        return mark_safe(f'<img src="{obj.img_informant.url}" height="200">')
     list_display = ('fio', 'date_of_birth', 'place_of_residence' )
+
 
 admin.site.register(Informant, InformantAdmin)
 

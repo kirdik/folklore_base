@@ -6,7 +6,7 @@
 {% block content %}
 <h4>Сеансы записи экспедиции {{ object.name_organisation }} {{ object.begin_data_expedition }}</h4><hr>
 <div class="container">
-  <div class="row" >
+  <div class="row m-1" >
     {% for seance in object.seanses_of_expedition.all %}
     <div class="col-sm col-md-3">
       <div class="card" style="width: 18rem; margin: 4;">

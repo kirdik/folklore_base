@@ -20,3 +20,7 @@ class DigitalMediaDetailView(DetailView):
 def matherials(request, id):
     mat = DigitalMedia.objects.select_related().filter(seans=id)
     return render(request, 'matherials.html', {'mat': mat})
+
+def informants(request):
+    inf = Informant.objects.all()
+    return render(request, 'informants.html', {'inf': inf})

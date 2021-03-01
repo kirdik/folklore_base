@@ -164,6 +164,7 @@ class SeansOfRecord(models.Model):
     class Meta:
         verbose_name = 'Сеанс записи'
         verbose_name_plural = 'Сеансы записи'
+        ordering = ['data_seans_of_record']
 
     def __str__(self):
         return str(self.data_seans_of_record) + ' ' + str(self.place_of_record)
@@ -193,6 +194,7 @@ class Expeditions(models.Model):
     class Meta:
         verbose_name = 'Экспедиция'
         verbose_name_plural = 'Экспедиции'
+        ordering = ['-begin_data_expedition']
 
     def __str__(self):
         return str(self.organisation_expedition) + ' ' + str(self.begin_data_expedition)

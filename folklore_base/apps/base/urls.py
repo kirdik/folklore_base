@@ -8,4 +8,5 @@ path('dm/<int:pk>/', DigitalMediaDetailView.as_view(), name = 'post_detail'),
 path('digital/', DigitalMediaListView.as_view(), name = 'home'),
 path('matherials/<int:id>/', matherials, name = 'matherials' ),
 path('informants/', informants, name = 'informants'),
+path('informants/<int:id>/', informant_details, name = 'informant_details'),
 ]

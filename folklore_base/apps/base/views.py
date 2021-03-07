@@ -7,7 +7,7 @@ from .models import *
 
 def expeditions(request):
     explist = Expeditions.objects.all()
-    paginator = Paginator(explist, 1)
+    paginator = Paginator(explist, 8)
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
 

@@ -25,32 +25,30 @@
       {% endfor %}
     </table>
 
+    {% if is_paginated %}
+    <nav aria-label="...">
+      <ul class="pagination justify-content-center">
+        <li class="page-item {% if not prev_url%} disabled {% endif %}">
+          <a class="page-link" href="{{ prev_url }}"tabindex="-1">Назад</a>
+        </li>
 
 
+        {% for n in explist.paginator.page_range %}
+        {% if explist.number == n %}
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">{{ n }}</span>
+        </li>
+        {% elif n > explist.number|add:-2 and n < explist.number|add:3 %}
 
-
-<nav aria-label="...">
-  <ul class="pagination">
-    <li class="page-item {% if not prev_url%} disabled {% endif %}">
-      <a class="page-link" href="{{ prev_url }}"tabindex="-1">Назад</a>
-    </li>
-
-
-  {% for n in explist.paginator.page_range %}
-  {% if explist.number == n %}
-  <li class="page-item active" aria-current="page">
-    <span class="page-link">{{ n }}</span>
-  </li>
-  {% elif n > explist.number|add:-2 and n < explist.number|add:3 %}
-
-  <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
-  {% endif %}
-  {% endfor %}
-  <li class="page-item {% if not next_url%} disabled {% endif %}">
-    <a class="page-link" href="{{ next_url }}"tabindex="-1">Вперёд</a>
-  </li>
-</ul>
-</nav>
-</div>
+        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+        {% endif %}
+        {% endfor %}
+        <li class="page-item {% if not next_url%} disabled {% endif %}">
+          <a class="page-link" href="{{ next_url }}"tabindex="-1">Вперёд</a>
+        </li>
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
 </div>
 {% endblock content %}

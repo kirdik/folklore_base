@@ -4,13 +4,11 @@ from django.core.paginator import Paginator
 
 from .models import *
 
+def pagegenerator(namemodel, number, request):
 
-def expeditions(request):
-    explist = Expeditions.objects.all()
-    paginator = Paginator(explist, 8)
+    paginator = Paginator(namemodel, number)
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
-
     is_paginated = page.has_other_pages()
 
     if page.has_previous():
@@ -22,13 +20,17 @@ def expeditions(request):
     else:
         next_url = ''
 
-    context = { 'explist': page,
+    context = { 'model': page,
                 'is_paginated': is_paginated,
                 'next_url': next_url,
                 'prev_url': prev_url
 
     }
+    return context
 
+def expeditions(request):
+    explist = Expeditions.objects.all()
+    context = pagegenerator(explist, 2, request)
     return render(request, 'expeditions.html', context)
 
 class ExpeditionDetail(DetailView):
@@ -48,27 +50,7 @@ def matherials(request, id):
 
 def informants(request):
     inf = Informant.objects.all()
-    paginator = Paginator(inf, 8)
-    page_number = request.GET.get('page', 1)
-    page = paginator.get_page(page_number)
-
-    is_paginated = page.has_other_pages()
-
-    if page.has_previous():
-        prev_url = '?page={}'.format(page.previous_page_number())
-    else:
-        prev_url = ''
-    if page.has_next():
-        next_url = '?page={}'.format(page.next_page_number())
-    else:
-        next_url = ''
-
-    context = { 'inf': page,
-                'is_paginated': is_paginated,
-                'next_url': next_url,
-                'prev_url': prev_url
-
-    }
+    context = pagegenerator(inf, 2, request)
     return render(request, 'informants.html', context)
 
 def informant_details(request, id):

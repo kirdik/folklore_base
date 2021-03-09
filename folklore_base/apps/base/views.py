@@ -28,6 +28,14 @@ def pagegenerator(namemodel, number, request):
     }
     return context
 
+def searching(model, field_of_search):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        mod = model.objects.filter(field_of_search=search_query)
+    else:
+        mod = model.objects.all()
+    return mod
+
 def expeditions(request):
     explist = Expeditions.objects.all()
     context = pagegenerator(explist, 2, request)
@@ -37,9 +45,11 @@ class ExpeditionDetail(DetailView):
     model = Expeditions
     template_name = 'seances.html'
 
-class DigitalMediaListView(ListView):
-    model = DigitalMedia
-    template_name = 'digitalmedia.html'
+def digitalmedialist(request):
+    digital = DigitalMedia.objects.all()
+    context = pagegenerator(digital, 2, request)
+    return render(request, 'digitalmedia.html', context)
+
 class DigitalMediaDetailView(DetailView):
     model = DigitalMedia
     template_name = 'digitalmediadetail.html'
@@ -49,7 +59,11 @@ def matherials(request, id):
     return render(request, 'matherials.html', {'mat': mat})
 
 def informants(request):
-    inf = Informant.objects.all()
+    search_query = request.GET.get('search', '')
+    if search_query:
+        inf = Informant.objects.filter(fio__icontains=search_query)
+    else:
+        inf = Informant.objects.all()
     context = pagegenerator(inf, 2, request)
     return render(request, 'informants.html', context)
 

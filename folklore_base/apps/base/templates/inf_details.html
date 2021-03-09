@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}
+Информант {{objects.fio}}
+{% endblock %}
+{% block content %}
+<br>
+<div class="row justify-content-center">
+  <div class="col-auto">
+
+
+<table class='table table-bordered  rounded'>
+
+
+<thead class="table-dark">
+  <tr>
+    <th scope="col">ФИО</th>
+    <th scope="col">Год рождения</th>
+    <th scope="col">Место проживания</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{infdetail.fio}}</td>
+  <td>{{infdetail.date_of_birth}}</td>
+  <td>{{ infdetail.place_of_residence}}</td>
+</tr>
+</tbody>
+</table>
+<table class='table table-bordered  rounded'>
+<thead class="table-dark">
+  <tr>
+    <th>Дополнительно</th>
+    <th>Фото</th>
+</tr>
+</thead>
+<tr>
+  <td>{{infdetail.info_informant}}</td>
+  <td><img src="{{infdetail.img_informant.url}}"  height="250"></td>
+</tr>
+<tr>
+  <td colspan="2">
+    {% for s in seances %}
+    {{ s }} <a href="{% url 'matherials' s.id_of_seance_of_record  %}" class="btn btn-secondary">Материалы</a> <br> <hr>
+    {% endfor %}
+  </td>
+</tr>
+
+
+
+</table>
+</div>
+</div>
+
+{% endblock %}

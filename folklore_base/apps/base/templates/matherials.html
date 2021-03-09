@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+Материалы экспедиции
+{% endblock%}
+
+{% block content %}
+<br><h3 class="text-center text-muted">Материалы сеанса записи</h3><br>
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <table class="table table-striped">
+      <tr>
+        <th>ID медиафайла</th>
+        <th>аудио</th>
+        <th>Описание</th>
+      </tr>
+      {% for media in mat %}
+      <tr>
+        <td>{{ media.id_of_digitl_media }}</td>
+        <td><audio src="{{ media.fileupl.url }}" controls></audio></td>
+        <td>{{ media.file_description|linebreaks}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}

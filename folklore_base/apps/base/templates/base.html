@@ -48,15 +48,11 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Новости</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
         </ul>
-
       </div>
 
       {% if digital == request.path or informants == request.path %}
-      <form class="form-inline my-2 my-lg-0" action="{% url 'informants' %}">
+      <form class="form-inline my-2 my-lg-0" action="{{request.path}}">
         <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search" name="search">
         <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><span class="bi bi-search"></span></button>
       </form>
@@ -68,7 +64,6 @@
       {% block content %}
       {% endblock content %}
     </div>
-    </div
-
+    </div>
   </body>
   </html>

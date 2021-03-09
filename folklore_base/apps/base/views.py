@@ -28,13 +28,7 @@ def pagegenerator(namemodel, number, request):
     }
     return context
 
-def searching(model, field_of_search):
-    search_query = request.GET.get('search', '')
-    if search_query:
-        mod = model.objects.filter(field_of_search=search_query)
-    else:
-        mod = model.objects.all()
-    return mod
+
 
 def expeditions(request):
     explist = Expeditions.objects.all()
@@ -46,7 +40,11 @@ class ExpeditionDetail(DetailView):
     template_name = 'seances.html'
 
 def digitalmedialist(request):
-    digital = DigitalMedia.objects.all()
+    search_query = request.GET.get('search', '')
+    if search_query:
+        digital = DigitalMedia.objects.filter(id_of_digitl_media__icontains=search_query)
+    else:
+        digital = DigitalMedia.objects.all()
     context = pagegenerator(digital, 2, request)
     return render(request, 'digitalmedia.html', context)
 

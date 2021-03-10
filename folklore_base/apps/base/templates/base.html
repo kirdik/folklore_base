@@ -50,7 +50,6 @@
           </li>
         </ul>
       </div>
-
       {% if digital == request.path or informants == request.path %}
       <form class="form-inline my-2 my-lg-0" action="{{request.path}}">
         <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search" name="search">
@@ -64,6 +63,6 @@
       {% block content %}
       {% endblock content %}
     </div>
-    </div>
-  </body>
-  </html>
+  </div>
+</body>
+</html>

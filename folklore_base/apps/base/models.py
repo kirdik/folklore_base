@@ -254,6 +254,7 @@ class DigitalMedia(models.Model):
                                         on_delete=models.DO_NOTHING,
                                         default=0,
                                         verbose_name='На каком HDD хранится')
+<<<<<<< HEAD
     id_of_digitl_media = models.CharField(unique=True,
                                           default='CRF20201213_34_A',
                                           verbose_name='ID цифровой записи',
@@ -263,6 +264,15 @@ class DigitalMedia(models.Model):
     file_description = models.TextField(max_length=600,
                                         verbose_name='Описание и тайминг',
                                         default='00:00:00 Русского \n00:00:30 Конец')
+=======
+    id_of_digitl_media = models.AutoField(primary_key=True,
+                                          unique=True,
+                                          default='000000',
+                                          verbose_name='ID цифровой записи')
+    path_of_place = models.CharField(max_length=300,
+                                     verbose_name="Путь до папки на жестком диске",
+                                     default='/')
+>>>>>>> 04d1685ce104f40978266ed91045c2c7bef7be6d
 
     class Meta:
         verbose_name='Цифровой медиа файл'

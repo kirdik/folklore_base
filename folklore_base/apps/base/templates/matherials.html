@@ -9,14 +9,14 @@
   <div class="col-auto">
     <table class="table table-striped">
       <tr>
-        <th>ID медиафайла</th>
+      <!--  <th>ID медиафайла</th> -->
         <th>аудио</th>
         <th>Описание</th>
       </tr>
       {% for media in mat %}
       <tr>
-        <td>{{ media.id_of_digitl_media }}</td>
-        <td><audio src="{{ media.fileupl.url }}" controls></audio></td>
+        <!-- <td>{{ media.id_of_digitl_media }}</td> -->
+        <td><a href="{{ media.fileupl.url }}" class="jouele" data-space-control="true" >{{ media.id_of_digitl_media }}</a></td>
         <td>{{ media.file_description|linebreaks}}</td>
       </tr>
       {% endfor %}

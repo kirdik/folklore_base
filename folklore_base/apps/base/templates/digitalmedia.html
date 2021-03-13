@@ -3,20 +3,34 @@
 {% block title %}
 Список аудио файлов
 {% endblock%}
-
-
-
 {% block content %}
-{% for dm in model %}
-<div class="card" style="margin: 4;">
-  <h5 class="card-header">{{ dm.id_of_digitl_media }}</h5>
-  <div class="card-body">
-    <h5 class="card-title">{{ dm.seans }}</h5>
-    <p class="card-text"><a  href="{{ dm.fileupl.url }}" class="jouele" data-space-control="true">{{ dm.id_of_digitl_media }}</a></p>
-    <p class="card-text">{{ dm.file_description|linebreaks }}</p>
+<br>
+<h2 class="text-center text-muted">Аудиозаписи</h2>
+<p class="text-center text-muted">Для поиска записи используйте форму ввода в меню
+  Поиск работает по полю ID записи</p> <br>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Сеанс записи</th>
+            <th>id записи</th>
+            <th>аудио</th>
+            <th>описание</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for dm in model %}
+          <tr>
+            <td>{{ dm.seans }}</td>
+            <td>{{ dm.id_of_digitl_media }}</td>
+            <td><a  href="{{ dm.fileupl.url }}" class="jouele" data-space-control="true">{{ dm.id_of_digitl_media }}</a></td>
+            <td>{{ dm.file_description|linebreaks }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
-{% endfor %}
-{% include 'pagination.html' %}
-
+  {% include 'pagination.html' %}
 {% endblock content %}

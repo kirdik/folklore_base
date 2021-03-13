@@ -45,7 +45,7 @@ def digitalmedialist(request):
         digital = DigitalMedia.objects.filter(id_of_digitl_media__icontains=search_query)
     else:
         digital = DigitalMedia.objects.all()
-    context = pagegenerator(digital, 2, request)
+    context = pagegenerator(digital, 6, request)
     return render(request, 'digitalmedia.html', context)
 
 class DigitalMediaDetailView(DetailView):

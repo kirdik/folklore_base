@@ -17,13 +17,15 @@
   <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
   <script src="{% static "js/jouele.min.js" %}"></script>
   <link href="{% static "css/jouele.min.css" %}" rel="stylesheet"/>
+  {%block advancedhead%}
+  {%endblock%}
 </head>
 <body>
   <br><h2 class="text-center">Банк данных экспедиционных записей</h2>
   <br>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'expeditions' %}">Главная</a>
+      <a class="navbar-brand" href="{% url 'map' %}">Главная</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

@@ -58,6 +58,10 @@ class Naspunkt(models.Model):
     naspunkt_name = models.CharField(max_length=30,
                                      help_text='Населённый пункт',
                                      verbose_name='Населённый пункт')
+    naspunkt_coordinates = models.CharField(max_length=25,
+    help_text='Кординаты населенного пункта, найти и скопировать с яндекс карт maps.yandex.ru',
+    verbose_name='Географические координаты',
+    blank=True)
 
     class Meta:
         verbose_name = 'Населённый пункт'

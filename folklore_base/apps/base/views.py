@@ -70,3 +70,6 @@ def informant_details(request, id):
     seances = SeansOfRecord.objects.select_related().filter(informant_of_seanse=id)
     return render(request, 'inf_details.html', {'infdetail': infdetail,
                                                 'seances': seances})
+def map(request):
+    map = Naspunkt.objects.all()
+    return render(request, 'index.html', {'map': map})

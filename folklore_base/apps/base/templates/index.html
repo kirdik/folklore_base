@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}
+Карта обследованных населенных пунктов
+{% endblock%}
+{%block advancedhead%}
+<script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+<script type="text/javascript">
+  var map;
+  DG.then(function () {
+    map = DG.map('map', {
+      center: [50.332490, 42.216282],
+      zoom: 7
+    });
+    {% for i in map %}
+    {%if i.naspunkt_coordinates%}
+    DG.marker([{{ i.naspunkt_coordinates}}]).addTo(map).bindPopup('{{i.naspunkt_name}}');
+    {%endif%}
+    {% endfor %}
+  });
+</script>
+{%endblock%}
+{% block content %}
+<br>
+<h2 class="text-center text-muted">Карта обследованных населенных пунктов</h2>
+<div class=" row justify-content-center">
+  <div id="map" style="width:900px; height:600px"></div>
+</div>
+{%endblock%}

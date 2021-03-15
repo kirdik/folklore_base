@@ -4,10 +4,33 @@
 Аудио файл {{ object.id_of_digitl_media }}
 {% endblock %}
 {% block content %}
-  <div class="post-entry">
-    <h3>{{ object.id_of_digitl_media }}</h3>
-    {{ object.file_description }}<br><br>
-    <audio src="{{ object.fileupl.url }}" controls></audio>
-  </div>
+<br>
+<div class="container">
 
+<table class="table table-bordered">
+  <thead>
+    <tr class="table-dark">
+      <td>id</td>
+      <td>тайм код</td>
+      <td>описание</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ object.id_of_digitl_media }}</td>
+      <td>{% for i in object.tm_dm.all %}
+        <button type="button" name="button" class="btn btn-secondary mt-2 jouele-control" data-type="seek" data-to="{{i.time_stamp|time:"H:i:s"}}">{{i.time_stamp|time:"H:i:s"}}</button> {{i.text_for_time_stamp}}<br>
+        {%endfor%}
+      </td>
+      <td>{{ object.file_description|linebreaks }}</td>
+      </tr>
+    <tr>
+      <td colspan="3" class="table-dark"><a href="{{ object.fileupl.url }}" class="jouele jouele-skin-dark">{{ object.id_of_digitl_media }}</a>
+
+        </td>
+
+    </tr>
+  </tbody>
+</table>
+</div>
 {% endblock content %}

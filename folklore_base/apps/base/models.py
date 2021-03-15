@@ -246,6 +246,28 @@ class HddMediaDrive(models.Model):
 
 '''End of HDD drives'''
 
+'''Timestamps'''
+
+class TimingDigitalMedia(models.Model):
+    time_stamp = models.TimeField(default='00:00:00',
+                                  verbose_name='час:минута:секунда')
+    number_of_temestamp = models.IntegerField(default='0',
+                                              blank=True,
+                                              verbose_name='Порядковый номер')
+    text_for_time_stamp = models.CharField(verbose_name='Описание',
+                                           blank=True,
+                                           max_length=120)
+    timestamp_for_dm = models.ForeignKey('DigitalMedia',
+                                         on_delete=models.CASCADE,
+                                         related_name = 'tm_dm')
+    class Meta:
+        verbose_name = 'Временные метки аудио'
+        verbose_name_plural = 'Временные метки аудио'
+    def __str__(self):
+        return str(self.number_of_temestamp) + " " + str(self.time_stamp)
+
+
+'''End Timing'''
 
 ''' Digital media Model'''
 
@@ -254,10 +276,10 @@ class DigitalMedia(models.Model):
     id_auto = models.AutoField(primary_key=True)
     seans = models.ForeignKey(SeansOfRecord,
                               on_delete=models.DO_NOTHING)
-    place_hdd_drive = models.ForeignKey(HddMediaDrive,
-                                        on_delete=models.DO_NOTHING,
-                                        default=0,
-                                        verbose_name='На каком HDD хранится')
+    # place_hdd_drive = models.ForeignKey(HddMediaDrive,
+    #                                     on_delete=models.DO_NOTHING,
+    #                                     default=0,
+    #                                     verbose_name='На каком HDD хранится')
     id_of_digitl_media = models.CharField(unique=True,
                                           default='CRF20201213_34_A',
                                           verbose_name='ID цифровой записи',
@@ -265,8 +287,8 @@ class DigitalMedia(models.Model):
     fileupl = models.FileField(upload_to='audio/',
                                verbose_name='Аудиофайл')
     file_description = models.TextField(max_length=600,
-                                        verbose_name='Описание и тайминг',
-                                        default='00:00:00 Русского \n00:00:30 Конец')
+                                        verbose_name='Описание',
+                                        help_text = 'ФИО ведущего сеанса, возможно список участников сеанса, любые другие сведения')
 
     class Meta:
         verbose_name='Цифровой медиа файл'

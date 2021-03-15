@@ -7,17 +7,19 @@
 <br><h3 class="text-center text-muted">Материалы сеанса записи</h3><br>
 <div class="row justify-content-center">
   <div class="col-auto">
-    <table class="table table-striped">
+    <table class="table table-dark table-striped">
       <tr>
       <!--  <th>ID медиафайла</th> -->
-        <th>аудио</th>
+        <th>Аудио</th>
         <th>Описание</th>
+        <th>Подробнее</th>
       </tr>
       {% for media in mat %}
       <tr>
         <!-- <td>{{ media.id_of_digitl_media }}</td> -->
-        <td><a href="{{ media.fileupl.url }}" class="jouele" data-space-control="true" >{{ media.id_of_digitl_media }}</a></td>
+        <td><a href="{{ media.fileupl.url }}" class="jouele jouele-skin-dark" data-space-control="true" >{{ media.id_of_digitl_media }}</a></td>
         <td>{{ media.file_description|linebreaks}}</td>
+        <td><a href="{% url 'dm_detail' media.id_auto %}" class="btn btn-secondary">Подробнее</a></td>
       </tr>
       {% endfor %}
     </table>

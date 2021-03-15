@@ -14,18 +14,18 @@
         <thead>
           <tr>
             <th>Сеанс записи</th>
-            <th>id записи</th>
             <th>аудио</th>
             <th>описание</th>
+            <th>подробнее</th>
           </tr>
         </thead>
         <tbody>
           {% for dm in model %}
           <tr>
             <td>{{ dm.seans }}</td>
-            <td>{{ dm.id_of_digitl_media }}</td>
             <td><a  href="{{ dm.fileupl.url }}" class="jouele" data-space-control="true">{{ dm.id_of_digitl_media }}</a></td>
             <td>{{ dm.file_description|linebreaks }}</td>
+            <td><a href="{% url 'dm_detail' dm.id_auto %}" class="btn btn-secondary">подробнее</a></td>
           </tr>
           {% endfor %}
         </tbody>

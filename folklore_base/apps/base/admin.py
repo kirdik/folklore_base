@@ -45,14 +45,18 @@ class RajonAdmin(admin.ModelAdmin):
 class InformantInline(admin.TabularInline):
     model = Informant
     extra = 0
+class TimingDigitalMediaInline(admin.TabularInline):
+    model = TimingDigitalMedia
+    extra = 0
 
 class DigitalMediaInline(admin.TabularInline):
     model = DigitalMedia
     extra = 0
 class DigitalMediaAdmin(admin.ModelAdmin):
     list_display = ['id_of_digitl_media', 'seans']
-    fields = ['seans', 'id_of_digitl_media', 'fileupl', 'preview', 'place_hdd_drive', 'file_description']
+    fields = ['seans', 'id_of_digitl_media', 'fileupl', 'preview', 'file_description']
     readonly_fields = ["preview"]
+    inlines = [TimingDigitalMediaInline]
     def preview(self, obj):
         return mark_safe(f'<audio src="{obj.fileupl.url}" controls></audio>')
 

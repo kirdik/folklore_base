@@ -20,7 +20,7 @@
         <td>{% for inf in seance.informant_of_seanse.all %}
           <p class="card-text">{{ inf }}</p>
           {% endfor %}</td>
-          <td><a href="{% url 'matherials' seance.id_of_seance_of_record %}" class="btn btn-secondary">Подробнее</a></td>
+          <td><a href="{% url 'digital' seance.id_of_seance_of_record %}" class="btn btn-secondary">Подробнее</a></td>
         </tr>
         {% endfor %}
       </table>

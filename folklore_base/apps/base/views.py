@@ -38,14 +38,16 @@ def expeditions(request):
 class ExpeditionDetail(DetailView):
     model = Expeditions
     template_name = 'seances.html'
-#----DigitalMedia---#
-#------это вме можно оптимизировать в одно представление------№
-def digitalmedialist(request):
+
+def digitalmedialist(request, id = 0):
     search_query = request.GET.get('search', '')
     if search_query:
         digital = DigitalMedia.objects.filter(id_of_digitl_media__icontains=search_query)
+    elif id:
+        digital = DigitalMedia.objects.select_related().filter(seans=id)
     else:
         digital = DigitalMedia.objects.all()
+
     context = pagegenerator(digital, 6, request)
     return render(request, 'digitalmedia.html', context)
 
@@ -53,10 +55,7 @@ class DigitalMediaDetailView(DetailView):
     model = DigitalMedia
     template_name = 'digitalmediadetail.html'
 
-def matherials(request, id):
-    mat = DigitalMedia.objects.select_related().filter(seans=id)
-    return render(request, 'matherials.html', {'mat': mat})
-#----End-Digital--------#
+
 
 def informants(request):
 #------Этот участок поиска надо вывести в отдельную функцию -------#

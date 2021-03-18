@@ -38,7 +38,8 @@ def expeditions(request):
 class ExpeditionDetail(DetailView):
     model = Expeditions
     template_name = 'seances.html'
-
+#----DigitalMedia---#
+#------это вме можно оптимизировать в одно представление------№
 def digitalmedialist(request):
     search_query = request.GET.get('search', '')
     if search_query:
@@ -55,13 +56,18 @@ class DigitalMediaDetailView(DetailView):
 def matherials(request, id):
     mat = DigitalMedia.objects.select_related().filter(seans=id)
     return render(request, 'matherials.html', {'mat': mat})
+#----End-Digital--------#
 
 def informants(request):
+#------Этот участок поиска надо вывести в отдельную функцию -------#
     search_query = request.GET.get('search', '')
     if search_query:
         inf = Informant.objects.filter(fio__icontains=search_query)
     else:
         inf = Informant.objects.all()
+
+#------------------------------------------------------------------#
+
     context = pagegenerator(inf, 2, request)
     return render(request, 'informants.html', context)
 

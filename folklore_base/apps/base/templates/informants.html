@@ -4,10 +4,16 @@
 {% endblock %}
 {% block content %}
 <h2 class="text-center text-muted">Информанты</h2>
-<div class="row justify-content-center">
-  <div class="col-auto">
+  <div class="container">
 <table class="table table-striped">
-
+<thead>
+  <tr class="table-secondary">
+    <th>ФИО</th>
+    <th>Год рождения</th>
+    <th>Место проживания</th>
+    <th>Детальная информация</th>
+  </tr>
+</thead>
 {% for i in model %}
 <tr>
 <td>{{i.fio}}</td>
@@ -19,7 +25,5 @@
 </table>
 {% include 'pagination.html' %}
 </div>
-</div>
-
 
 {% endblock %}

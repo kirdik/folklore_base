@@ -250,7 +250,9 @@ class HddMediaDrive(models.Model):
 
 class TimingDigitalMedia(models.Model):
     time_stamp = models.TimeField(default='00:00:00',
-                                  verbose_name='час:минута:секунда')
+                                  verbose_name='Начало фрагмента')
+    end_time_stamp = models.TimeField(default='00:00:00',
+                                        verbose_name='Конец фрагмента')
     number_of_temestamp = models.IntegerField(default='0',
                                               blank=True,
                                               verbose_name='Порядковый номер')

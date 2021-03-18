@@ -8,15 +8,14 @@
 <h2 class="text-center text-muted">Аудиозаписи</h2>
 <p class="text-center text-muted">Для поиска записи используйте форму ввода в меню
   Поиск работает по полю ID записи</p> <br>
-  <div class="row justify-content-center">
-    <div class="col-auto">
+    <div class="container">
       <table class="table table-striped">
         <thead>
-          <tr>
+          <tr class="table-secondary">
             <th>Сеанс записи</th>
-            <th>аудио</th>
-            <th>описание</th>
-            <th>подробнее</th>
+            <th>Аудио</th>
+            <th>Описание</th>
+            <th>Подробнее</th>
           </tr>
         </thead>
         <tbody>
@@ -31,6 +30,5 @@
         </tbody>
       </table>
     </div>
-  </div>
   {% include 'pagination.html' %}
 {% endblock content %}

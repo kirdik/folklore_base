@@ -7,30 +7,31 @@
 <br>
 <div class="container">
 
-<table class="table table-bordered">
-  <thead>
-    <tr class="table-dark">
-      <td>id</td>
-      <td>тайм код</td>
-      <td>описание</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{ object.id_of_digitl_media }}</td>
-      <td>{% for i in object.tm_dm.all %}
-        <button type="button" name="button" class="btn btn-secondary mt-2 jouele-control" data-type="seek" data-to="{{i.time_stamp|time:"H:i:s"}}">{{i.time_stamp|time:"H:i:s"}}</button> {{i.text_for_time_stamp}}<br>
-        {%endfor%}
-      </td>
-      <td>{{ object.file_description|linebreaks }}</td>
+  <table class="table table-bordered">
+    <thead>
+      <tr class="table-secondary">
+        <td>id</td>
+        <td>тайм код</td>
+        <td>описание</td>
       </tr>
-    <tr>
-      <td colspan="3" class="table-dark"><a href="{{ object.fileupl.url }}" class="jouele jouele-skin-dark">{{ object.id_of_digitl_media }}</a>
-
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ object.id_of_digitl_media }}</td>
+        <td>{% for i in object.tm_dm.all %}
+          <button type="button" name="button" class="btn btn-secondary mt-2 jouele-control" data-type="seek" data-range="{{i.time_stamp|time:'H:i:s'}} ... {{i.end_time_stamp|time:'H:i:s'}}">{{i.time_stamp|time:"H:i:s"}}</button>
+          <span class="jouele-control" data-type="timeline" data-range="{{i.time_stamp|time:'H:i:s'}}...{{i.end_time_stamp|time:'H:i:s'}}" >{{i.text_for_time_stamp}}</span><br>
+          {%endfor%}
         </td>
-
-    </tr>
-  </tbody>
-</table>
+        <td>{{ object.file_description|linebreaks }}</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="table-secondary">
+          <a href="{{ object.fileupl.url }}" class="jouele" data-space-control="true">{{ object.id_of_digitl_media }}</a><br>
+          <button type="button" name="button" class="jouele-control btn btn-secondary" data-type="play-pause">play / pause</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 {% endblock content %}

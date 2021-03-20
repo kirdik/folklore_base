@@ -55,15 +55,28 @@ class DigitalMediaDetailView(DetailView):
     model = DigitalMedia
     template_name = 'digitalmediadetail.html'
 
+#--------------- функция поиска -------------#
+def searchfunc(request, namemodel, filter, search_query):
+
+    # search_query = request.GET.get('search', '')
+    if search_query:
+        queryset = filter
+    else:
+        queryset = namemodel.objects.all()
+    return queryset
+#--------------------------------------------#
 
 
 def informants(request):
-#------Этот участок поиска надо вывести в отдельную функцию -------#
     search_query = request.GET.get('search', '')
-    if search_query:
-        inf = Informant.objects.filter(fio__icontains=search_query)
-    else:
-        inf = Informant.objects.all()
+    filter = Informant.objects.filter(fio__icontains=search_query)
+    inf = searchfunc(request, Informant, filter, search_query)
+#------Этот участок поиска надо вывести в отдельную функцию -------#
+    # search_query = request.GET.get('search', '')
+    # if search_query:
+    #     inf = Informant.objects.filter(fio__icontain=search_query)
+    # else:
+    #     inf = Informant.objects.all()
 
 #------------------------------------------------------------------#
 

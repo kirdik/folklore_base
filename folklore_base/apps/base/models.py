@@ -21,6 +21,7 @@ class Oblast(models.Model):
     oblast = models.ForeignKey(Countries,
                                on_delete=models.DO_NOTHING,
                                verbose_name='Страна',
+                               related_name='oblast',
                                default='Российская Федерация')
     oblast_name = models.CharField(max_length=30,
                                    help_text='Область',
@@ -37,7 +38,8 @@ class Oblast(models.Model):
 class Rajon(models.Model):
     oblast_rajon = models.ForeignKey(Oblast,
                               on_delete=models.DO_NOTHING,
-                              verbose_name='Область')
+                              verbose_name='Область',
+                              related_name='rajon')
 
     rajon_name = models.CharField(max_length=30,
                                   help_text='Район',
@@ -53,7 +55,8 @@ class Rajon(models.Model):
 
 class Naspunkt(models.Model):
     rajon_naspunkt = models.ForeignKey(Rajon, on_delete=models.DO_NOTHING,
-                                 verbose_name='Район')
+                                 verbose_name='Район',
+                                 related_name='naspunkt')
 
     naspunkt_name = models.CharField(max_length=30,
                                      help_text='Населённый пункт',

@@ -91,3 +91,6 @@ def informant_details(request, id):
 def map(request):
     map = Naspunkt.objects.all()
     return render(request, 'index.html', {'map': map})
+def locations(request):
+    pass
+    return render(request, 'locations.html')

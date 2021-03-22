@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+<!-- {%load spec_filters%} -->
+{% block title %}
+Список обследованных населенных пунктов
+{% endblock %}
+{% block content %}
+<!-- {% locate as loc %} -->
+<br>
+<h2 class="text-center text-secondary">Список обследованных населенных пунктов</h2>
+<br>
+
+  <table class="table table-bordered w-50 mx-auto">
+    {%for i in loc %}
+    <tr><td colspan="2" class="table-secondary"><h4>{{i}}</h4></td></tr>
+    <tr>
+      {%for r in i.rajon.all%}
+      <td class="text-center"><b>{{r}}</b></td>
+      <td class="p-3 text-center">{%for n in r.naspunkt.all %} <li>{{n}}</li> {%endfor%} </td>
+    </tr>
+    {%endfor%}
+    {%endfor%}
+  </table>
+
+{%endblock%}

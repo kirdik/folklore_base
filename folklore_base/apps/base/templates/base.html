@@ -2,10 +2,11 @@
 {% url 'expeditions' as expeditions %}
 {% url 'digital' as digital %}
 {% url 'informants' as informants %}
+{% url 'locations' as locations %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
-  
+
 <head>
   <title>
     {% block title %}
@@ -38,6 +39,11 @@
             class="nav-link active" aria-current="page"
             {% else %} class="nav-link"
             {% endif %} href="{% url 'expeditions' %}">Экспедиции</a>
+          </li>
+          <li class="nav-item">
+            <a {% if request.path == locations %} class="nav-link active" aria-current="page"
+            {% else %} class="nav-link"
+            {% endif %} href="{% url 'locations' %}">Населенные пункты</a>
           </li>
           <li class="nav-item">
             <a {% if request.path == digital %} class="nav-link active" aria-current="page"

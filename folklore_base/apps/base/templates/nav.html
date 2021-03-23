@@ -1,0 +1,47 @@
+{% url 'expeditions' as expeditions %}
+{% url 'digital' as digital %}
+{% url 'informants' as informants %}
+{% url 'locations' as locations %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'map' %}">Главная</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a {% if request.path == expeditions %}
+          class="nav-link active" aria-current="page"
+          {% else %} class="nav-link"
+          {% endif %} href="{% url 'expeditions' %}">Экспедиции</a>
+        </li>
+        <li class="nav-item">
+          <a {% if request.path == locations %} class="nav-link active" aria-current="page"
+          {% else %} class="nav-link"
+          {% endif %} href="{% url 'locations' %}">Населенные пункты</a>
+        </li>
+        <li class="nav-item">
+          <a {% if request.path == digital %} class="nav-link active" aria-current="page"
+          {% else %} class="nav-link"
+          {% endif %} href="{% url 'digital' %}">Записи</a>
+        </li>
+        <li class="nav-item">
+          <a {% if request.path == informants %}
+          class="nav-link active" aria-current="page"
+          {% else %} class="nav-link"
+          {% endif %} href="{% url 'informants' %}">Исполнители</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'admin:index' %}">Админ панель</a>
+        </li>
+      </ul>
+    </div>
+    {% if digital == request.path or informants == request.path %}
+    <form class="d-flex my-2 my-lg-0" action="{{request.path}}">
+      <input class="form-control mr-sm-0" type="search" placeholder="Поиск" aria-label="Search" name="search">
+      <button class="btn btn-outline-light my-2 my-sm-0 m-2" type="submit"><span class="bi bi-search"></span></button>
+    </form>
+    {% endif %}
+  </div>
+</nav>

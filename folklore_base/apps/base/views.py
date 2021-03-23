@@ -3,6 +3,9 @@ from django.views.generic import ListView, DetailView, View
 from django.core.paginator import Paginator
 
 from .models import *
+#---------- Генерация постраничного вывода в представлении -------------#
+# В шаблоне в цикл for передавать model.object_list
+# В представлении передавать в конце не список {'var': var }, а переменную var
 
 def pagegenerator(namemodel, number, request):
 
@@ -27,7 +30,21 @@ def pagegenerator(namemodel, number, request):
 
     }
     return context
+#---------------------------------------------#
 
+#--------------- функция поиска -------------#
+# Вставлять в представление передавать параметры
+# search_query = request.GET.get('search', '')
+# filter = Informant.objects.filter(fio__icontains=search_query)
+
+def searchfunc(request, namemodel, filter, search_query):
+
+    if search_query:
+        queryset = filter
+    else:
+        queryset = namemodel.objects.all()
+    return queryset
+#--------------------------------------------#
 
 
 def expeditions(request):
@@ -55,30 +72,14 @@ class DigitalMediaDetailView(DetailView):
     model = DigitalMedia
     template_name = 'digitalmediadetail.html'
 
-#--------------- функция поиска -------------#
-def searchfunc(request, namemodel, filter, search_query):
 
-    # search_query = request.GET.get('search', '')
-    if search_query:
-        queryset = filter
-    else:
-        queryset = namemodel.objects.all()
-    return queryset
-#--------------------------------------------#
 
 
 def informants(request):
     search_query = request.GET.get('search', '')
     filter = Informant.objects.filter(fio__icontains=search_query)
     inf = searchfunc(request, Informant, filter, search_query)
-#------Этот участок поиска надо вывести в отдельную функцию -------#
-    # search_query = request.GET.get('search', '')
-    # if search_query:
-    #     inf = Informant.objects.filter(fio__icontain=search_query)
-    # else:
-    #     inf = Informant.objects.all()
 
-#------------------------------------------------------------------#
 
     context = pagegenerator(inf, 2, request)
     return render(request, 'informants.html', context)
@@ -91,6 +92,10 @@ def informant_details(request, id):
 def map(request):
     map = Naspunkt.objects.all()
     return render(request, 'index.html', {'map': map})
-def locations(request):
-    loc = Rajon.objects.all()
-    return render(request, 'locations.html',{'loc': loc} )
+def locations(request, id = 0):
+    if id:
+        locate = Oblast.objects.select_related().filter(id=id)
+    else:
+        locate = Oblast.objects.all()
+    loc = pagegenerator(locate, 2, request)
+    return render(request, 'locations.html', loc )

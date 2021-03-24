@@ -277,9 +277,10 @@ class TimingDigitalMedia(models.Model):
 ''' Digital media Model'''
 
 def foldername(instance, filename):
-# Функция загрузки в нужную директорию, имя берется из нужной модели
-    return '{0}{1}/{2}'.format(instance.seans.data_seans_of_record,instance.seans.place_of_record, filename)
-# directory это поле из модели UploadDirectory
+    ext = filename.split('.')[-1]
+    return '{0}{1}/{2}.{3}'.format(instance.seans.data_seans_of_record,
+    instance.seans.place_of_record, instance.id_of_digitl_media, ext)
+
 class DigitalMedia(models.Model):
     id_auto = models.AutoField(primary_key=True)
     seans = models.ForeignKey(SeansOfRecord,

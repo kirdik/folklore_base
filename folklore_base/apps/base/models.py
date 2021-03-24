@@ -276,20 +276,25 @@ class TimingDigitalMedia(models.Model):
 
 ''' Digital media Model'''
 
-
+def foldername(instance, filename):
+# Функция загрузки в нужную директорию, имя берется из нужной модели
+    return '{0}{1}/{2}'.format(instance.seans.data_seans_of_record,instance.seans.place_of_record, filename)
+# directory это поле из модели UploadDirectory
 class DigitalMedia(models.Model):
     id_auto = models.AutoField(primary_key=True)
     seans = models.ForeignKey(SeansOfRecord,
-                              on_delete=models.DO_NOTHING)
+                              on_delete=models.DO_NOTHING,
+                              related_name = 'seans_dm')
     # place_hdd_drive = models.ForeignKey(HddMediaDrive,
     #                                     on_delete=models.DO_NOTHING,
     #                                     default=0,
     #                                     verbose_name='На каком HDD хранится')
     id_of_digitl_media = models.CharField(unique=True,
-                                          default='CRF20201213_34_A',
+                                          help_text='Здесь указывается уникальный номер записи,'
+                                          ' правила именования на примере ЦРФ смотрите в описании БДФЭЗ',
                                           verbose_name='ID цифровой записи',
                                           max_length=45)
-    fileupl = models.FileField(upload_to='audio/',
+    fileupl = models.FileField(upload_to=foldername,
                                verbose_name='Аудиофайл')
     file_description = models.TextField(max_length=600,
                                         verbose_name='Описание',

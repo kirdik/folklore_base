@@ -167,7 +167,8 @@ class SeansOfRecord(models.Model):
                                         on_delete=models.DO_NOTHING,
                                         verbose_name='Место записи')
     informant_of_seanse = models.ManyToManyField(Informant,
-                                                 verbose_name='Информанты сеанса')
+                                                 verbose_name='Информанты сеанса',
+                                                 blank=True)
     class Meta:
         verbose_name = 'Сеанс записи'
         verbose_name_plural = 'Сеансы записи'

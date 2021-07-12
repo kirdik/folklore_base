@@ -37,9 +37,9 @@ class Oblast(models.Model):
 
 class Rajon(models.Model):
     oblast_rajon = models.ForeignKey(Oblast,
-                              on_delete=models.DO_NOTHING,
-                              verbose_name='Область',
-                              related_name='rajon')
+                                     on_delete=models.DO_NOTHING,
+                                     verbose_name='Область',
+                                     related_name='rajon')
 
     rajon_name = models.CharField(max_length=30,
                                   help_text='Район',
@@ -55,16 +55,16 @@ class Rajon(models.Model):
 
 class Naspunkt(models.Model):
     rajon_naspunkt = models.ForeignKey(Rajon, on_delete=models.DO_NOTHING,
-                                 verbose_name='Район',
-                                 related_name='naspunkt')
+                                       verbose_name='Район',
+                                       related_name='naspunkt')
 
     naspunkt_name = models.CharField(max_length=30,
                                      help_text='Населённый пункт',
                                      verbose_name='Населённый пункт')
     naspunkt_coordinates = models.CharField(max_length=25,
-    help_text='Кординаты населенного пункта, найти и скопировать с яндекс карт maps.yandex.ru',
-    verbose_name='Географические координаты',
-    blank=True)
+                                            help_text='Кординаты населенного пункта, найти и скопировать с яндекс карт maps.yandex.ru',
+                                            verbose_name='Географические координаты',
+                                            blank=True)
 
     class Meta:
         verbose_name = 'Населённый пункт'
@@ -122,14 +122,16 @@ class Organisation(models.Model):
 '''End Organisations'''
 
 '''Model Informant'''
+
+
 class Informant(models.Model):
     fio = models.CharField(max_length=50,
                            help_text='Фамилия Имя Отчество указывать полностью',
                            verbose_name='ФИО')
     date_of_birth = models.IntegerField(verbose_name='Год рождения',
-                                     blank=True,
-                                     null=True,
-                                     help_text='Указывать только год рождения. Точную дату при необходимости добавить в "Дополнительно"')
+                                        blank=True,
+                                        null=True,
+                                        help_text='Указывать только год рождения. Точную дату при необходимости добавить в "Дополнительно"')
     place_of_residence = models.ForeignKey(Naspunkt,
                                            on_delete=models.DO_NOTHING,
                                            verbose_name='Место проживания')
@@ -139,14 +141,15 @@ class Informant(models.Model):
                                       verbose_name='Фотография исполнителя')
     info_informant = models.TextField(verbose_name='Дополнительная информация',
                                       help_text='Здесь можно добавить такие сведения как: '
-                                      'девичья фамилия, '
-                                      'место рождения, '
-                                      'год переезда, '
-                                      'точная дата рождения, '
-                                      'дата смерти, '
-                                      'контактная информация',
+                                                'девичья фамилия, '
+                                                'место рождения, '
+                                                'год переезда, '
+                                                'точная дата рождения, '
+                                                'дата смерти, '
+                                                'контактная информация',
                                       blank=True)
-    #data_seans_of_record_inf = models.ForeignKey(SeansOfRecord,
+
+    # data_seans_of_record_inf = models.ForeignKey(SeansOfRecord,
     #                                             on_delete=models.DO_NOTHING,
     #                                             blank=True,
     #                                             null=True)
@@ -160,9 +163,14 @@ class Informant(models.Model):
 
 '''End of Informant'''
 ''' Seans zapisi Model'''
+
+
 class SeansOfRecord(models.Model):
     id_of_seance_of_record = models.AutoField(primary_key=True)
     data_seans_of_record = models.DateField(verbose_name='Дата сеанса записи')
+    num_of_seance = models.IntegerField(default=1,
+                                        blank=False,
+                                        null=False)
     place_of_record = models.ForeignKey(Naspunkt,
                                         on_delete=models.DO_NOTHING,
                                         verbose_name='Место записи')
@@ -170,16 +178,17 @@ class SeansOfRecord(models.Model):
                                                  verbose_name='Информанты сеанса',
                                                  blank=True,
                                                  null=True)
+
     class Meta:
         verbose_name = 'Сеанс записи'
         verbose_name_plural = 'Сеансы записи'
         ordering = ['data_seans_of_record']
 
     def __str__(self):
-        return str(self.data_seans_of_record) + ' ' + str(self.place_of_record)
+        return str(self.data_seans_of_record) + ' ' + str(self.place_of_record) + '–' + str(self.num_of_seance)
+
 
 '''End of Seanse of record'''
-
 
 '''Expeditions Model'''
 
@@ -211,7 +220,6 @@ class Expeditions(models.Model):
 
 '''End Expeditions'''
 
-
 '''Inventory Number model'''
 
 
@@ -230,7 +238,6 @@ class InventoryNumber(models.Model):
 
 '''End Inventory Number'''
 
-
 '''HDD drives Model'''
 
 
@@ -242,9 +249,11 @@ class HddMediaDrive(models.Model):
                                  verbose_name='Производитель ЖД')
     hdd_drive_capacity = models.CharField(max_length=5,
                                           verbose_name='Объем диска в гигобайтах')
+
     class Meta:
         verbose_name = 'Жесткий диск (HDD)'
         verbose_name_plural = 'Жесткие диски (HDD)'
+
     def __str__(self):
         return str(self.hdd_drive) + ' ' + str(self.inventory_number_hdd)
 
@@ -253,11 +262,12 @@ class HddMediaDrive(models.Model):
 
 '''Timestamps'''
 
+
 class TimingDigitalMedia(models.Model):
     time_stamp = models.TimeField(default='00:00:00',
                                   verbose_name='Начало фрагмента')
     end_time_stamp = models.TimeField(default='00:00:00',
-                                        verbose_name='Конец фрагмента')
+                                      verbose_name='Конец фрагмента')
     number_of_temestamp = models.IntegerField(default='0',
                                               blank=True,
                                               verbose_name='Порядковый номер')
@@ -266,10 +276,12 @@ class TimingDigitalMedia(models.Model):
                                            max_length=120)
     timestamp_for_dm = models.ForeignKey('DigitalMedia',
                                          on_delete=models.CASCADE,
-                                         related_name = 'tm_dm')
+                                         related_name='tm_dm')
+
     class Meta:
         verbose_name = 'Временные метки аудио'
         verbose_name_plural = 'Временные метки аудио'
+
     def __str__(self):
         return str(self.number_of_temestamp) + " " + str(self.time_stamp)
 
@@ -278,36 +290,60 @@ class TimingDigitalMedia(models.Model):
 
 ''' Digital media Model'''
 
+
 def foldername(instance, filename):
     ext = filename.split('.')[-1]
-    return '{0}{1}/{2}.{3}'.format(instance.seans.data_seans_of_record,
-    instance.seans.place_of_record, instance.id_of_digitl_media, ext)
+    return '{0}{1}/{2}/{3}.{4}'.format(instance.seans.data_seans_of_record,
+                                       instance.seans.place_of_record, instance.seans.num_of_seance,
+                                       instance.id_of_digitl_media, ext)
+
 
 class DigitalMedia(models.Model):
     id_auto = models.AutoField(primary_key=True)
     seans = models.ForeignKey(SeansOfRecord,
                               on_delete=models.DO_NOTHING,
-                              related_name = 'seans_dm')
+                              related_name='seans_dm')
     # place_hdd_drive = models.ForeignKey(HddMediaDrive,
     #                                     on_delete=models.DO_NOTHING,
     #                                     default=0,
     #                                     verbose_name='На каком HDD хранится')
     id_of_digitl_media = models.CharField(unique=True,
                                           help_text='Здесь указывается уникальный номер записи,'
-                                          ' правила именования на примере ЦРФ смотрите в описании БДФЭЗ',
+                                                    ' правила именования на примере ЦРФ смотрите в описании БДФЭЗ',
                                           verbose_name='ID цифровой записи',
                                           max_length=45)
     fileupl = models.FileField(upload_to=foldername,
                                verbose_name='Аудиофайл')
     file_description = models.TextField(max_length=600,
                                         verbose_name='Описание',
-                                        help_text = 'ФИО ведущего сеанса, возможно список участников сеанса, любые другие сведения')
+                                        help_text='ФИО ведущего сеанса, возможно список участников сеанса, любые другие сведения')
 
     class Meta:
-        verbose_name='Цифровой медиа файл'
+        verbose_name = 'Цифровой медиа файл'
         verbose_name_plural = 'Цифровые медиа файлы'
+
     def __str__(self):
         return str(self.id_of_digitl_media)
 
 
 '''End Digital Media'''
+
+'''Reestr Model'''
+
+
+class Reestr(models.Model):
+    reestr_file = models.FileField(upload_to=foldername,
+                                   verbose_name='Реестр сеанса записи')
+    id_of_digitl_media = models.CharField(max_length=100,
+                                          verbose_name='id файла реестра'
+                                          )
+    seans = models.ForeignKey(SeansOfRecord,
+                              on_delete=models.DO_NOTHING,
+                              related_name='seans_reestr')
+
+    class Meta:
+        verbose_name = 'Реестр сеанса записи'
+        verbose_name_plural = 'Реестры сеансов записи'
+
+    def __str__(self):
+        return str(self.id_of_digitl_media)

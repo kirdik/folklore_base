@@ -4,7 +4,7 @@ from folklore_base.apps.base.models import *
 admin.site.site_header = 'Банк данных экспедиционных материалов'
 
 
-MyModels = [Researcher,Organisation, InventoryNumber]
+MyModels = [Researcher,Organisation, InventoryNumber, Reestr]
 
 admin.site.register(MyModels)
 

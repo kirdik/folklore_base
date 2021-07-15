@@ -8,6 +8,13 @@
 <h2 class="text-center text-muted">Аудиозаписи</h2>
 <p class="text-center text-muted">Для поиска записи используйте форму ввода в меню
   Поиск работает по полю ID записи</p> <br>
+{% load spec_filters %}
+{{request.path|req_filt}}
+{% reestr_tag request.path|req_filt as reestr %}
+{% for r in reestr %}
+<img src="{{ r.reestr_file.url }}">
+{%endfor%}
+
     <div class="container">
       <table class="table table-striped">
         <thead>

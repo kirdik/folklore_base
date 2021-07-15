@@ -64,7 +64,6 @@ def digitalmedialist(request, id = 0):
         digital = DigitalMedia.objects.select_related().filter(seans=id)
     else:
         digital = DigitalMedia.objects.all()
-
     context = pagegenerator(digital, 6, request)
     return render(request, 'digitalmedia.html', context)
 

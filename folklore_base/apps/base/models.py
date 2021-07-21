@@ -347,3 +347,5 @@ class Reestr(models.Model):
 
     def __str__(self):
         return str(self.id_of_digitl_media)
+
+#test

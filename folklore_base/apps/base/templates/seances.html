@@ -5,8 +5,7 @@
 {% endblock %}
 {% block content %}
 <br><h4 class="text-center text-muted" >Сеансы записи экспедиции {{ object.name_organisation }} {{ object.begin_data_expedition }}</h4><hr>
-<div class="row justify-content-center">
-  <div class="col-auto">
+  <div class="container">
     <table class="table table-striped">
       <tr>
         <th>Место записи</th>
@@ -21,10 +20,9 @@
         <td>{% for inf in seance.informant_of_seanse.all %}
           <p class="card-text">{{ inf }}</p>
           {% endfor %}</td>
-          <td><a href="{% url 'matherials' seance.id_of_seance_of_record %}" class="btn btn-secondary">Подробнее</a></td>
+          <td><a href="{% url 'digital' seance.id_of_seance_of_record %}" class="btn btn-secondary">Подробнее</a></td>
         </tr>
         {% endfor %}
       </table>
     </div>
-  </div>
   {% endblock content %}

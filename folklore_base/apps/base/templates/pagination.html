@@ -9,7 +9,7 @@
     {% for n in model.paginator.page_range %}
     {% if explist.number == n %}
     <li class="page-item active" aria-current="page">
-      <span class="page-link">{{ n }}</span>
+      <span class="page-link border-dark">{{ n }}</span>
     </li>
     {% elif n > model.number|add:-2 and n < model.number|add:3 %}
 

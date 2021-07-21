@@ -3,6 +3,9 @@ from django.views.generic import ListView, DetailView, View
 from django.core.paginator import Paginator
 
 from .models import *
+#---------- Генерация постраничного вывода в представлении -------------#
+# В шаблоне в цикл for передавать model.object_list
+# В представлении передавать в конце не список {'var': var }, а переменную var
 
 def pagegenerator(namemodel, number, request):
 
@@ -27,7 +30,21 @@ def pagegenerator(namemodel, number, request):
 
     }
     return context
+#---------------------------------------------#
 
+#--------------- функция поиска -------------#
+# Вставлять в представление передавать параметры
+# search_query = request.GET.get('search', '')
+# filter = Informant.objects.filter(fio__icontains=search_query)
+
+def searchfunc(request, namemodel, filter, search_query):
+
+    if search_query:
+        queryset = filter
+    else:
+        queryset = namemodel.objects.all()
+    return queryset
+#--------------------------------------------#
 
 
 def expeditions(request):
@@ -39,29 +56,30 @@ class ExpeditionDetail(DetailView):
     model = Expeditions
     template_name = 'seances.html'
 
-def digitalmedialist(request):
+def digitalmedialist(request, id = 0):
     search_query = request.GET.get('search', '')
     if search_query:
         digital = DigitalMedia.objects.filter(id_of_digitl_media__icontains=search_query)
+    elif id:
+        digital = DigitalMedia.objects.select_related().filter(seans=id)
     else:
         digital = DigitalMedia.objects.all()
-    context = pagegenerator(digital, 2, request)
+    context = pagegenerator(digital, 6, request)
     return render(request, 'digitalmedia.html', context)
 
 class DigitalMediaDetailView(DetailView):
     model = DigitalMedia
     template_name = 'digitalmediadetail.html'
 
-def matherials(request, id):
-    mat = DigitalMedia.objects.select_related().filter(seans=id)
-    return render(request, 'matherials.html', {'mat': mat})
+
+
 
 def informants(request):
     search_query = request.GET.get('search', '')
-    if search_query:
-        inf = Informant.objects.filter(fio__icontains=search_query)
-    else:
-        inf = Informant.objects.all()
+    filter = Informant.objects.filter(fio__icontains=search_query)
+    inf = searchfunc(request, Informant, filter, search_query)
+
+
     context = pagegenerator(inf, 2, request)
     return render(request, 'informants.html', context)
 
@@ -70,3 +88,13 @@ def informant_details(request, id):
     seances = SeansOfRecord.objects.select_related().filter(informant_of_seanse=id)
     return render(request, 'inf_details.html', {'infdetail': infdetail,
                                                 'seances': seances})
+def map(request):
+    map = Naspunkt.objects.all()
+    return render(request, 'index.html', {'map': map})
+def locations(request, id = 0):
+    if id:
+        locate = Oblast.objects.select_related().filter(id=id)
+    else:
+        locate = Oblast.objects.all()
+    loc = pagegenerator(locate, 2, request)
+    return render(request, 'locations.html', loc )

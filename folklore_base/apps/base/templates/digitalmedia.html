@@ -3,20 +3,78 @@
 {% block title %}
 Список аудио файлов
 {% endblock%}
-
-
-
 {% block content %}
-{% for dm in model %}
-<div class="card" style="margin: 4;">
-  <h5 class="card-header">{{ dm.id_of_digitl_media }}</h5>
-  <div class="card-body">
-    <h5 class="card-title">{{ dm.seans }}</h5>
-    <p class="card-text"><a  href="{{ dm.fileupl.url }}" class="jouele" data-space-control="true">{{ dm.id_of_digitl_media }}</a></p>
-    <p class="card-text">{{ dm.file_description|linebreaks }}</p>
-  </div>
-</div>
-{% endfor %}
-{% include 'pagination.html' %}
+<br>
+<h2 class="text-center text-muted">Аудиозаписи</h2>
+<p class="text-center text-muted">Для поиска записи используйте форму ввода в меню
+  Поиск работает по полю ID записи</p> <br>
+{% load spec_filters %}
+{% reestr_tag request.path|req_filt as reestr %}
+<div class="container">
+  <table class="table table-striped">
+    <tbody>
+    <tr>
+      <td>
+      ID реестра
+      </td>
+      <td>
+      открыть просмотр
+      </td>
+    </tr>
+    </tbody>
 
+{% for r in reestr %}
+<tr>
+  <td>
+    {{r.id_of_digitl_media}}
+  </td>
+<td>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal{{r.id_of_digitl_media}}">
+    Открыть
+  </button>
+  <!-- Modal -->
+  <div class="modal fade" id="modal{{r.id_of_digitl_media}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{r.id_of_digitl_media}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <a href="{{r.reestr_file.url}}"><img src="{{ r.reestr_file.url }}" width="1100"></a>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+      </td>
+</tr>
+  {%endfor%}
+  </table>
+  <table class="table table-striped">
+        <thead>
+          <tr class="table-secondary">
+            <th>Сеанс записи</th>
+            <th>Аудио</th>
+            <th>Описание</th>
+            <th>Подробнее</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for dm in model %}
+          <tr>
+            <td>{{ dm.seans }}</td>
+            <td><a  href="{{ dm.fileupl.url }}" class="jouele" data-space-control="true">{{ dm.id_of_digitl_media }}</a></td>
+            <td>{{ dm.file_description|linebreaks }}</td>
+            <td><a href="{% url 'dm_detail' dm.id_auto %}" class="btn btn-secondary">подробнее</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% include 'pagination.html' %}
 {% endblock content %}

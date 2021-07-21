@@ -176,8 +176,8 @@ class SeansOfRecord(models.Model):
                                         verbose_name='Место записи')
     informant_of_seanse = models.ManyToManyField(Informant,
                                                  verbose_name='Информанты сеанса',
-                                                 blank=True,
-                                                 null=True)
+                                                 blank=True
+                                                 )
 
     class Meta:
         verbose_name = 'Сеанс записи'

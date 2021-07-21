@@ -349,4 +349,3 @@ class Reestr(models.Model):
         return str(self.id_of_digitl_media)
 
 #test
->>>>>>> addfile

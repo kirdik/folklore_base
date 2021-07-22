@@ -1,0 +1,28 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+
+<head>
+  <title>
+    {% block title %}
+    Банк данных фольклорно этнографических экспедиций
+    {% endblock %}
+  </title>
+  <meta charset="utf-8">
+  {%include 'jscss.html'%}
+  {%block advancedhead%}
+  {%endblock%}
+</head>
+<body>
+  <br>
+  <h2 class="text-center">Банк данных экспедиционных записей</h2>
+  {%include 'nav.html'%}
+  <br>
+  <div class="row">
+    <div class="col">
+      {% block content %}
+      {% endblock content %}
+    </div>
+  </div>
+</body>
+</html>

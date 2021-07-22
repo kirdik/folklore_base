@@ -1,0 +1,28 @@
+<!-- templates/seances.html -->
+{% extends 'base.html' %}
+{% block title %}
+Экспедиция {{ object.name_organisation }} {{ object.begin_data_expedition }}
+{% endblock %}
+{% block content %}
+<br><h4 class="text-center text-muted" >Сеансы записи экспедиции {{ object.name_organisation }} {{ object.begin_data_expedition }}</h4><hr>
+  <div class="container">
+    <table class="table table-striped">
+      <tr>
+        <th>Место записи</th>
+        <th>Дата записи</th>
+        <th>Информанты</th>
+        <th>Материалы</th>
+      </tr>
+      {% for seance in object.seanses_of_expedition.all %}
+      <tr>
+        <td>{{ seance.place_of_record }}</td>
+        <td>{{ seance.data_seans_of_record }}</td>
+        <td>{% for inf in seance.informant_of_seanse.all %}
+          <p class="card-text">{{ inf }}</p>
+          {% endfor %}</td>
+          <td><a href="{% url 'digital' seance.id_of_seance_of_record %}" class="btn btn-secondary">Подробнее</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% endblock content %}

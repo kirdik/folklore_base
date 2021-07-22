@@ -1,3 +1,11 @@
 .idea
 log-cow.log
 __pycache__
+Pipfile
+media/*
+*.DS_Store
+db.sqlite3
+folklore_base/apps/base/migrations/0*.py
+db.json
+fulldb.json
+backupbase.sh

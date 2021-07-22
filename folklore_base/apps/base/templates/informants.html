@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+Информанты
+{% endblock %}
+{% block content %}
+<h2 class="text-center text-muted">Информанты</h2>
+  <div class="container">
+<table class="table table-striped">
+<thead>
+  <tr class="table-secondary">
+    <th>ФИО</th>
+    <th>Год рождения</th>
+    <th>Место проживания</th>
+    <th>Детальная информация</th>
+  </tr>
+</thead>
+{% for i in model %}
+<tr>
+<td>{{i.fio}}</td>
+<td>{{i.date_of_birth}}</td>
+<td>{{i.place_of_residence}}</td>
+<td><a href="{{i.id}}" class="btn btn-secondary">Подробнее</a></td>
+</tr>
+{% endfor %}
+</table>
+{% include 'pagination.html' %}
+</div>
+
+{% endblock %}

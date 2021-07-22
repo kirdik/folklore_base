@@ -1,0 +1,31 @@
+<!-- templates/expeditions.html -->
+{% extends 'base.html' %}
+{% block title %}
+Список экспедиций
+{% endblock%}
+
+{% block content %}
+<br><h3 class="text-center text-muted">Список экспедиций</h3> <hr>
+  <div class="container">
+    <table class="table table-striped">
+      <tr>
+        <th>Организация</th>
+        <th>Дата начала экспедиции</th>
+        <th>Руководитель</th>
+        <th>Сеансы записи</th>
+      </tr>
+      {% for exp in model.object_list %}
+      <tr>
+        <td>{{ exp.organisation_expedition }}</td>
+        <td>{{ exp.begin_data_expedition }}</td>
+        <td>{{ exp.researcher_expedtion }}</td>
+        <td><a href='{% url "seances" exp.pk %}' class="btn btn-secondary">Подробнее</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+
+  {% include 'pagination.html' %}
+  </div>
+{{top_patch}}
+
+{% endblock content %}

@@ -92,7 +92,7 @@ class SeansOfRecordAdmin(admin.ModelAdmin):
 @admin.register(Expeditions)
 class ExpeditionAdmin(admin.ModelAdmin):
     list_display = ('organisation_expedition', 'begin_data_expedition')
-    filter_horizontal = ('seanses_of_expedition',)
+    filter_horizontal = ('seanses_of_expedition','other_org_exp')
 
 
 class HddMediaDriveAdmin(admin.ModelAdmin):

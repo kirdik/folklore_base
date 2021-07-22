@@ -8,6 +8,7 @@
 <h2 class="text-center text-muted">Аудиозаписи</h2>
 <p class="text-center text-muted">Для поиска записи используйте форму ввода в меню
   Поиск работает по полю ID записи</p> <br>
+{% if test %}
 {% load spec_filters %}
 {% reestr_tag request.path|req_filt as reestr %}
 <div class="container">
@@ -55,6 +56,7 @@
 </tr>
   {%endfor%}
   </table>
+  {%endif%}
   <table class="table table-striped">
         <thead>
           <tr class="table-secondary">

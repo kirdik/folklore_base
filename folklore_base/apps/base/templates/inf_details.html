@@ -30,7 +30,7 @@
 </thead>
 <tr>
   <td>{{infdetail.info_informant}}</td>
-  <td><img src="{{infdetail.img_informant.url}}"  height="250"></td>
+  <td>{% if infdetail.img_informant %}<img src="{{infdetail.img_informant.url}}"  height="250">{%else%}<h1 class='bi bi-person-square'></h1>{%endif%}</td>
 </tr>
 <tr>
   <td colspan="2">

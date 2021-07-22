@@ -13,6 +13,10 @@ sqlparse = "==0.4.1"
 Django = "==3.2.5"
 Pillow = "==8.3.1"
 django-import-export = "*"
+pyyaml = "*"
+xlrd = "*"
+xlwt = "*"
+openpyxl = "*"
 
 [requires]
 python_version = "3.8"

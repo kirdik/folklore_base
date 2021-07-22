@@ -5,6 +5,7 @@ Pipfile
 media/*
 *.DS_Store
 db.sqlite3
+db.sqlite3.back
 folklore_base/apps/base/migrations/0*.py
 db.json
 fulldb.json

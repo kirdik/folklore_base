@@ -62,7 +62,8 @@ class Naspunkt(models.Model):
                                      help_text='Населённый пункт',
                                      verbose_name='Населённый пункт')
     naspunkt_coordinates = models.CharField(max_length=25,
-                                            help_text='Кординаты населенного пункта, найти и скопировать с яндекс карт maps.yandex.ru',
+                                            help_text='Кординаты населенного пункта, найти и скопировать с яндекс '
+                                                      'карт maps.yandex.ru',
                                             verbose_name='Географические координаты',
                                             blank=True)
 
@@ -131,7 +132,8 @@ class Informant(models.Model):
     date_of_birth = models.IntegerField(verbose_name='Год рождения',
                                         blank=True,
                                         null=True,
-                                        help_text='Указывать только год рождения. Точную дату при необходимости добавить в "Дополнительно"')
+                                        help_text='Указывать только год рождения. Точную дату при необходимости '
+                                                  'добавить в "Дополнительно"')
     place_of_residence = models.ForeignKey(Naspunkt,
                                            on_delete=models.DO_NOTHING,
                                            verbose_name='Место проживания')
@@ -199,12 +201,17 @@ class Expeditions(models.Model):
     end_data_expedition = models.DateField(verbose_name='Дата окончания экспедиции',
                                            null=True,
                                            blank=True)
-    organisation_expedition = models.ForeignKey(Organisation,
-                                                on_delete=models.DO_NOTHING,
-                                                verbose_name='Организация')
     researcher_expedtion = models.ForeignKey(Researcher,
                                              on_delete=models.DO_NOTHING,
                                              verbose_name='Руководитель экспедиции')
+    organisation_expedition = models.ForeignKey(Organisation,
+                                                on_delete=models.DO_NOTHING,
+                                                related_name='organisation',
+                                                verbose_name='Организация инициатор экспедиции')
+    other_org_exp = models.ManyToManyField(Organisation,
+                                           blank=True,
+                                           related_query_name='other_organisations',
+                                           verbose_name='Другие организации участники экспедиции')
     seanses_of_expedition = models.ManyToManyField(SeansOfRecord,
                                                    blank=True,
                                                    verbose_name='Сеансы записи')
@@ -316,7 +323,8 @@ class DigitalMedia(models.Model):
                                verbose_name='Аудиофайл')
     file_description = models.TextField(max_length=600,
                                         verbose_name='Описание',
-                                        help_text='ФИО ведущего сеанса, возможно список участников сеанса, любые другие сведения')
+                                        help_text='ФИО ведущего сеанса, возможно список участников сеанса, любые '
+                                                  'другие сведения')
 
     class Meta:
         verbose_name = 'Цифровой медиа файл'
@@ -347,5 +355,3 @@ class Reestr(models.Model):
 
     def __str__(self):
         return str(self.id_of_digitl_media)
-
-#test

@@ -318,7 +318,7 @@ class DigitalMedia(models.Model):
                                           help_text='Здесь указывается уникальный номер записи,'
                                                     ' правила именования на примере ЦРФ смотрите в описании БДФЭЗ',
                                           verbose_name='ID цифровой записи',
-                                          max_length=45)
+                                          max_length=100)
     fileupl = models.FileField(upload_to=foldername,
                                verbose_name='Аудиофайл')
     file_description = models.TextField(max_length=600,

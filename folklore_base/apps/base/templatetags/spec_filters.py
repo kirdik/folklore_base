@@ -17,3 +17,7 @@ def reestr_tag(id_of_seance):
 def req_filt(url_in):
     i = re.search(r"\d+$", url_in)
     return i.group(0)
+@register.filter()
+def clean_id(str_in):
+    rres = re.sub(r'\W', '', str_in)
+    return rres

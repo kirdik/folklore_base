@@ -32,11 +32,11 @@
 <td>
 
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal{{r.id_of_digitl_media}}">
+  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal{{r.id_of_digitl_media|clean_id}}">
     Открыть
   </button>
   <!-- Modal -->
-  <div class="modal fade" id="modal{{r.id_of_digitl_media}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modal{{r.id_of_digitl_media|clean_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">

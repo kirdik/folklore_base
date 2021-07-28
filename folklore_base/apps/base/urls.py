@@ -12,4 +12,5 @@ urlpatterns = [
     path('informants/<int:id>/', informant_details, name='informant_details'),
     path('locations/', locations, name='locations'),
     path('locations/<int:id>/', locations, name='locate_select'),
+    path('video/<int:id>', video, name='video'),
 ]

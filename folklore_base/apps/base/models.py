@@ -62,7 +62,7 @@ class Naspunkt(models.Model):
                                      help_text='Населённый пункт',
                                      verbose_name='Населённый пункт')
     naspunkt_coordinates = models.CharField(max_length=25,
-                                            help_text='Кординаты населенного пункта, найти и скопировать с яндекс '
+                                            help_text='Координаты населенного пункта, найти и скопировать с яндекс '
                                                       'карт maps.yandex.ru',
                                             verbose_name='Географические координаты',
                                             blank=True)
@@ -352,6 +352,26 @@ class Reestr(models.Model):
     class Meta:
         verbose_name = 'Реестр сеанса записи'
         verbose_name_plural = 'Реестры сеансов записи'
+
+    def __str__(self):
+        return str(self.id_of_digitl_media)
+
+
+''' Video Model'''
+
+
+class Video(models.Model):
+    video_file = models.FileField(upload_to=foldername,
+                                  verbose_name='Видео')
+    id_of_digitl_media = models.CharField(max_length=100,
+                                          verbose_name='id видео файла')
+    seans = models.ForeignKey(SeansOfRecord,
+                              on_delete=models.DO_NOTHING,
+                              related_name='seans_video')
+
+    class Meta:
+        verbose_name = 'Видеозапись'
+        verbose_name_plural = 'Видеозаписи'
 
     def __str__(self):
         return str(self.id_of_digitl_media)

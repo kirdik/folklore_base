@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock %}
+{% block content %}
+
+<table class="table table-striped">
+        <thead>
+          <tr class="table-secondary">
+            <th>Сеанс записи</th>
+            <th>Видео</th>
+            <th>ID</th>
+            <th>Подробнее</th>
+          </tr>
+        </thead>
+        <tbody>
+         {% for v in video_req%}
+          <tr>
+            <td>{{ v.seans }}</td>
+            <td><video width="400" height="300" controls="controls" >
+   <source src="{{v.video_file.url}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+   Тег video не поддерживается вашим браузером.
+  </video></td>
+            <td>{{v.id_of_digitl_media}}</td>
+            <td></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+{% endblock content %}l>

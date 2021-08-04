@@ -21,7 +21,8 @@
           <p class="card-text">{{ inf }}</p>
           {% endfor %}</td>
           <td><a href="{% url 'digital' seance.id_of_seance_of_record %}" class="btn btn-secondary">Аудио</a>
-          <a href="{% url 'video' seance.id_of_seance_of_record  %}" class="btn btn-secondary">Видео</a></td>
+          <a href="{% url 'video' seance.id_of_seance_of_record  %}" class="btn btn-secondary">Видео</a>
+            <a href="{% url 'reestr' seance.id_of_seance_of_record  %}" class="btn btn-secondary">Реестры</a></td>
         </tr>
         {% endfor %}
       </table>

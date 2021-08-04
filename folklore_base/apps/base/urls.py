@@ -13,4 +13,5 @@ urlpatterns = [
     path('locations/', locations, name='locations'),
     path('locations/<int:id>/', locations, name='locate_select'),
     path('video/<int:id>', video, name='video'),
+    path('reestr/<int:id>', reestr, name='reestr'),
 ]

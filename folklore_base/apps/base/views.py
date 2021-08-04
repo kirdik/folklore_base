@@ -107,6 +107,11 @@ def locations(request, id=0):
         locate = Oblast.objects.all()
     loc = pagegenerator(locate, 2, request)
     return render(request, 'locations.html', loc)
+
 def video(request, id):
     video_req = Video.objects.select_related().filter(seans=id)
     return render(request, 'video.html', {'video_req': video_req})
+
+def reestr(request, id):
+    reestr_req = Reestr.objects.select_related().filter(seans=id)
+    return render(request, 'reestr.html', {'reestr_req': reestr_req})

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock %}
+{% block content %}
+
+<table class="table table-striped">
+        <thead>
+          <tr class="table-secondary">
+            <th>Реестр</th>
+              <th>Сеанс записи</th>
+              <th>ID</th>
+
+          </tr>
+        </thead>
+        <tbody>
+         {% for v in reestr_req%}
+          <tr>
+            <td><img src="{{v.reestr_file.url}}" alt="" class="img" style="max-width: 50%;"></td>
+              <td>{{ v.seans }}</td>
+              <td>{{v.id_of_digitl_media}}</td>
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+{% endblock content %}l>

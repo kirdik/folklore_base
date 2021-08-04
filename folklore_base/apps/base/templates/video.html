@@ -7,21 +7,20 @@
 <table class="table table-striped">
         <thead>
           <tr class="table-secondary">
-            <th>Сеанс записи</th>
             <th>Видео</th>
-            <th>ID</th>
-            <th>Подробнее</th>
+            <th>Сеанс записи ID</th>
+            <th>Описание</th>
           </tr>
         </thead>
         <tbody>
          {% for v in video_req%}
           <tr>
-            <td>{{ v.seans }}</td>
             <td><video width="400" height="300" controls="controls" >
-   <source src="{{v.video_file.url}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+   <source src="{{v.video_file.url}}" >
    Тег video не поддерживается вашим браузером.
   </video></td>
-            <td>{{v.id_of_digitl_media}}</td>
+            <td>{{ v.seans }}<br>
+            {{v.id_of_digitl_media}}</td>
             <td></td>
           </tr>
           {% endfor %}

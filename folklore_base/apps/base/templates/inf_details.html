@@ -30,12 +30,17 @@
 </thead>
 <tr>
   <td>{{infdetail.info_informant}}</td>
-  <td>{% if infdetail.img_informant %}<img src="{{infdetail.img_informant.url}}"  height="250">{%else%}<h1 class='bi bi-person-square'></h1>{%endif%}</td>
+  <td>{% if infdetail.img_informant %}<img src="{{infdetail.img_informant.url}}"  height="250">{%else%}
+    <h1 class='bi bi-person-square'></h1>
+    {%endif%}
+  </td>
 </tr>
 <tr>
   <td colspan="2">
     {% for s in seances %}
-    {{ s }} <a href="{% url 'digital' s.id_of_seance_of_record  %}" class="btn btn-secondary">Материалы</a> <br> <hr>
+    {{ s }} <a href="{% url 'digital' s.id_of_seance_of_record  %}" class="btn btn-secondary">Аудио</a>
+    <a href="{% url 'video' s.id_of_seance_of_record  %}" class="btn btn-secondary">Видео</a>
+            <a href="{% url 'reestr' s.id_of_seance_of_record  %}" class="btn btn-secondary">Реестры</a><br> <hr>
     {% endfor %}
   </td>
 </tr>

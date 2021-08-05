@@ -56,6 +56,10 @@ def expeditions(request):
     context = pagegenerator(explist, 2, request)
     return render(request, 'expeditions.html', context)
 
+def seances(request, id):
+    seances_list = SeansOfRecord.objects.filter(place_of_rec=id)
+    return render(request, 'seansofgeo.html', {'seances_list': seances_list})
+
 
 class ExpeditionDetail(DetailView):
     model = Expeditions

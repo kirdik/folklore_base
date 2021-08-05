@@ -175,7 +175,8 @@ class SeansOfRecord(models.Model):
                                         null=False)
     place_of_record = models.ForeignKey(Naspunkt,
                                         on_delete=models.DO_NOTHING,
-                                        verbose_name='Место записи')
+                                        verbose_name='Место записи',
+                                        related_name='place_of_rec')
     informant_of_seanse = models.ManyToManyField(Informant,
                                                  verbose_name='Информанты сеанса',
                                                  blank=True

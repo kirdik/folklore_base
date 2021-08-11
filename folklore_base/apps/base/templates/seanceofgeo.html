@@ -1,10 +1,9 @@
 <!-- templates/seances.html -->
 {% extends 'base.html' %}
 {% block title %}
-Экспедиция {{ object.name_organisation }} {{ object.begin_data_expedition }}
 {% endblock %}
 {% block content %}
-<br><h4 class="text-center text-muted" >Сеансы записи экспедиции {{ object.name_organisation }} {{ object.begin_data_expedition }}</h4><hr>
+<br><h4 class="text-center text-muted" >Сеансы записи населенного пункта</h4><hr>
   <div class="container">
     <table class="table table-striped shadow">
       <tr>
@@ -13,7 +12,7 @@
         <th>Информанты</th>
         <th>Материалы</th>
       </tr>
-      {% for seance in object.seanses_of_expedition.all %}
+      {% for seance in seances_list %}
       <tr>
         <td>{{ seance.place_of_record }}</td>
         <td>{{ seance.data_seans_of_record }}</td>

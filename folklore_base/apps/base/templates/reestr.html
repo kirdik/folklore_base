@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
 
-<table class="table table-striped">
+<table class="table table-striped shadow">
         <thead>
           <tr class="table-secondary">
             <th>Реестр</th>
@@ -16,7 +16,7 @@
         <tbody>
          {% for v in reestr_req%}
           <tr>
-            <td><img src="{{v.reestr_file.url}}" alt="" class="img" style="max-width: 50%;"></td>
+            <td><img src="{{v.reestr_file.url}}" alt="" class="img shadow" style="max-width: 50%;"></td>
               <td>{{ v.seans }}</td>
               <td>{{v.id_of_digitl_media}}</td>
 

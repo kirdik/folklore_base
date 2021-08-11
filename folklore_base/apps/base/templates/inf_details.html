@@ -5,7 +5,7 @@
 {% block content %}
 <br>
   <div class="container">
-<table class='table table-bordered  rounded'>
+<table class='table table-bordered  rounded shadow'>
 <thead class="table-secondary">
   <tr>
     <th scope="col">ФИО</th>
@@ -21,7 +21,7 @@
 </tr>
 </tbody>
 </table>
-<table class='table table-bordered  rounded'>
+<table class='table table-bordered  rounded shadow'>
 <thead class="table-secondary">
   <tr>
     <th>Дополнительно</th>
@@ -30,7 +30,7 @@
 </thead>
 <tr>
   <td>{{infdetail.info_informant}}</td>
-  <td>{% if infdetail.img_informant %}<img src="{{infdetail.img_informant.url}}"  height="250">{%else%}
+  <td>{% if infdetail.img_informant %}<img src="{{infdetail.img_informant.url}}"  height="250" class="shadow">{%else%}
     <h1 class='bi bi-person-square'></h1>
     {%endif%}
   </td>
@@ -38,9 +38,9 @@
 <tr>
   <td colspan="2">
     {% for s in seances %}
-    {{ s }} <a href="{% url 'digital' s.id_of_seance_of_record  %}" class="btn btn-secondary">Аудио</a>
-    <a href="{% url 'video' s.id_of_seance_of_record  %}" class="btn btn-secondary">Видео</a>
-            <a href="{% url 'reestr' s.id_of_seance_of_record  %}" class="btn btn-secondary">Реестры</a><br> <hr>
+    {{ s }} <a href="{% url 'digital' s.id_of_seance_of_record  %}" class="btn btn-secondary shadow">Аудио</a>
+    <a href="{% url 'video' s.id_of_seance_of_record  %}" class="btn btn-secondary shadow">Видео</a>
+            <a href="{% url 'reestr' s.id_of_seance_of_record  %}" class="btn btn-secondary shadow">Реестры</a><br> <hr>
     {% endfor %}
   </td>
 </tr>

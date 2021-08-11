@@ -2,7 +2,7 @@
 <nav aria-label="...">
   <ul class="pagination justify-content-center">
     <li class="page-item {% if not prev_url%} disabled {% endif %} shadow">
-      <a class="page-link" href="{{ prev_url }}"tabindex="-1">Назад</a>
+      <a class="page-link link-dark" href="{{ prev_url }}"tabindex="-1">Назад</a>
     </li>
 
 
@@ -13,11 +13,11 @@
     </li>
     {% elif n > model.number|add:-2 and n < model.number|add:3 %}
 
-    <li class="page-item shadow"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+    <li class="page-item shadow"><a class="page-link link-dark" href="?page={{ n }}">{{ n }}</a></li>
     {% endif %}
     {% endfor %}
     <li class="page-item {% if not next_url%} disabled {% endif %} shadow">
-      <a class="page-link" href="{{ next_url }}"tabindex="-1">Вперёд</a>
+      <a class="page-link link-dark" href="{{ next_url }}" tabindex="-1">Вперёд</a>
     </li>
   </ul>
 </nav>

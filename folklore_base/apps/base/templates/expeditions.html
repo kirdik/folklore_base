@@ -7,7 +7,7 @@
 {% block content %}
 <br><h3 class="text-center text-muted">Список экспедиций</h3> <hr>
   <div class="container">
-    <table class="table table-striped">
+    <table class="table table-striped shadow">
       <tr>
         <th>Организация</th>
         <th>Дата начала экспедиции</th>
@@ -19,7 +19,7 @@
         <td>{{ exp.organisation_expedition }}</td>
         <td>{{ exp.begin_data_expedition }}</td>
         <td>{{ exp.researcher_expedtion }}</td>
-        <td><a href='{% url "seances" exp.pk %}' class="btn btn-secondary">Подробнее</a></td>
+        <td><a href='{% url "seances" exp.pk %}' class="btn btn-secondary shadow">Подробнее</a></td>
       </tr>
       {% endfor %}
     </table>

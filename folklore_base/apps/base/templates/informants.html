@@ -5,7 +5,7 @@
 {% block content %}
 <h2 class="text-center text-muted">Информанты</h2>
   <div class="container">
-<table class="table table-striped">
+<table class="table table-striped shadow">
 <thead>
   <tr class="table-secondary">
     <th>ФИО</th>
@@ -19,7 +19,7 @@
 <td>{{i.fio}}</td>
 <td>{{i.date_of_birth}}</td>
 <td>{{i.place_of_residence}}</td>
-<td><a href="{{i.id}}" class="btn btn-secondary">Подробнее</a></td>
+<td><a href="{{i.id}}" class="btn btn-secondary shadow">Подробнее</a></td>
 </tr>
 {% endfor %}
 </table>

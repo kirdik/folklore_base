@@ -18,7 +18,10 @@
     <tr>
       {%for r in i.rajon.all%}
       <td class="text-center"><p class="lead"> {{r}}</p></td>
-      <td class="p-3 text-center">{%for n in r.naspunkt.all %} <li><a href="{% url 'seanceofgeo' n.id %}" class="link-dark"> {{n}}</a></li> {%endfor%} </td>
+      <td class="p-3 text-center">{%for n in r.naspunkt.all %}
+        <li><a href="{% url 'seanceofgeo' n.id %}" class="link-dark"> {{n}}</a>
+        </li> {%endfor%}
+      </td>
     </tr>
     {%endfor%}
     {%endfor%}

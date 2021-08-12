@@ -2,6 +2,8 @@
 {% url 'digital' as digital %}
 {% url 'informants' as informants %}
 {% url 'locations' as locations %}
+{% load spec_filters%}
+{% locate_tag as list%}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'map' %}">Главная</a>
@@ -16,11 +18,19 @@
           {% else %} class="nav-link"
           {% endif %} href="{% url 'expeditions' %}">Экспедиции</a>
         </li>
-        <li class="nav-item">
-          <a {% if request.path == locations %} class="nav-link active" aria-current="page"
-          {% else %} class="nav-link"
-          {% endif %} href="{% url 'locations' %}">Населенные пункты</a>
-        </li>
+<!--        <li class="nav-item">-->
+<!--          <a {% if request.path == locations %} class="nav-link active" aria-current="page"-->
+<!--          {% else %} class="nav-link"-->
+<!--          {% endif %} href="{% url 'locations' %}">Населенные пункты</a>-->
+<!--        </li>-->
+         <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Населенные пункты</a>
+    <ul class="dropdown-menu">
+      {% for o in list %}
+      <li class="nav-item"><a class="dropdown-item" href="{% url 'locate_select' o.id %}">{{o}}</a></li>
+      {%endfor%}
+    </ul>
+  </li>
         <li class="nav-item">
           <a {% if request.path == digital %} class="nav-link active" aria-current="page"
           {% else %} class="nav-link"

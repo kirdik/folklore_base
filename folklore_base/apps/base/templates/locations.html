@@ -17,7 +17,7 @@
     <tr><td colspan="2" class="table-secondary"><h4>{{i}}</h4></td></tr>
     <tr>
       {%for r in i.rajon.all%}
-      <td class="text-center"><b>{{r}}</b></td>
+      <td class="text-center"><p class="lead"> {{r}}</p></td>
       <td class="p-3 text-center">{%for n in r.naspunkt.all %} <li><a href="{% url 'seanceofgeo' n.id %}" class="link-dark"> {{n}}</a></li> {%endfor%} </td>
     </tr>
     {%endfor%}
@@ -25,15 +25,15 @@
   </table>
   {%include 'pagination.html'%}
 </div>
-<div class="col-sm text-center">
-{% locate_tag as list%}
-<div class="list-group">
+<!--<div class="col-sm text-center">-->
+<!--{% locate_tag as list%}-->
+<!--<div class="list-group">-->
 
-{% for o in list %}
-<a href="{% url 'locate_select' o.id %}" class="list-group-item list-group-item-action shadow">{{o}}</a><br>
-{%endfor%}
-</div>
-</div>
+<!--{% for o in list %}-->
+<!--<a href="{% url 'locate_select' o.id %}" class="list-group-item list-group-item-action shadow">{{o}}</a><br>-->
+<!--{%endfor%}-->
+<!--</div>-->
+<!--</div>-->
 </div>
 </div>
 {%endblock%}

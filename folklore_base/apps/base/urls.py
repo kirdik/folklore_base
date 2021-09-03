@@ -15,4 +15,5 @@ urlpatterns = [
     path('video/<int:id>', video, name='video'),
     path('reestr/<int:id>', reestr, name='reestr'),
     path('seanceofgeo/<int:id>', seances_of_geo, name='seanceofgeo'),
+    path('photo/<int:id>', photo, name='photo'),
 ]

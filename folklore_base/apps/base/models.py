@@ -380,12 +380,15 @@ class Video(models.Model):
 class Photo(models.Model):
     photo_file = models.FileField(upload_to=foldername,
                                   verbose_name='Фото')
+    description_photo = models.CharField(max_length=300,
+                                         verbose_name='Описание')
     id_of_digitl_media = models.AutoField(primary_key=True)
     seans = models.ForeignKey(SeansOfRecord,
                               on_delete=models.DO_NOTHING,
-                              related_name='seans_photo')
+                              related_name='seans_photo',
+                              verbose_name='Сеанс записи')
     class Meta:
-        verbose_name='Фотография'
+        verbose_name = 'Фотография'
         verbose_name_plural = 'Фотографии'
     def __str__(self):
         return str(self.seans) + str(self.id_of_digitl_media)

@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, View
 from django.core.paginator import Paginator
+from .forms import PhotoForm
 
 from .models import *
 
@@ -119,3 +120,21 @@ def video(request, id):
 def reestr(request, id):
     reestr_req = Reestr.objects.select_related().filter(seans=id)
     return render(request, 'reestr.html', {'reestr_req': reestr_req})
+
+def photo(request):
+    error = ''
+    if request.method == 'POST':
+        form = PhotoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('photo')
+        else:
+            error = 'Неправильно заполнены поля'
+    form = PhotoForm()
+    data = {
+        form: 'form',
+        error: 'error'
+    }
+
+
+

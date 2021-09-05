@@ -137,6 +137,6 @@ def reestr(request, id):
 #     }
 def photo(request, id):
     photo = Photo.objects.select_related().filter(seans=id)
-    return render(request, 'photo.html', { 'photo': photo})
+    return render(request, 'photo.html', {'photo': photo})
 
 

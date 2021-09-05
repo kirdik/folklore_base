@@ -1,31 +1,31 @@
 {% extends 'base.html' %}
 {% block title %}
-
 {% endblock %}
 {% block content %}
+ <div class="container">
+        <div class="row">
+<div class="col-md-9">
+                <div class="row">
 
-<table class="table table-striped shadow">
-        <thead>
-          <tr class="table-secondary">
-            <th>Фото</th>
-            <th>Сеанс записи ID</th>
-            <th>Описание</th>
-          </tr>
-        </thead>
-        <tbody>
-         {% for p in photo %}
-          <tr>
-            <td><img src="{{p.photo_file.url}}" class="img shadow" style="max-width: 50%;"></td>
-            <td>{{ p.seans }}<br>
-            {{p.id_of_digitl_media}}</td>
-            <td></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+                    {% for photo in photo %}
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <a data-fancybox="gallery" href="{{photo.photo_file.url}}">
+                                <img src="{{photo.photo_file.url}}" class="img-fluid"></a>
+                            <div class="card-body">
+                                <small>Описание: {{photo.description_photo}}</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% empty %}
+                    <h3>No photos...</h3>
+                    {% endfor %}
+
+                </div>
+          </div>
+        </div>
+ </div>
 
 
-
-
-{% endblock content %}l>
+{% endblock content %}

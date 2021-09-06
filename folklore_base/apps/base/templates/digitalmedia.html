@@ -24,7 +24,7 @@
             <td>{{ dm.seans }}</td>
             <td><a  href="{{ dm.fileupl.url }}" class="jouele" data-space-control="true">{{ dm.id_of_digitl_media }}</a></td>
             <td>{{ dm.file_description|linebreaks }}</td>
-            <td><a href="{% url 'dm_detail' dm.id_auto %}" class="btn btn-secondary shadow">подробнее</a></td>
+            <td><a href="{% url 'dm_detail' dm.id_auto %}" class="btn btn-outline-dark btn-sm m-1">подробнее</a></td>
           </tr>
           {% endfor %}
         </tbody>

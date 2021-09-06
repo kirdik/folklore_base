@@ -19,9 +19,10 @@
         <td>{% for inf in seance.informant_of_seanse.all %}
           <p class="card-text">{{ inf }}</p>
           {% endfor %}</td>
-          <td><a href="{% url 'digital' seance.id_of_seance_of_record %}" class="btn btn-secondary shadow">Аудио</a>
-          <a href="{% url 'video' seance.id_of_seance_of_record  %}" class="btn btn-secondary shadow">Видео</a>
-            <a href="{% url 'reestr' seance.id_of_seance_of_record  %}" class="btn btn-secondary shadow">Реестры</a></td>
+          <td><a href="{% url 'digital' seance.id_of_seance_of_record %}" class="btn btn-outline-dark btn-sm m-1">Аудио</a>
+          <a href="{% url 'video' seance.id_of_seance_of_record  %}" class="btn btn-outline-dark btn-sm m-1">Видео</a>
+            <a href="{% url 'photo' seance.id_of_seance_of_record  %}" class="btn btn-outline-dark btn-sm m-1">Фото</a>
+            <a href="{% url 'reestr' seance.id_of_seance_of_record  %}" class="btn btn-outline-dark btn-sm m-1">Реестры</a></td>
         </tr>
         {% endfor %}
       </table>

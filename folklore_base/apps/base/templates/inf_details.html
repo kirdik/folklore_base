@@ -38,9 +38,10 @@
 <tr>
   <td colspan="2">
     {% for s in seances %}
-    {{ s }} <a href="{% url 'digital' s.id_of_seance_of_record  %}" class="btn btn-secondary shadow">Аудио</a>
-    <a href="{% url 'video' s.id_of_seance_of_record  %}" class="btn btn-secondary shadow">Видео</a>
-            <a href="{% url 'reestr' s.id_of_seance_of_record  %}" class="btn btn-secondary shadow">Реестры</a><br> <hr>
+    {{ s }} <a href="{% url 'digital' s.id_of_seance_of_record  %}" class="btn btn-outline-dark btn-sm m-1">Аудио</a>
+    <a href="{% url 'video' s.id_of_seance_of_record  %}" class="btn btn-outline-dark btn-sm m-1">Видео</a>
+    <a href="{% url 'photo' s.id_of_seance_of_record  %}" class="btn btn-outline-dark btn-sm m-1">Фото</a>
+    <a href="{% url 'reestr' s.id_of_seance_of_record  %}" class="btn btn-outline-dark btn-sm m-1">Реестры</a><br> <hr>
     {% endfor %}
   </td>
 </tr>

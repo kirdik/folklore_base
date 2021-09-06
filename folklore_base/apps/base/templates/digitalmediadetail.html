@@ -19,7 +19,7 @@
       <tr>
         <td>{{ object.id_of_digitl_media }}</td>
         <td>{% for i in object.tm_dm.all %}
-          <button type="button" name="button" class="btn btn-secondary mt-2 jouele-control" data-type="seek" data-range="{{i.time_stamp|time:'H:i:s'}} ... {{i.end_time_stamp|time:'H:i:s'}}">{{i.time_stamp|time:"H:i:s"}}</button>
+          <button type="button" name="button" class="btn btn-outline-dark btn-sm m-1 jouele-control" data-type="seek" data-range="{{i.time_stamp|time:'H:i:s'}} ... {{i.end_time_stamp|time:'H:i:s'}}">{{i.time_stamp|time:"H:i:s"}}</button>
           <span class="jouele-control" data-type="timeline" data-range="{{i.time_stamp|time:'H:i:s'}}...{{i.end_time_stamp|time:'H:i:s'}}" >{{i.text_for_time_stamp}}</span><br>
           {%endfor%}
         </td>
@@ -28,7 +28,7 @@
       <tr>
         <td colspan="3" class="table-secondary">
           <a href="{{ object.fileupl.url }}" class="jouele" data-space-control="true">{{ object.id_of_digitl_media }}</a><br>
-          <button type="button" name="button" class="jouele-control btn btn-secondary " data-type="play-pause">play / pause</button>
+          <button type="button" name="button" class="jouele-control btn btn-outline-dark btn-sm m-1 " data-type="play-pause">play / pause</button>
         </td>
       </tr>
     </tbody>

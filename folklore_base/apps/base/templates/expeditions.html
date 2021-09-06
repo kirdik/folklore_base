@@ -19,7 +19,7 @@
         <td>{{ exp.organisation_expedition }}</td>
         <td>{{ exp.begin_data_expedition }}</td>
         <td>{{ exp.researcher_expedtion }}</td>
-        <td><a href='{% url "seances" exp.pk %}' class="btn btn-secondary shadow">Подробнее</a></td>
+        <td><a href='{% url "seances" exp.pk %}' class="btn btn-outline-dark btn-sm m-1">Подробнее</a></td>
       </tr>
       {% endfor %}
     </table>

@@ -3,29 +3,32 @@
 
 {% endblock %}
 {% block content %}
+<br><h4 class="text-center text-muted" >Реестры</h4><hr>
 
-<table class="table table-striped shadow">
-        <thead>
-          <tr class="table-secondary">
-            <th>Реестр</th>
-              <th>Сеанс записи</th>
-              <th>ID</th>
+<div class="container">
+        <div class="row">
+<div class="col-md-9">
+                <div class="row">
 
-          </tr>
-        </thead>
-        <tbody>
-         {% for v in reestr_req%}
-          <tr>
-            <td><img src="{{v.reestr_file.url}}" alt="" class="img shadow" style="max-width: 50%;"></td>
-              <td>{{ v.seans }}</td>
-              <td>{{v.id_of_digitl_media}}</td>
+                    {% for v in reestr_req%}
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <a data-fancybox="gallery" href="{{v.reestr_file.url}}">
+                                <img src="{{v.reestr_file.url}}" class="img-fluid"></a>
+                            <div class="card-body">
+                                <small> ID: {{v.id_of_digitl_media}}</small>
+                            </div>
+                        </div>
+                    </div>
 
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+                    {% empty %}
+                    <h3>Ничего не загружено...</h3>
+                    {% endfor %}
 
+                </div>
+          </div>
+        </div>
+ </div>
 
 
 

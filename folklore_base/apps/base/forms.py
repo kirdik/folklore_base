@@ -1,5 +1,5 @@
 from .models import Photo
-from django.forms import ModelForm, FileInput, TextInput, Select
+from django.forms import ModelForm, FileInput, TextInput
 
 class PhotoForm(ModelForm):
         class Meta:
@@ -13,9 +13,5 @@ class PhotoForm(ModelForm):
                 "description_photo": TextInput(attrs={
                     'class': 'form-control',
                     'placeholder': 'Описание'
-                }),
-                'seans': Select(attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Сеанс записи'
                 })
             }

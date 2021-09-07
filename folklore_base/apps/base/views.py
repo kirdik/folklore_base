@@ -121,7 +121,7 @@ def reestr(request, id):
     reestr_req = Reestr.objects.select_related().filter(seans=id)
     return render(request, 'reestr.html', {'reestr_req': reestr_req})
 
-def photo_upload(request):
+def photo_upload(request, id):
     error = ''
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
@@ -130,10 +130,9 @@ def photo_upload(request):
             return redirect('expeditions')
         else:
             error = 'Неправильно заполнены поля'
-    form = PhotoForm()
-    # s_id = Photo.objects.select_related().filter(seans=id)
+    form = PhotoForm(initial={'seans': id})
 
-    return render(request, 'photo_upload.html', {'form': form, 'error': error})
+    return render(request, 'photo_upload.html', {'form': form, 'error': error, 'id': id})
 
 def photo(request, id):
     photo = Photo.objects.select_related().filter(seans=id)

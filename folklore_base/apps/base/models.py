@@ -381,7 +381,9 @@ class Photo(models.Model):
     photo_file = models.FileField(upload_to=foldername,
                                   verbose_name='Фото')
     description_photo = models.CharField(max_length=300,
-                                         verbose_name='Описание')
+                                         verbose_name='Описание',
+                                         blank=True
+                                         )
     id_of_digitl_media = models.AutoField(primary_key=True)
     seans = models.ForeignKey(SeansOfRecord,
                               on_delete=models.DO_NOTHING,
@@ -390,6 +392,8 @@ class Photo(models.Model):
     class Meta:
         verbose_name = 'Фотография'
         verbose_name_plural = 'Фотографии'
+    def get_absolute_url(self):
+        return f'/photo/{self.seans.id_of_seance_of_record}'
     def __str__(self):
         return str(self.seans) + str(self.id_of_digitl_media)
 

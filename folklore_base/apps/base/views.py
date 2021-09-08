@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView, View, UpdateView
 from django.core.paginator import Paginator
 from .forms import PhotoForm
 
@@ -121,21 +121,23 @@ def reestr(request, id):
     reestr_req = Reestr.objects.select_related().filter(seans=id)
     return render(request, 'reestr.html', {'reestr_req': reestr_req})
 
-def photo_upload(request, id):
+
+
+def photo(request, id):
     error = ''
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('expeditions')
+            return redirect('photo', id)
         else:
             error = 'Неправильно заполнены поля'
     form = PhotoForm(initial={'seans': id})
-
-    return render(request, 'photo_upload.html', {'form': form, 'error': error, 'id': id})
-
-def photo(request, id):
     photo = Photo.objects.select_related().filter(seans=id)
-    return render(request, 'photo.html', {'photo': photo})
+    return render(request, 'photo.html', {'photo': photo, 'form': form, 'error': error, 'id': id})
 
+class PhotoUpdate(UpdateView):
+    model = Photo
+    template_name = 'photo_update.html'
+    form_class = PhotoForm
 

@@ -15,7 +15,7 @@ urlpatterns = [
     path('video/<int:id>', video, name='video'),
     path('reestr/<int:id>', reestr, name='reestr'),
     path('seanceofgeo/<int:id>', seances_of_geo, name='seanceofgeo'),
-    path('photo/<int:id>/upload/', photo_upload, name='photo_upload'),
+    path('photo/<int:pk>/update/', PhotoUpdate.as_view(), name='photo_udate'),
     path('photo/<int:id>', photo, name='photo'),
 
 ]

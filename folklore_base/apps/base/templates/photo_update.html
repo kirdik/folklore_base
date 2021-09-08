@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+{% block content %}
+
+ <div class="container">
+        <div class="row">
+<div class="col-md-9">
+                <div class="row">
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <img src="{{form.instance.photo_file.url}}" class="img-fluid">
+                        <label>Example file input</label><br>
+                        {{form.photo_file}}<br>
+                        {{form.description_photo}}<br>
+                        {{form.seans}}<br>
+                        <button class="btn btn-success" type="submit">Изменить</button>
+                        <span>{{error}}</span>
+                    </form>
+
+                </div>
+          </div>
+        </div>
+ </div>
+
+
+{% endblock content %}

@@ -130,8 +130,13 @@ def photo(request, id):
     error = ''
     if request.method == 'POST' and request.user.is_authenticated:
         form = PhotoForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        images = request.FILES.getlist('images')
+
+        for image in images:
+            photo = Photo.objects.create(
+                photo_file=image,
+                seans=id
+            )
             return redirect('photo', id)
         else:
             error = 'Неправильно заполнены поля'

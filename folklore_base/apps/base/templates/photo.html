@@ -44,9 +44,10 @@
                     <img src="{{photo.photo_file.url}}" class="img-fluid"></a>
                 <div class="card-body">
                     Описание: <small>{{photo.description_photo}}</small>
-
-
-                       <a href="/photo/{{photo.id_of_digitl_media}}/update" class="btn btn-outline-primary btn-sm pull-right">изменить</a>
+                </div>
+                <div class="card-footer">
+                    <a href="/photo/{{photo.id_of_digitl_media}}/update" class="btn btn-outline-primary btn-sm pull-right">изменить</a>
+                    <a href="/photo/{{photo.id_of_digitl_media}}/delete" class="btn btn-outline-danger btn-sm pull-right">удалить</a>
                 </div>
             </div>
         </div>

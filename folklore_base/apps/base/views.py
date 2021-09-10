@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, View, UpdateView
+from django.views.generic import ListView, DetailView, View, UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from .forms import PhotoForm
+from django.urls import reverse_lazy
 
 from .models import *
 
@@ -125,7 +128,7 @@ def reestr(request, id):
 
 def photo(request, id):
     error = ''
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
@@ -136,8 +139,19 @@ def photo(request, id):
     photo = Photo.objects.select_related().filter(seans=id)
     return render(request, 'photo.html', {'photo': photo, 'form': form, 'error': error, 'id': id})
 
-class PhotoUpdate(UpdateView):
+class PhotoUpdate(LoginRequiredMixin, UpdateView):
+    login_url = '/admin/'
     model = Photo
     template_name = 'photo_update.html'
     form_class = PhotoForm
 
+
+class PhotoDelete(LoginRequiredMixin, DeleteView):
+    login_url = '/admin/'
+    model = Photo
+    template_name = 'photo_delete.html'
+
+    def get_success_url(self, **kwargs):
+        obj = super().get_object()
+        photo = Photo.objects.get(id_of_digitl_media=obj.id_of_digitl_media)
+        return reverse_lazy('photo', kwargs={'id':photo.seans.id_of_seance_of_record})

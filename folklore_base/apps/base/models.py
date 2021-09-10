@@ -394,6 +394,7 @@ class Photo(models.Model):
         verbose_name_plural = 'Фотографии'
     def get_absolute_url(self):
         return f'/photo/{self.seans.id_of_seance_of_record}'
+
     def __str__(self):
         return str(self.seans) + str(self.id_of_digitl_media)
 

@@ -378,7 +378,7 @@ class Video(models.Model):
         return str(self.id_of_digitl_media)
 
 class Photo(models.Model):
-    photo_file = models.ImageField(upload_to=foldername,
+    photo_file = models.FileField(upload_to=foldername,
                                   verbose_name='Фото')
     description_photo = models.CharField(max_length=300,
                                          verbose_name='Описание',

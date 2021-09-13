@@ -129,13 +129,16 @@ def reestr(request, id):
 def photo(request, id):
     error = ''
     if request.method == 'POST' and request.user.is_authenticated:
-        form = PhotoForm(request.POST, request.FILES)
-        images = request.FILES.getlist('images')
+        data = PhotoForm(request.POST, request.FILES)
+        seans = SeansOfRecord.objects.get(id_of_seance_of_record=id)
+        images = request.FILES.getlist('photo_file')
+
 
         for image in images:
-            photo = Photo.objects.create(
+            Photo.objects.create(
                 photo_file=image,
-                seans=id
+                description_photo=data['description_photo'],
+                seans=seans
             )
             return redirect('photo', id)
         else:

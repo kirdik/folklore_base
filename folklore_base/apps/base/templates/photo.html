@@ -20,7 +20,7 @@
        <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <label>Выберите файл</label><br>
-                        <input type="file" name="photo_file" accept="image/*" multiple required id="id_photo_file"><br><br>
+                        {{form.photo_file}}<br>
                         {{form.description_photo}}<br>
                         {{form.seans}}<br>
                         <span>{{error}}</span>

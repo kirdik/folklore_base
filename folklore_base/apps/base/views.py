@@ -124,23 +124,20 @@ def reestr(request, id):
     reestr_req = Reestr.objects.select_related().filter(seans=id)
     return render(request, 'reestr.html', {'reestr_req': reestr_req})
 
-
+from django.core.files.base import ContentFile
 
 def photo(request, id):
     error = ''
     if request.method == 'POST' and request.user.is_authenticated:
-        data = PhotoForm(request.POST, request.FILES)
-        seans = SeansOfRecord.objects.get(id_of_seance_of_record=id)
+        data = request.POST
         images = request.FILES.getlist('photo_file')
-
-
+        seans = SeansOfRecord.objects.get(id_of_seance_of_record=data['seans'])
         for image in images:
-            Photo.objects.create(
-                photo_file=image,
+            ph = Photo.objects.create(
+                seans=seans,
                 description_photo=data['description_photo'],
-                seans=seans
+                photo_file=image
             )
-            return redirect('photo', id)
         else:
             error = 'Неправильно заполнены поля'
     form = PhotoForm(initial={'seans': id})

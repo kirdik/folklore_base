@@ -1,12 +1,12 @@
 from .models import Photo
-from django.forms import ModelForm, FileField, TextInput, ClearableFileInput, FileInput
+from django.forms import ModelForm, TextInput, ClearableFileInput
 
 class PhotoForm(ModelForm):
         class Meta:
             model = Photo
             fields = ('photo_file', 'description_photo', 'seans')
             widgets = {
-                'photo_file': FileInput(attrs={
+                'photo_file': ClearableFileInput(attrs={
                     'multiple': True,
                     "class": "form-control-file",
                     "placeholder": "Выбрать файл"
@@ -16,7 +16,3 @@ class PhotoForm(ModelForm):
                     'placeholder': 'Описание'
                 })
             }
-            # file_field = FileField(widget=FileInput(attrs={'multiple': True,
-            #                                                         'class': 'form-control-file',
-            #                                                         'placeholder': 'Выбрать файл'
-            #                                                         }))

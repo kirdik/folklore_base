@@ -35,13 +35,13 @@
 </div>
 <!--{% endif %}-->
 <div class="col-md-9">
-    <div class="row">
+    <div class="row" >
 
         {% for photo in photo %}
         <div class="col-md-4">
-            <div class="card my-2">
+            <div class="card my-2" >
                 <a data-fancybox="gallery" href="{{photo.photo_file.url}}">
-                    <img src="{{photo.photo_file.url}}" class="img-fluid"></a>
+                    <img src="{{photo.photo_file.url}}" class="img-fluid" style="height: 300px"></a>
                 <div class="card-body">
                     Описание: <small>{{photo.description_photo}}</small>
                 </div>

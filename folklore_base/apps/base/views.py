@@ -87,9 +87,6 @@ def dmediadetail(request, id):
     return render(request, 'digitalmediadetail.html', {'media': media, 'form': form})
 
 
-# class DigitalMediaDetailView(DetailView):
-#     model = DigitalMedia
-#     template_name = 'digitalmediadetail.html'
 
 
 def informants(request):

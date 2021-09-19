@@ -33,18 +33,21 @@
       </tr>
     </tbody>
   </table>
-</div>
-<div class="input-group">
+  <div class="input-group">
+    <span class="input-group-text">Номер фрагмента</span>
+{{form.number_of_temestamp}}
   <span class="input-group-text">Начало фрагмента</span>
    {{ form.time_stamp }}
   <span class="input-group-text">Конец фрагмента</span>
   {{form.end_time_stamp}}
 </div><br>
-<div class="input-group">
-  <span class="input-group-text">Номер фрагмента</span>
-{{form.number_of_temestamp}}
-<span class="input-group-text">ID файла</span>
+
   {{form.timestamp_for_dm}}
-</div><br>
+
+  <div class="input-group">
 {{form.text_for_time_stamp}}
+  <button type="button" name="button" class=" btn btn-outline-primary " >Добавить</button>
+</div>
+</div>
+
 {% endblock content %}

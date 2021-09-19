@@ -39,7 +39,7 @@ class TimingForm(ModelForm):
             }),
             'timestamp_for_dm': Select(attrs={
                 'disabled': True,
-                'class': 'form-control'
+                'class': 'form-control visually-hidden'
             }),
             'text_for_time_stamp': TextInput(attrs={
                 'class': 'form-control',

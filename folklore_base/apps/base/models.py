@@ -151,10 +151,7 @@ class Informant(models.Model):
                                                 'контактная информация',
                                       blank=True)
 
-    # data_seans_of_record_inf = models.ForeignKey(SeansOfRecord,
-    #                                             on_delete=models.DO_NOTHING,
-    #                                             blank=True,
-    #                                             null=True)
+
     class Meta:
         verbose_name = 'Информант'
         verbose_name_plural = 'Информанты'
@@ -311,10 +308,7 @@ class DigitalMedia(models.Model):
     seans = models.ForeignKey(SeansOfRecord,
                               on_delete=models.DO_NOTHING,
                               related_name='seans_dm')
-    # place_hdd_drive = models.ForeignKey(HddMediaDrive,
-    #                                     on_delete=models.DO_NOTHING,
-    #                                     default=0,
-    #                                     verbose_name='На каком HDD хранится')
+
     id_of_digitl_media = models.CharField(unique=True,
                                           help_text='Здесь указывается уникальный номер записи,'
                                                     ' правила именования на примере ЦРФ смотрите в описании БДФЭЗ',
@@ -328,8 +322,8 @@ class DigitalMedia(models.Model):
                                                   'другие сведения')
 
     class Meta:
-        verbose_name = 'Цифровой медиа файл'
-        verbose_name_plural = 'Цифровые медиа файлы'
+        verbose_name = 'Аудио'
+        verbose_name_plural = 'Аудио'
 
     def __str__(self):
         return str(self.id_of_digitl_media)

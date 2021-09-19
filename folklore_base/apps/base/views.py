@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, View, UpdateView, DeleteV
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from .forms import PhotoForm
+from .forms import PhotoForm, TimingForm
 from django.urls import reverse_lazy
 
 from .models import *
@@ -81,10 +81,15 @@ def digitalmedialist(request, id=0):
     context = pagegenerator(digital, 6, request)
     return render(request, 'digitalmedia.html', context)
 
+def dmediadetail(request, id):
+    media = DigitalMedia.objects.get(id_auto=id)
+    form = TimingForm(initial={'timestamp_for_dm': id})
+    return render(request, 'digitalmediadetail.html', {'media': media, 'form': form})
 
-class DigitalMediaDetailView(DetailView):
-    model = DigitalMedia
-    template_name = 'digitalmediadetail.html'
+
+# class DigitalMediaDetailView(DetailView):
+#     model = DigitalMedia
+#     template_name = 'digitalmediadetail.html'
 
 
 def informants(request):
@@ -104,7 +109,7 @@ def informant_details(request, id):
 
 
 def map(request):
-    map = Naspunkt.objects.all()
+    map = Oblast.objects.all()
     return render(request, 'index.html', {'map': map})
 
 
@@ -124,7 +129,6 @@ def reestr(request, id):
     reestr_req = Reestr.objects.select_related().filter(seans=id)
     return render(request, 'reestr.html', {'reestr_req': reestr_req})
 
-from django.core.files.base import ContentFile
 
 def photo(request, id):
     error = ''
@@ -160,3 +164,5 @@ class PhotoDelete(LoginRequiredMixin, DeleteView):
         obj = super().get_object()
         photo = Photo.objects.get(id_of_digitl_media=obj.id_of_digitl_media)
         return reverse_lazy('photo', kwargs={'id':photo.seans.id_of_seance_of_record})
+
+

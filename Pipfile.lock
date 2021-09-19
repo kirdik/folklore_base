@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c0f4d3f0ed909ba246119eb5864a76075c5079d418c8a55d2efe26ea6bc95a40"
+            "sha256": "77f519874a78b8300ba8d0e75bf7c925063d6fddfdfb5b11de87e8ebf65353bb"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -50,11 +50,11 @@
         },
         "django-import-export": {
             "hashes": [
-                "sha256:c39c003bfc803fb63ba7742562f1667603a4a8d7426261845d75ce8582d40f48",
-                "sha256:cf6f3dabdd4f32dcb26e25c7ddcba7aee3168b55d380b0da79f0349afa17c011"
+                "sha256:5bb833d240583882dbef1a829df39644d3033a6476ff7d7e7247a27ed19824ab",
+                "sha256:ef7dbf0ffb81f5534ac46c5f221b9455bdfcfca873652a2b44a03b28814e2be2"
             ],
             "index": "pypi",
-            "version": "==2.5.0"
+            "version": "==2.6.0"
         },
         "et-xmlfile": {
             "hashes": [
@@ -63,6 +63,21 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==1.1.0"
+        },
+        "geographiclib": {
+            "hashes": [
+                "sha256:8f441c527b0b8a26cd96c965565ff0513d1e4d9952b704bf449409e5015c77b7",
+                "sha256:ac400d672b8954b0306bca890b088bb8ba2a757dc8133cca0b878f34b33b2740"
+            ],
+            "version": "==1.52"
+        },
+        "geopy": {
+            "hashes": [
+                "sha256:58b7edf526b8c32e33126570b5f4fcdfaa29d4416506064777ae8d84cd103fdd",
+                "sha256:8f1f949082b964385de61fcc3a667a6a9a6e242beb1ae8972449f164b2ba0e89"
+            ],
+            "index": "pypi",
+            "version": "==2.2.0"
         },
         "markuppy": {
             "hashes": [

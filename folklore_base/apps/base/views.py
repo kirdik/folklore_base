@@ -95,7 +95,11 @@ def dmediadetail(request, id):
     return render(request, 'digitalmediadetail.html', {'media': media, 'form': form, 'error': error})
 
 
-
+class TimingUpdate(LoginRequiredMixin, UpdateView):
+    login_url = '/admin/'
+    model = TimingDigitalMedia
+    template_name = 'timing_update.html'
+    form_class = TimingForm
 
 def informants(request):
     search_query = request.GET.get('search', '')

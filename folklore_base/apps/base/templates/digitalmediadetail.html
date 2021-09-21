@@ -7,7 +7,7 @@
 <br>
 <div class="container">
   <div class="row">
-    <div class="col bg-light border rounded">
+    <div class="col m-2 bg-light border rounded">
        <a href="{{ media.fileupl.url }}" class="jouele" data-space-control="true">{{ media.id_of_digitl_media }}</a>
     </div>
       <div class="col-2 bg-light border rounded">
@@ -30,7 +30,11 @@
           {{i.text_for_time_stamp}}
           </div>
           <div class="col border-bottom col-md-auto">
+              Конец фрагмента <br>
             {{i.end_time_stamp|time:'H:i:s'}}
+          </div>
+          <div class="col border-bottom col-md-auto">
+              <a href="{% url 'timing_update' i.id %}">Изменить</a>
           </div>
       </div>
       {%endfor%}

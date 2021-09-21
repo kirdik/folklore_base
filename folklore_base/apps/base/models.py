@@ -288,6 +288,9 @@ class TimingDigitalMedia(models.Model):
         verbose_name_plural = 'Временные метки аудио'
         ordering = ['number_of_timestamp']
 
+    def get_absolute_url(self):
+        return f'/dm/{self.timestamp_for_dm.id_auto}'
+
     def __str__(self):
         return str(self.number_of_timestamp) + " " + str(self.time_stamp)
 

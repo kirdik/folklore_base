@@ -18,5 +18,6 @@ urlpatterns = [
     path('photo/<int:pk>/update/', PhotoUpdate.as_view(), name='photo_udate'),
     path('photo/<int:id>', photo, name='photo'),
     path('photo/<int:pk>/delete', PhotoDelete.as_view(), name='photo_delete'),
+    path('dm/<int:pk>/update/', TimingUpdate.as_view(), name='timing_update'),
 
 ]

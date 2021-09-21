@@ -273,7 +273,7 @@ class TimingDigitalMedia(models.Model):
                                   verbose_name='Начало фрагмента')
     end_time_stamp = models.TimeField(default='00:00:00',
                                       verbose_name='Конец фрагмента')
-    number_of_temestamp = models.IntegerField(default='0',
+    number_of_timestamp = models.IntegerField(default='0',
                                               blank=True,
                                               verbose_name='Порядковый номер')
     text_for_time_stamp = models.CharField(verbose_name='Описание',
@@ -286,9 +286,10 @@ class TimingDigitalMedia(models.Model):
     class Meta:
         verbose_name = 'Временные метки аудио'
         verbose_name_plural = 'Временные метки аудио'
+        ordering = ['number_of_timestamp']
 
     def __str__(self):
-        return str(self.number_of_temestamp) + " " + str(self.time_stamp)
+        return str(self.number_of_timestamp) + " " + str(self.time_stamp)
 
 
 '''End Timing'''

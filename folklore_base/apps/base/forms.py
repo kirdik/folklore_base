@@ -16,15 +16,16 @@ class PhotoForm(ModelForm):
                     'placeholder': 'Описание'
                 }),
                 'seans': Select(attrs={
-                    'class': 'form-control',
-                    'disabled': True
+                    'class': 'form-control visually-hidden',
+                    # 'disabled': True,
+
                 })
             }
 
 class TimingForm(ModelForm):
     class Meta:
         model = TimingDigitalMedia
-        fields = ('time_stamp', 'end_time_stamp', 'number_of_temestamp', 'text_for_time_stamp', 'timestamp_for_dm')
+        fields = ('time_stamp', 'end_time_stamp', 'number_of_timestamp', 'text_for_time_stamp', 'timestamp_for_dm')
         widgets = {
             'time_stamp': TimeInput(attrs={
             'class': 'form-control',
@@ -34,11 +35,11 @@ class TimingForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Конец фрагмента'
             }),
-            'number_of_temestamp': NumberInput(attrs={
+            'number_of_timestamp': NumberInput(attrs={
                 'class': 'form-control'
             }),
             'timestamp_for_dm': Select(attrs={
-                'disabled': True,
+                # 'disabled': True,
                 'class': 'form-control visually-hidden'
             }),
             'text_for_time_stamp': TextInput(attrs={

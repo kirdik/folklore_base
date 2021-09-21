@@ -82,9 +82,17 @@ def digitalmedialist(request, id=0):
     return render(request, 'digitalmedia.html', context)
 
 def dmediadetail(request, id):
+    error = ''
+    if request.method == 'POST':
+        form = TimingForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            error = 'Форма заполнена неправильно'
+
     media = DigitalMedia.objects.get(id_auto=id)
     form = TimingForm(initial={'timestamp_for_dm': id})
-    return render(request, 'digitalmediadetail.html', {'media': media, 'form': form})
+    return render(request, 'digitalmediadetail.html', {'media': media, 'form': form, 'error': error})
 
 
 

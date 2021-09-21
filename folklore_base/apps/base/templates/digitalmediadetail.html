@@ -6,48 +6,85 @@
 {% block content %}
 <br>
 <div class="container">
-
-  <table class="table table-bordered shadow">
-    <thead>
-      <tr class="table-secondary">
-        <td>id</td>
-        <td>тайм код</td>
-        <td>описание</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{ media.id_of_digitl_media }}</td>
-        <td>{% for i in media.tm_dm.all %}
-          <button type="button" name="button" class="btn btn-outline-dark btn-sm m-1 jouele-control" data-type="seek" data-range="{{i.time_stamp|time:'H:i:s'}} ... {{i.end_time_stamp|time:'H:i:s'}}">{{i.time_stamp|time:"H:i:s"}}</button>
-          <span class="jouele-control" data-type="timeline" data-range="{{i.time_stamp|time:'H:i:s'}}...{{i.end_time_stamp|time:'H:i:s'}}" >{{i.text_for_time_stamp}}</span><br>
-          {%endfor%}
-        </td>
-        <td>{{ media.file_description|linebreaks }}</td>
-      </tr>
-      <tr>
-        <td colspan="3" class="table-secondary">
-          <a href="{{ media.fileupl.url }}" class="jouele" data-space-control="true">{{ media.id_of_digitl_media }}</a><br>
+  <div class="row">
+    <div class="col bg-light border rounded">
+       <a href="{{ media.fileupl.url }}" class="jouele" data-space-control="true">{{ media.id_of_digitl_media }}</a>
+    </div>
+      <div class="col-2 bg-light border rounded">
           <button type="button" name="button" class="jouele-control btn btn-outline-dark btn-sm m-1 " data-type="play-pause">play / pause</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="input-group">
-    <span class="input-group-text">Номер фрагмента</span>
-{{form.number_of_temestamp}}
-  <span class="input-group-text">Начало фрагмента</span>
-   {{ form.time_stamp }}
-  <span class="input-group-text">Конец фрагмента</span>
-  {{form.end_time_stamp}}
-</div><br>
+      </div>
+  </div>
+    <br>
+  <div class="row justify-content-md-center">
+    <div class="col">
 
-  {{form.timestamp_for_dm}}
+    {% for i in media.tm_dm.all %}
+      <div class="row">
+          <div class="col bg-light col-md-auto border-bottom">
+            <span class="align-text-bottom"> {{i.number_of_timestamp}}</span>
+          </div>
+          <div class="col col-md-auto border-bottom">
+          <button type="button" name="button" class="btn btn-outline-dark m-1 jouele-control" data-type="seek" data-range="{{i.time_stamp|time:'H:i:s'}} ... {{i.end_time_stamp|time:'H:i:s'}}">{{i.time_stamp|time:"H:i:s"}}</button>
+          </div>
+          <div class="col  border-bottom">
+          {{i.text_for_time_stamp}}
+          </div>
+          <div class="col border-bottom col-md-auto">
+            {{i.end_time_stamp|time:'H:i:s'}}
+          </div>
+      </div>
+      {%endfor%}
 
-  <div class="input-group">
-{{form.text_for_time_stamp}}
-  <button type="button" name="button" class=" btn btn-outline-primary " >Добавить</button>
+    </div>
+  </div>
+  <br><br>
+
+
+
+  </div>
+  <!--{% if request.user.is_authenticated %}-->
+ <!-- Button trigger modal -->
+  <label class="form-label" for="addbtn">Описание фрагмента записи</label><br>
+<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addbtn">
+  Добавить
+</button>
+  {%if error%}
+  <br><br>
+  <div class="alert alert-danger">{{error}}</div>
+  {%endif%}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Добавить описание фрагмента</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+       <form method="POST" enctype="multipart/form-data">
+         {% csrf_token %}
+         <div class="input-group mb-3">
+            <span class="input-group-text">Номер фрагмента</span>
+            {{form.number_of_timestamp}}
+            <span class="input-group-text">Начало фрагмента</span>
+            {{ form.time_stamp }}
+            <span class="input-group-text">Конец фрагмента</span>
+            {{form.end_time_stamp}}
+          </div><br>
+            {{form.timestamp_for_dm}}
+            <div class="input-group mb-3">
+            {{form.text_for_time_stamp}}
+            <button type="submit" name="button" class="btn btn-outline-primary">Добавить</button>
+            </div>
+
+
+        </form>
+    </div>
+  </div>
 </div>
 </div>
-
+<!--{% endif %}-->
+</div>
 {% endblock content %}

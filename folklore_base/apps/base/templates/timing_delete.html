@@ -5,13 +5,13 @@
 
  <div class="container">
         <div class="row">
-<div class="col-md-9">
+<div class="col-md-9 bg-light rounded">
                 <div class="row">
 
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-<!--                        <img src="{{photo.photo_file.url}}" class="img-fluid">-->
-                        {{tmstmp.text_for_time_stamp}}
+                        Номер фрагмента: {{timingdigitalmedia.number_of_timestamp}}<br>
+                        Описание фрагмента: {{timingdigitalmedia.text_for_time_stamp}}<br>
 
 
                         <button class="btn btn-danger" type="submit">Удалить</button>

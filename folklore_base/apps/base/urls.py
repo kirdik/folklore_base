@@ -19,5 +19,6 @@ urlpatterns = [
     path('photo/<int:id>', photo, name='photo'),
     path('photo/<int:pk>/delete', PhotoDelete.as_view(), name='photo_delete'),
     path('dm/<int:pk>/update/', TimingUpdate.as_view(), name='timing_update'),
+    path('dm/<int:pk>/delete/', TimingDelete.as_view(), name='timing_update'),
 
 ]

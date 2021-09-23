@@ -101,6 +101,16 @@ class TimingUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'timing_update.html'
     form_class = TimingForm
 
+class TimingDelete(LoginRequiredMixin, DeleteView):
+    login_url = '/admin/'
+    model = TimingDigitalMedia
+    template_name = 'timing_delete.html'
+
+    def get_success_url(self, **kwargs):
+        obj = super().get_object()
+        tmstmp = TimingDigitalMedia.objects.get(id=obj.id_auto)
+        return reverse_lazy('dm', kwargs={'id':id_auto})
+
 def informants(request):
     search_query = request.GET.get('search', '')
     filter = Informant.objects.filter(fio__icontains=search_query)

@@ -8,11 +8,24 @@
 <div class="col-md-9">
                 <div class="row">
 
-                    <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                       {{form}}
+                     <form method="POST" enctype="multipart/form-data">
+         {% csrf_token %}
+         <div class="input-group mb-3">
+            <span class="input-group-text">Номер фрагмента</span>
+            {{form.number_of_timestamp}}
+            <span class="input-group-text">Начало фрагмента</span>
+            {{ form.time_stamp }}
+            <span class="input-group-text">Конец фрагмента</span>
+            {{form.end_time_stamp}}
+          </div><br>
+            {{form.timestamp_for_dm}}
+            <div class="input-group mb-3">
+            {{form.text_for_time_stamp}}
+            <button type="submit" name="button" class="btn btn-outline-primary">Изменить</button>
+            </div>
 
-                        <button class="btn btn-success" type="submit">Изменить</button>
+
+        </form>
                         <span>{{error}}</span>
                     </form>
 

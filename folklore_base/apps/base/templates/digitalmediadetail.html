@@ -6,12 +6,12 @@
 {% block content %}
 <br>
 <div class="container">
-  <div class="row">
-    <div class="col m-2 bg-light border rounded">
+  <div class="row bg-light border rounded">
+    <div class="col m-2">
        <a href="{{ media.fileupl.url }}" class="jouele" data-space-control="true">{{ media.id_of_digitl_media }}</a>
     </div>
-      <div class="col-2 bg-light border rounded">
-          <button type="button" name="button" class="jouele-control btn btn-outline-dark btn-sm m-1 " data-type="play-pause">play / pause</button>
+      <div class="col-2">
+          <button type="button" name="button" class="jouele-control btn btn-outline-dark btn-sm m-3 " data-type="play-pause">play / pause</button>
       </div>
   </div>
     <br>
@@ -34,7 +34,9 @@
             {{i.end_time_stamp|time:'H:i:s'}}
           </div>
           <div class="col border-bottom col-md-auto">
-              <a href="{% url 'timing_update' i.id %}">Изменить</a>
+              <a href="{% url 'timing_update' i.id %}">Изменить</a><br>
+              <a href="/dm/{{i.id}}/delete" >Удалить</a>
+
           </div>
       </div>
       {%endfor%}

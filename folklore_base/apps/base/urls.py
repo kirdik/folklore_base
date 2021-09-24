@@ -6,6 +6,8 @@ urlpatterns = [
     path('expeditions', expeditions, name='expeditions'),
     path('seances/<int:pk>', ExpeditionDetail.as_view(), name='seances'),
     path('dm/<int:id>/', dmediadetail, name='dm_detail'),
+    path('dm/<int:pk>/update/', TimingUpdate.as_view(), name='timing_update'),
+    path('dm/<int:pk>/delete/', TimingDelete.as_view(), name='timing_delete'),
     path('digital/', digitalmedialist, name='digital'),
     path('digital/<int:id>', digitalmedialist, name='digital'),
     path('informants/', informants, name='informants'),
@@ -18,7 +20,5 @@ urlpatterns = [
     path('photo/<int:pk>/update/', PhotoUpdate.as_view(), name='photo_udate'),
     path('photo/<int:id>', photo, name='photo'),
     path('photo/<int:pk>/delete', PhotoDelete.as_view(), name='photo_delete'),
-    path('dm/<int:pk>/update/', TimingUpdate.as_view(), name='timing_update'),
-    path('dm/<int:pk>/delete/', TimingDelete.as_view(), name='timing_delete'),
 
 ]

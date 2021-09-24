@@ -108,7 +108,7 @@ class TimingDelete(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self, **kwargs):
         obj = super().get_object()
-        tmstmp = TimingDigitalMedia.objects.get(timestamp_for_dm=obj.timestamp_for_dm)
+        tmstmp = TimingDigitalMedia.objects.get(id=obj.id)
         return reverse_lazy('dm_detail', kwargs={'id':tmstmp.timestamp_for_dm.id_auto})
 
 def informants(request):

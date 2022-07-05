@@ -1,7 +1,7 @@
 asgiref==3.4.1
 defusedxml==0.7.1
 diff-match-patch==20200713
-Django==3.2.8
+Django==3.2.14
 django-import-export==2.6.1
 et-xmlfile==1.1.0
 geographiclib==1.52
